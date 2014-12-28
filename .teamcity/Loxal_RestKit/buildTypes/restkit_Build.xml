@@ -3,9 +3,6 @@
   <name>Build</name>
   <description />
   <settings ref="Build">
-    <disabled-settings>
-      <setting-ref ref="RUNNER_1" />
-    </disabled-settings>
     <parameters />
     <build-runners order="RUNNER_1, RUNNER_5" />
     <vcs-settings>
