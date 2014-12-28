@@ -21,13 +21,6 @@
     <packaging>war</packaging>
     <description>Microservice Toolkit</description>
 
-    <scm>
-        <connection>scm:git:git://github.com:loxal/RESTkit.git</connection>
-        <developerConnection>scm:git:git@github.com:loxal/RESTkit.git</developerConnection>
-        <url>https://github.com/loxal/RESTkit</url>
-        <tag>HEAD</tag>
-    </scm>
-
     <properties>
         <tomcat.version>8.0.15</tomcat.version>
         <jetty-maven-plugin.version>9.2.3.v20140905</jetty-maven-plugin.version>
@@ -355,6 +348,13 @@
         </plugins>
     </build>
     <profiles/>
+
+    <scm>
+        <connection>scm:git:git://github.com:loxal/rest-kit.git</connection>
+        <developerConnection>scm:git:git@github.com:loxal/rest-kit.git</developerConnection>
+        <url>https://github.com/loxal/rest-kit</url>
+        <tag>HEAD</tag>
+    </scm>
     <inceptionYear>2014</inceptionYear>
     <url>http://www.loxal.net</url>
 </project>
