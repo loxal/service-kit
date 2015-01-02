@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  ~ Copyright 2014 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+  ~ Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
   -->
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
@@ -154,6 +154,27 @@
             </testResource>
         </testResources>
         <plugins>
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-compiler-plugin</artifactId>-->
+            <!--<version>3.2</version>-->
+            <!--<configuration>-->
+            <!--<source>1.7</source>-->
+            <!--<target>1.7</target>-->
+            <!--<compilerArguments>-->
+            <!--&lt;!&ndash;<profile></profile>&ndash;&gt;-->
+            <!--</compilerArguments>-->
+            <!--<compilerArgument>-Xlint:unchecked</compilerArgument>-->
+            <!--<showWarnings>true</showWarnings>-->
+            <!--<showDeprecation>true</showDeprecation>-->
+            <!--<optimize>${java.optimize}</optimize>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
+            <plugin>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>1.9.17</version>
+            </plugin>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
