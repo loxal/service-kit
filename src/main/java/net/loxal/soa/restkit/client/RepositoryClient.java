@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.client;
@@ -26,14 +26,14 @@ public class RepositoryClient<T> extends RESTClient<T> {
     }
 
     @Override
-    public Response post(Entity<T> entity) {
+    public Response post(Entity<? super T> entity) {
 
         return targetTenant(targetServiceRepository(explicitType(entity)))
                 .post(entity);
     }
 
     @Override
-    public Response put(Entity<T> entity, String id) {
+    public Response put(Entity<? super T> entity, String id) {
 
         return targetTenant(targetServiceRepository(explicitType(entity))
                 .path(id))
@@ -41,7 +41,7 @@ public class RepositoryClient<T> extends RESTClient<T> {
     }
 
     @Override
-    public Response delete(Class<T> entity, String id) {
+    public Response delete(Class<? super T> entity, String id) {
 
         return targetTenant(targetServiceRepository(explicitType(entity))
                 .path(id))
@@ -49,7 +49,7 @@ public class RepositoryClient<T> extends RESTClient<T> {
     }
 
     @Override
-    public Response get(Class<T> entity, String id) {
+    public Response get(Class<? super T> entity, String id) {
 
         return targetTenant(targetServiceRepository(explicitType(entity))
                 .path(id))
@@ -66,11 +66,11 @@ public class RepositoryClient<T> extends RESTClient<T> {
                 .path(entityType);
     }
 
-    private String explicitType(Entity<T> entity) {
+    private String explicitType(Entity<? super T> entity) {
         return entity.getEntity().getClass().getSimpleName().toLowerCase();
     }
 
-    private String explicitType(Class<T> entity) {
+    private String explicitType(Class<? super T> entity) {
         return entity.getSimpleName().toLowerCase();
     }
 }
