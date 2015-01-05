@@ -17,7 +17,6 @@ import kotlin.test.assertEquals
 public class VoteResourceIT : AbstractEndpointTest() {
 
     Test
-    throws(javaClass<Exception>())
     public fun createVote() {
         val response = createVoteAssignedToPoll()
 
@@ -30,7 +29,6 @@ public class VoteResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun deleteNonExistentVote() {
         val existingEntity = createVoteAssignedToPoll()
 
@@ -44,7 +42,6 @@ public class VoteResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun deleteExistingVote() {
         val existingVote = createVoteAssignedToPoll()
 
@@ -55,7 +52,6 @@ public class VoteResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun retrieveExistingVote() {
         val existingVote = createVoteAssignedToPoll()
 
@@ -69,7 +65,6 @@ public class VoteResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun retrieveNonExistentVote() {
         val existingEntity = createVoteAssignedToPoll()
 
@@ -82,7 +77,6 @@ public class VoteResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun updateExistingVote() {
         val existingVote = createVoteAssignedToPoll()
 
@@ -102,7 +96,6 @@ public class VoteResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun updateNonExistentVote() {
         val existingEntity = createVoteAssignedToPoll()
 
