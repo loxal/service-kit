@@ -49,7 +49,7 @@ public class GroupResourceIT : AbstractEndpointTest() {
         val notFoundStatus = Response.Status.NOT_FOUND
         assertEquals(notFoundStatus.getStatusCode().toLong(), response.getStatus().toLong())
         val errorMessage = response.readEntity<ErrorMessage>(javaClass<ErrorMessage>())
-        assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), errorMessage.getType())
+        assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), errorMessage.type)
     }
 
     Test
@@ -87,7 +87,7 @@ public class GroupResourceIT : AbstractEndpointTest() {
         assertEquals(Response.Status.NOT_FOUND.getStatusCode().toLong(), retrieval.getStatus().toLong())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.getMediaType())
         val notFoundError = retrieval.readEntity<ErrorMessage>(javaClass<ErrorMessage>())
-        assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), notFoundError.getType())
+        assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), notFoundError.type)
     }
 
     Test

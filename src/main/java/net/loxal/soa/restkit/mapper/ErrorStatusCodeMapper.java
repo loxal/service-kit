@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.mapper;
@@ -40,11 +40,10 @@ public class ErrorStatusCodeMapper implements ExceptionMapper<WebApplicationExce
             status = Response.Status.BAD_REQUEST;
         }
 
-        final ErrorMessage errorMessage = new ErrorMessage();
+        final ErrorMessage errorMessage = ErrorMessage.create(status.getReasonPhrase());
         errorMessage.setStatus(status.getStatusCode());
         errorMessage.setMessage(exception.getMessage());
         errorMessage.setMoreInfo(status.getFamily().name());
-        errorMessage.setType(status.getReasonPhrase());
         return Response.status(status.getStatusCode())
                 // TODO make specification of "type(MediaType.APPLICATION_JSON_TYPE)" superfluous
                 .type(MediaType.APPLICATION_JSON_TYPE)

@@ -36,7 +36,7 @@ public class ResolveIpAddressService : Endpoint() {
             LOG.info(requestContext.getMethod())
         } catch (e: UnknownHostException) {
             val errorMsg = e.getMessage()
-            val errorMessage = ErrorMessage(errorMsg)
+            val errorMessage = ErrorMessage.create(errorMsg)
 
             asyncResponse.resume(Response.serverError().entity(errorMessage).build())
             LOG.severe(errorMsg)
