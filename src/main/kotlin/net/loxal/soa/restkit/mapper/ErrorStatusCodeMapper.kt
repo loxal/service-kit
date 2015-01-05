@@ -13,6 +13,7 @@ import javax.ws.rs.ForbiddenException
 import javax.ws.rs.InternalServerErrorException
 import javax.ws.rs.NotAuthorizedException
 import javax.ws.rs.core.MediaType
+import net.loxal.soa.restkit.model.common.ErrorMessage
 
 /**
  * Maps Java exceptions to HTTP error codes.
