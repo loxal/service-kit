@@ -21,6 +21,7 @@
     </inbound-services>
 
     <static-files>
+        <include path="**/*.json"/>
         <include path="**/*.txt"/>
         <include path="**/*.gif"/>
         <include path="**/*.png"/>
@@ -40,6 +41,5 @@
     </system-properties>
 
     <env-variables>
-        <env-var name="DEFAULT_ENCODING" value="UTF-8"/>
     </env-variables>
 </appengine-web-app>
