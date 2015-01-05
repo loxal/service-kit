@@ -21,7 +21,7 @@ public class ErrorMessage private() {
     Min(value = 100)
     Max(value = 599)
     var status: Int = 0
-    var message: String = ""
+    var message: String? = ""
     var moreInfo: String = ""
     var details: Set<ErrorDetail> = emptySet()
 
