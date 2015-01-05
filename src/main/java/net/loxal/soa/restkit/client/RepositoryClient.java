@@ -21,7 +21,7 @@ public class RepositoryClient<T> extends RESTClient<T> {
     @Value("${tenant}")
     private String tenant;
 
-    private RepositoryClient() {
+    public RepositoryClient() {
         LOG.info("repositoryServiceUri: " + repositoryServiceUri);
     }
 
