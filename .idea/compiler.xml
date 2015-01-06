@@ -22,14 +22,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="account-service" />
-        <module name="order-mashup-service" />
         <module name="rest-kit" />
-        <module name="restful-order" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="order-mashup-service" target="1.8" />
       <module name="rest-kit" target="1.7" />
     </bytecodeTargetLevel>
   </component>
