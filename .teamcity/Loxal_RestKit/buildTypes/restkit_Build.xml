@@ -12,7 +12,7 @@
         <parameters>
           <param name="incrementalMake" value="true" />
           <param name="iprInfoRunParam"><![CDATA[<iprInfo path-to-ipr="" should-load-iml="true">
-  <Jdk name="1.7" path-to-library="%env.JDK_17%" is-used="true" type="JavaSDK" path-to-jdk="%env.JDK_17%">
+  <Jdk name="1.7" path-to-library="/Library/Java/JavaVirtualMachines/jdk1.7.0_72.jdk/Contents/Home" is-used="true" type="JavaSDK" path-to-jdk="/Library/Java/JavaVirtualMachines/jdk1.7.0_72.jdk/Contents/Home">
     <Pattern value="jre/lib/*.jar" />
     <ExternalAnnotationPattern value="%teamcity.tool.idea%/lib/jdkAnnotations.jar" />
   </Jdk>
