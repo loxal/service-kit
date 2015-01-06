@@ -4,7 +4,6 @@
   <description />
   <settings ref="Build">
     <disabled-settings>
-      <setting-ref ref="RUNNER_5" />
       <setting-ref ref="RUNNER_7" />
     </disabled-settings>
     <parameters />
