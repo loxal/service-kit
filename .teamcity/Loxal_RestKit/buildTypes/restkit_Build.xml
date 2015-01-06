@@ -3,31 +3,8 @@
   <name>Build</name>
   <description />
   <settings ref="Build">
-    <disabled-settings>
-      <setting-ref ref="RUNNER_7" />
-    </disabled-settings>
     <parameters />
-    <build-runners order="RUNNER_5, RUNNER_7, RUNNER_1">
-      <runner id="RUNNER_7" name="Temporary Dummy" type="JPS">
-        <parameters>
-          <param name="incrementalMake" value="true" />
-          <param name="iprInfoRunParam"><![CDATA[<iprInfo path-to-ipr="" should-load-iml="true">
-  <Jdk name="1.7" path-to-library="/Library/Java/JavaVirtualMachines/jdk1.7.0_72.jdk/Contents/Home" is-used="true" type="JavaSDK" path-to-jdk="/Library/Java/JavaVirtualMachines/jdk1.7.0_72.jdk/Contents/Home">
-    <Pattern value="jre/lib/*.jar" />
-    <ExternalAnnotationPattern value="%teamcity.tool.idea%/lib/jdkAnnotations.jar" />
-  </Jdk>
-  <PathVariable name="MAVEN_REPOSITORY" value="~/.m2/repository" />
-</iprInfo>]]></param>
-          <param name="jvmArgs" value="-Xmx256m" />
-          <param name="teamcity.coverage.emma.include.source" value="true" />
-          <param name="teamcity.coverage.emma.instr.parameters" value="-ix -*Test*" />
-          <param name="teamcity.coverage.idea.includePatterns" value="net.loxal.*" />
-          <param name="teamcity.coverage.jacoco.patterns" value="+:*" />
-          <param name="teamcity.coverage.runner" value="IDEA" />
-          <param name="teamcity.step.mode" value="default" />
-        </parameters>
-      </runner>
-    </build-runners>
+    <build-runners order="RUNNER_5, RUNNER_7, RUNNER_1" />
     <vcs-settings>
       <vcs-entry-ref root-id="Loxal_RestKit_RestKit" />
     </vcs-settings>
