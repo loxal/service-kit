@@ -117,7 +117,9 @@
       </EnvironmentVariables>
     </ConfigurationWrapper>
     <method>
-      <option name="BuildArtifacts" enabled="true" />
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="rest-kit:war exploded" />
+      </option>
     </method>
   </configuration>
 </component>
