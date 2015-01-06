@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="war" name="rest-kit:war">
-    <output-path>$PROJECT_DIR$/../rest-kit/target</output-path>
+    <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="rest-kit-1.4.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="rest-kit:war exploded" />
     </root>
