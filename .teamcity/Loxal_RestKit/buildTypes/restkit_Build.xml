@@ -5,6 +5,7 @@
   <settings ref="Build">
     <disabled-settings>
       <setting-ref ref="RUNNER_5" />
+      <setting-ref ref="RUNNER_7" />
     </disabled-settings>
     <parameters />
     <build-runners order="RUNNER_5, RUNNER_7, RUNNER_1">
