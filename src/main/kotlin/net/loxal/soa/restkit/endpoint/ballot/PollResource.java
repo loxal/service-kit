@@ -37,47 +37,47 @@ public class PollResource extends Endpoint {
 
     @POST
     public void create(@NotNull @Valid Poll poll, @Context ContainerRequestContext requestContext, @Suspended AsyncResponse asyncResponse) {
-        asyncResponse.setTimeout(ASYNC_RESPONSE_TIMEOUT, TimeUnit.SECONDS);
+	    asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT, TimeUnit.SECONDS);
 
         Response createdPoll = client.post(Entity.json(poll));
         final String id = extractIdOfLocation(createdPoll);
 
-        URI entityLocation = URI.create(requestContext.getUriInfo().getRequestUri().toString() + URI_PATH_SEPARATOR + id);
+	    URI entityLocation = URI.create(requestContext.getUriInfo().getRequestUri().toString() + Endpoint.URI_PATH_SEPARATOR + id);
 
         asyncResponse.resume(Response.fromResponse(createdPoll).location(entityLocation).build());
-        LOG.info(requestContext.getMethod());
+	    Endpoint.LOG.info(requestContext.getMethod());
     }
 
-    @Path(ID_PATH_PARAM_PLACEHOLDER)
+	@Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
     @DELETE
-    public void delete(@NotNull @PathParam(ID_PATH_PARAM) String id, @Context ContainerRequestContext requestContext, @Suspended AsyncResponse asyncResponse) {
-        asyncResponse.setTimeout(ASYNC_RESPONSE_TIMEOUT, TimeUnit.SECONDS);
+	public void delete(@NotNull @PathParam(Endpoint.ID_PATH_PARAM) String id, @Context ContainerRequestContext requestContext, @Suspended AsyncResponse asyncResponse) {
+		asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT, TimeUnit.SECONDS);
 
         Response response = client.delete(Poll.class, id);
 
         asyncResponse.resume(Response.fromResponse(response).type(MediaType.APPLICATION_JSON_TYPE).build());
-        LOG.info(requestContext.getMethod());
+		Endpoint.LOG.info(requestContext.getMethod());
     }
 
-    @Path(ID_PATH_PARAM_PLACEHOLDER)
+	@Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
     @GET
-    public void retrieve(@NotNull @PathParam(ID_PATH_PARAM) String id, @Context ContainerRequestContext requestContext, @Suspended AsyncResponse asyncResponse) {
-        asyncResponse.setTimeout(ASYNC_RESPONSE_TIMEOUT, TimeUnit.SECONDS);
+	public void retrieve(@NotNull @PathParam(Endpoint.ID_PATH_PARAM) String id, @Context ContainerRequestContext requestContext, @Suspended AsyncResponse asyncResponse) {
+		asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT, TimeUnit.SECONDS);
 
         Response response = client.get(Poll.class, id);
 
         asyncResponse.resume(Response.fromResponse(response).build());
-        LOG.info(requestContext.getMethod());
+		Endpoint.LOG.info(requestContext.getMethod());
     }
 
-    @Path(ID_PATH_PARAM_PLACEHOLDER)
+	@Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
     @PUT
-    public void update(@NotNull @Valid Poll poll, @NotNull @PathParam(ID_PATH_PARAM) String id, @Context ContainerRequestContext requestContext, @Suspended AsyncResponse asyncResponse) {
-        asyncResponse.setTimeout(ASYNC_RESPONSE_TIMEOUT, TimeUnit.SECONDS);
+	public void update(@NotNull @Valid Poll poll, @NotNull @PathParam(Endpoint.ID_PATH_PARAM) String id, @Context ContainerRequestContext requestContext, @Suspended AsyncResponse asyncResponse) {
+		asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT, TimeUnit.SECONDS);
 
         Response updated = client.put(Entity.json(poll), id);
 
         asyncResponse.resume(Response.fromResponse(updated).build());
-        LOG.info(requestContext.getMethod());
+		Endpoint.LOG.info(requestContext.getMethod());
     }
 }
