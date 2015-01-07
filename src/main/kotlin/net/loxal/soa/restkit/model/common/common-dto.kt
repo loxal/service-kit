@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response
 /**
  * Detailed error message used in response to provide all errors triggered by a request.
  */
-public class ErrorMessage private() {
+data class ErrorMessage private() {
     NotNull Pattern(regexp = TYPE_REGEXP_PATTERN)
     var type: String? = Response.Status.BAD_REQUEST.getReasonPhrase()
     NotNull
@@ -35,4 +35,12 @@ public class ErrorMessage private() {
             return e
         }
     }
+}
+
+data class ErrorDetail private() {
+    var field: String = ""
+    NotNull
+    Pattern(regexp = ErrorMessage.TYPE_REGEXP_PATTERN)
+    var type: String = ""
+    var message: String = ""
 }

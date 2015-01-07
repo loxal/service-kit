@@ -9,7 +9,7 @@ import java.util.logging.Logger
 import java.text.MessageFormat
 import java.util.regex.Pattern
 
-public abstract class Endpoint {
+abstract class Endpoint {
 
     protected fun extractIdOfLocation(createdVote: Response): String {
         val entityId = ENTITY_ID_PATTERN.matcher(createdVote.getLocation().getPath())
