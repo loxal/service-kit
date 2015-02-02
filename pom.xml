@@ -16,7 +16,7 @@
 
     <groupId>net.loxal.soa</groupId>
     <artifactId>rest-kit</artifactId>
-    <version>1.4.0-SNAPSHOT</version>
+    <version>1.4.1-SNAPSHOT</version>
     <name>RESTkit</name>
     <packaging>war</packaging>
     <description>Microservice Toolkit</description>
