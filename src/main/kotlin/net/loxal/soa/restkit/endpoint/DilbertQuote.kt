@@ -28,10 +28,9 @@ public class DilbertQuote : Endpoint() {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val randomQuoteIndex = random.nextInt(quotes.size())
-        LOG.info("$randomQuoteIndex")
         asyncResponse.resume(Response.ok(quotes[randomQuoteIndex]).build())
 
-        LOG.info(requestContext.getMethod())
+        LOG.info("${requestContext.getMethod()} for $randomQuoteIndex")
     }
 
     {
@@ -39,6 +38,7 @@ public class DilbertQuote : Endpoint() {
     }
 
     class object {
+        private val LOG = Logger.getGlobal()
         private data class Quotes : TypeReference<List<Quote>>()
 
         private val quotesType = Quotes()
@@ -48,7 +48,6 @@ public class DilbertQuote : Endpoint() {
         private val quotes: List<Quote> = objectMapper.readValue(quoteData, quotesType)
         private val random: Random = Random()
 
-        private val LOG = Logger.getGlobal()
         internal val RESOURCE_PATH = "dilbert-dev-excuse"
         internal val RESOURCE_PATH_MANAGER = "dilbert-manager-quote"
     }

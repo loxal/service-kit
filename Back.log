@@ -4,6 +4,7 @@
 	* retrieve via ID (URL parameter dev-excuse/1, dev-excuse/2, dev-excuse/3)
 	* or random (default)
 * Dilbert Manager Quote
+* move the Dilbert Quote endpoint to something like a “dilbert” sub-package
 
 * Main IDEA: myBIZ RESTful **devKit.loxal.net** (RESTkit) for DEVs like getVoucher (UUID), getVisitCount
 
