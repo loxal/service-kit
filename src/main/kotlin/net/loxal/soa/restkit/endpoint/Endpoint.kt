@@ -25,10 +25,10 @@ abstract class Endpoint {
 
     class object {
         public val URI_PATH_SEPARATOR: String = "/"
-        protected val ASYNC_RESPONSE_TIMEOUT: Int = 3
-        protected val ID_PATH_PARAM: String = "id"
-        protected val ID_PATH_PARAM_PLACEHOLDER: String = "{" + ID_PATH_PARAM + "}"
-        protected val LOG: Logger = Logger.getGlobal()
+        val ASYNC_RESPONSE_TIMEOUT: Int = 3
+        val ID_PATH_PARAM: String = "id"
+        val ID_PATH_PARAM_PLACEHOLDER: String = "{" + ID_PATH_PARAM + "}"
+        val LOG: Logger = Logger.getGlobal()
         private val ENTITY_ID_GROUP = "entityIdGroup"
         private val ENTITY_ID_PATTERN = Pattern.compile(MessageFormat.format("/(?<{0}>[0-9a-f]+)$", ENTITY_ID_GROUP))
     }

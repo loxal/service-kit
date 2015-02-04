@@ -2,26 +2,27 @@
  * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
-package net.loxal.soa.restkit.endpoint
+package net.loxal.soa.restkit.service.quote
 
 import javax.ws.rs.Path
+import net.loxal.soa.restkit.endpoint.Endpoint
 import javax.ws.rs.GET
 import javax.ws.rs.core.Context
 import javax.servlet.http.HttpServletRequest
 import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
 import javax.ws.rs.container.AsyncResponse
+import net.loxal.soa.restkit.model.dilbert.Quote
+import com.fasterxml.jackson.core.type.TypeReference
+import java.util.Random
 import java.util.concurrent.TimeUnit
 import javax.ws.rs.core.Response
 import java.util.logging.Logger
-import net.loxal.soa.restkit.model.dilbert.Quote
-import java.io.InputStreamReader
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.core.type.TypeReference
-import java.util.Random
+import java.io.InputStreamReader
 
-Path(DilbertQuote.RESOURCE_PATH)
-public class DilbertQuote : Endpoint() {
+Path(DilbertQuoteService.RESOURCE_PATH)
+public class DilbertQuoteService : Endpoint() {
 
     GET
     public fun quote(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
