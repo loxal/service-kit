@@ -18,9 +18,9 @@
       <option name="JNDI_PORT" value="8151" />
     </server-settings>
     <predefined_log_file id="Tomcat" enabled="true" />
-    <predefined_log_file id="Tomcat Catalina" enabled="true" />
-    <predefined_log_file id="Tomcat Manager" enabled="true" />
-    <predefined_log_file id="Tomcat Host Manager" enabled="true" />
+    <predefined_log_file id="Tomcat Catalina" enabled="false" />
+    <predefined_log_file id="Tomcat Manager" enabled="false" />
+    <predefined_log_file id="Tomcat Host Manager" enabled="false" />
     <predefined_log_file id="Tomcat Localhost Access" enabled="true" />
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <RunnerSettings RunnerId="Cover" />

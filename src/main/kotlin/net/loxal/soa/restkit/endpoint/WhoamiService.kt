@@ -30,7 +30,7 @@ public class WhoamiService : Endpoint() {
     }
 
     class object {
-        val RESOURCE_PATH = "who-am-i"
         private val LOG = Logger.getGlobal()
+        val RESOURCE_PATH = "who-am-i"
     }
 }
