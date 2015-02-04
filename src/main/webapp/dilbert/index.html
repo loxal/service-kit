@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+  -->
+
+<!--<html manifest="cache.appcache">-->
+<meta charset="UTF-8">
+<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<title>Dilbert Quotes</title>
+
+<script>
+    function loadQuote() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var quote = JSON.parse(xhr.response);
+                var quoteContainer = document.getElementById("quote");
+                quoteContainer.textContent = quote.quote;
+            }
+        };
+        xhr.open("GET", "/dilbert-quote/dev-excuse", true);
+        xhr.send();
+    }
+</script>
+
+<style type="text/css">
+    @import url(http://fonts.googleapis.com/css?family=Courgette|Playball);
+
+    html {
+        font-size: 40px;
+        vertical-align: middle;
+        text-align: center;
+        font-family: 'Courgette', cursive;
+        margin-top: 30%;
+    }
+</style>
+
+<body onload="loadQuote()">
+<strong>“<span id="quote" onloadeddata="loadQuote()"></span>”</strong><br/><br/>
+<span style="font-size: 20px; float: right;">— Dilbert, the Programmer</span>
+</body>
+

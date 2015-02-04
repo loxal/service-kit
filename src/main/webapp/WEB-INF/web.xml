@@ -49,5 +49,6 @@
         <servlet-name>default</servlet-name>
         <url-pattern>/api/*</url-pattern>
         <url-pattern>/gadget/*</url-pattern>
+        <url-pattern>/dilbert/*</url-pattern>
     </servlet-mapping>
 </web-app>
