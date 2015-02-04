@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "quote": "You have to think along, I can’t take care of everything."
+  },
+  {
+    "id": 2,
+    "quote": "What I’ve said yesterday doesn’t matter today anymore."
+  },
+  {
+    "id": 3,
+    "quote": "Good morning, my name is Bob, I’m the “Senior Chief Strategist and Vice President of Innovation, Cloud Evangelism, and Operational Leadership”."
+  },
+  {
+    "id": 4,
+    "quote": "Take care of the problem and I’ll take care of our Go-To-Market strategy."
+  },
+  {
+    "id": 5,
+    "quote": "We need to have a meeting on this topic."
+  },
+  {
+    "id": 6,
+    "quote": "Don’t go into details, I don’t understand them anyway."
+  },
+  {
+    "id": 7,
+    "quote": "Important things need to be done first."
+  },
+  {
+    "id": 8,
+    "quote": "What’s our current high priority blocker? [BLAH…] Ok, let’s start with the high priority blocker!"
+  },
+  {
+    "id": 9,
+    "quote": "We need this feature implemented by next Monday, let’s work agile!"
+  },
+  {
+    "id": 10,
+    "quote": "I didn’t meant it personally, I just don’t like you."
+  }
+]

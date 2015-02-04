@@ -110,5 +110,65 @@
   {
     "id": 28,
     "quote": "There must be something strange in your data."
+  },
+  {
+    "id": 29,
+    "quote": "Oh, you said you DIDN'T want that to happen?"
+  },
+  {
+    "id": 30,
+    "quote": "THIS can't be the source of THAT."
+  },
+  {
+    "id": 31,
+    "quote": "You must have done something wrong."
+  },
+  {
+    "id": 32,
+    "quote": "I couldn't find any examples of how that can be done anywhere else in the project."
+  },
+  {
+    "id": 33,
+    "quote": "It works, but it's not been tested."
+  },
+  {
+    "id": 34,
+    "quote": "It must be a hardware problem."
+  },
+  {
+    "id": 35,
+    "quote": "That's the fault of the graphic designer."
+  },
+  {
+    "id": 36,
+    "quote": "The code is compiling."
+  },
+  {
+    "id": 37,
+    "quote": "Our redundant systems must have failed as well."
+  },
+  {
+    "id": 38,
+    "quote": "I'm surprised that was working at all."
+  },
+  {
+    "id": 39,
+    "quote": "Don't worry, that value is only wrong half of the time."
+  },
+  {
+    "id": 40,
+    "quote": "I didn't receive a ticket for it."
+  },
+  {
+    "id": 41,
+    "quote": "You must have the wrong version."
+  },
+  {
+    "id": 42,
+    "quote": "It must be because of a leap second."
+  },
+  {
+    "id": 43,
+    "quote": "Management insisted we wouldn't need to waste our time writing unit tests."
   }
 ]

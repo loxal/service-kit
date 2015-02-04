@@ -25,31 +25,57 @@ import javax.ws.rs.PathParam
 Path(DilbertQuoteService.RESOURCE_PATH)
 public class DilbertQuoteService : Endpoint() {
 
+    Path(RESOURCE_PATH_DEV)
     GET
-    public fun quote(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    public fun quoteDev(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val randomQuoteIndex = random.nextInt(quotes.size())
-        asyncResponse.resume(Response.ok(quotes[randomQuoteIndex]).build())
+        val randomQuoteIndex = random.nextInt(quotesDev.size())
+        asyncResponse.resume(Response.ok(quotesDev[randomQuoteIndex]).build())
 
         LOG.info("${requestContext.getMethod()} for $randomQuoteIndex ${request.getContextPath()}")
     }
 
-    Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
+    Path("$RESOURCE_PATH_DEV/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
     GET
-    public fun quote(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
+    public fun quoteDev(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
                      PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
                      Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val quoteIndex = quoteId - 1
-        asyncResponse.resume(Response.ok(quotes[quoteIndex]).build())
+        asyncResponse.resume(Response.ok(quotesDev[quoteIndex]).build())
+
+        LOG.info("${requestContext.getMethod()} for $quoteId ${request.getContextPath()}")
+    }
+
+    Path(RESOURCE_PATH_MANAGER)
+    GET
+    public fun quoteManager(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+
+        val randomQuoteIndex = random.nextInt(quotesManager.size())
+        asyncResponse.resume(Response.ok(quotesManager[randomQuoteIndex]).build())
+
+        LOG.info("${requestContext.getMethod()} for $randomQuoteIndex ${request.getContextPath()}")
+    }
+
+    Path("$RESOURCE_PATH_MANAGER/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
+    GET
+    public fun quoteManager(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
+                            PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
+                            Suspended asyncResponse: AsyncResponse) {
+        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+
+        val quoteIndex = quoteId - 1
+        asyncResponse.resume(Response.ok(quotesManager[quoteIndex]).build())
 
         LOG.info("${requestContext.getMethod()} for $quoteId ${request.getContextPath()}")
     }
 
     {
-        quotesReader.close()
+        quotesDevReader.close()
+        quotesManagerReader.close()
     }
 
     class object {
@@ -59,12 +85,16 @@ public class DilbertQuoteService : Endpoint() {
 
         private val quotesType = Quotes()
         private val objectMapper = ObjectMapper()
-        private val quotesReader = InputStreamReader(javaClass.getResourceAsStream("quotes.json"))
-        private val quoteData = quotesReader.readText()
-        val quotes: List<Quote> = objectMapper.readValue(quoteData, quotesType)
+        private val quotesDevReader = InputStreamReader(javaClass.getResourceAsStream("quotes-dev.json"))
+        private val quotesManagerReader = InputStreamReader(javaClass.getResourceAsStream("quotes-manager.json"))
+        private val quoteDevData = quotesDevReader.readText()
+        private val quoteManagerData = quotesManagerReader.readText()
+        val quotesDev: List<Quote> = objectMapper.readValue(quoteDevData, quotesType)
+        val quotesManager: List<Quote> = objectMapper.readValue(quoteManagerData, quotesType)
         private val random: Random = Random()
 
-        internal val RESOURCE_PATH = "dilbert-dev-excuse"
-        internal val RESOURCE_PATH_MANAGER = "dilbert-manager-quote"
+        val RESOURCE_PATH = "dilbert-quote"
+        val RESOURCE_PATH_DEV = "dev-excuse"
+        val RESOURCE_PATH_MANAGER = "manager"
     }
 }
