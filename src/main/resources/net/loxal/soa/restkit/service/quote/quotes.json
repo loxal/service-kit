@@ -10,5 +10,105 @@
   {
     "id": 3,
     "quote": "My time was split in a way that meant I couldn't do either project properly."
+  },
+  {
+    "id": 4,
+    "quote": "I have never seen that before in my life."
+  },
+  {
+    "id": 5,
+    "quote": "The third party documentation doesn't exist."
+  },
+  {
+    "id": 6,
+    "quote": "The third party documentation is wrong."
+  },
+  {
+    "id": 7,
+    "quote": "I couldn't find any library that can even do that."
+  },
+  {
+    "id": 8,
+    "quote": "The unit test doesn't cover that eventuality."
+  },
+  {
+    "id": 9,
+    "quote": "What did I tell you about using parts of the system you don't understand?"
+  },
+  {
+    "id": 10,
+    "quote": "The person responsible doesn't work here anymore."
+  },
+  {
+    "id": 11,
+    "quote": "Your browser must be caching the old content."
+  },
+  {
+    "id": 12,
+    "quote": "In the interest of efficiency I only check my email for that on a Friday."
+  },
+  {
+    "id": 13,
+    "quote": "It's a character encoding issue."
+  },
+  {
+    "id": 14,
+    "quote": "That's interesting, how did you manage to make it do that?"
+  },
+  {
+    "id": 15,
+    "quote": "No one told me so I was forced to assume which way to do that."
+  },
+  {
+    "id": 16,
+    "quote": "You're doing it wrong."
+  },
+  {
+    "id": 17,
+    "quote": "It's a known bug with the programming language."
+  },
+  {
+    "id": 18,
+    "quote": "I usually get a notification when that happens."
+  },
+  {
+    "id": 19,
+    "quote": "I broke that deliberately to do some testing."
+  },
+  {
+    "id": 20,
+    "quote": "That error means it was successful."
+  },
+  {
+    "id": 21,
+    "quote": "I can't make that a priority right now."
+  },
+  {
+    "id": 22,
+    "quote": "The project manager told me to do it that way."
+  },
+  {
+    "id": 23,
+    "quote": "It's a remote vendor issue."
+  },
+  {
+    "id": 24,
+    "quote": "That was literally a one in a million error."
+  },
+  {
+    "id": 25,
+    "quote": "Our code quality is no worse than anyone else in the industry."
+  },
+  {
+    "id": 26,
+    "quote": "We should have updated our software years ago."
+  },
+  {
+    "id": 27,
+    "quote": "It would have taken twice as long to build it properly."
+  },
+  {
+    "id": 28,
+    "quote": "There must be something strange in your data."
   }
 ]

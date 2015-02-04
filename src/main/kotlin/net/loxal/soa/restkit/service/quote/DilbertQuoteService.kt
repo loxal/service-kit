@@ -20,6 +20,7 @@ import javax.ws.rs.core.Response
 import java.util.logging.Logger
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.io.InputStreamReader
+import javax.ws.rs.PathParam
 
 Path(DilbertQuoteService.RESOURCE_PATH)
 public class DilbertQuoteService : Endpoint() {
@@ -31,7 +32,20 @@ public class DilbertQuoteService : Endpoint() {
         val randomQuoteIndex = random.nextInt(quotes.size())
         asyncResponse.resume(Response.ok(quotes[randomQuoteIndex]).build())
 
-        LOG.info("${requestContext.getMethod()} for $randomQuoteIndex")
+        LOG.info("${requestContext.getMethod()} for $randomQuoteIndex ${request.getContextPath()}")
+    }
+
+    Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
+    GET
+    public fun quote(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
+                     PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
+                     Suspended asyncResponse: AsyncResponse) {
+        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+
+        val quoteIndex = quoteId - 1
+        asyncResponse.resume(Response.ok(quotes[quoteIndex]).build())
+
+        LOG.info("${requestContext.getMethod()} for $quoteId ${request.getContextPath()}")
     }
 
     {
@@ -40,13 +54,14 @@ public class DilbertQuoteService : Endpoint() {
 
     class object {
         private val LOG = Logger.getGlobal()
+
         private data class Quotes : TypeReference<List<Quote>>()
 
         private val quotesType = Quotes()
         private val objectMapper = ObjectMapper()
         private val quotesReader = InputStreamReader(javaClass.getResourceAsStream("quotes.json"))
         private val quoteData = quotesReader.readText()
-        private val quotes: List<Quote> = objectMapper.readValue(quoteData, quotesType)
+        val quotes: List<Quote> = objectMapper.readValue(quoteData, quotesType)
         private val random: Random = Random()
 
         internal val RESOURCE_PATH = "dilbert-dev-excuse"

@@ -1,9 +1,12 @@
 # Backlog
 
+## RELEASE NEXT
 * Dilbert Dev Quote like programmers excuse (default)
 	* retrieve via ID (URL parameter dev-excuse/1, dev-excuse/2, dev-excuse/3)
-	* or random (default)
-	* implement test
+* provide quotes like http://programmingexcuses.com via /dev-quote
+	* implement an index.html container to show the quotes to end users
+
+## RELEASE 1
 * Dilbert Manager Quote
 * move the Dilbert Quote endpoint to something like a “dilbert” sub-package
 
@@ -14,6 +17,5 @@
 * Marathon ranking service
 * Something to check the "Reisepass readiness" status
 
-* provide quotes like http://programmingexcuses.com via /dev-quote
 
 

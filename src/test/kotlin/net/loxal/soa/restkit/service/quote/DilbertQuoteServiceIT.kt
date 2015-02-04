@@ -15,6 +15,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 public class DilbertQuoteServiceIT : AbstractEndpointTest() {
+
     Before
     public fun setUp() {
         AbstractEndpointTest.resourcePath = DilbertQuoteService.RESOURCE_PATH
@@ -23,7 +24,7 @@ public class DilbertQuoteServiceIT : AbstractEndpointTest() {
     Test
     public fun getQuote() {
         val response = AbstractEndpointTest.prepareGenericRequest(DilbertQuoteService.RESOURCE_PATH).request().get()
-        assertEquals(Response.Status.OK.getStatusCode().toInt(), response.getStatus().toInt())
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
 
         val quote = response.readEntity(javaClass<Quote>())
@@ -31,5 +32,18 @@ public class DilbertQuoteServiceIT : AbstractEndpointTest() {
         assertTrue(quote.id is Int)
         assertNotNull(quote.quote)
         assertTrue(quote.quote is String)
+    }
+
+    Test
+    public fun getQuoteViaId() {
+        val quoteId = 9
+        val response = AbstractEndpointTest.prepareGenericRequest(DilbertQuoteService.RESOURCE_PATH)
+                .path(quoteId.toString()).request().get()
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
+
+        val quote = response.readEntity(javaClass<Quote>())
+        val quoteIndex = quoteId - 1
+        assertEquals(DilbertQuoteService.quotes[quoteIndex], quote)
     }
 }
