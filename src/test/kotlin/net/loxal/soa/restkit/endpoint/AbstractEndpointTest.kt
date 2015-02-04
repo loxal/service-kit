@@ -33,7 +33,7 @@ public abstract class AbstractEndpointTest {
         platformStatic val SERVICE_TARGET: String
         private val client = ClientBuilder.newClient()
         public var properties: Properties
-        protected var resourcePath: String = "/"
+        var resourcePath: String = "/"
 
         public platformStatic fun prepareGenericRequest(path: String): WebTarget {
             return prepareTarget(SERVICE_TARGET).path(path)
