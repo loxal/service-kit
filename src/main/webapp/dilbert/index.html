@@ -9,17 +9,52 @@
 <title>Dilbert Quotes</title>
 
 <script>
-    function loadQuote() {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var quote = JSON.parse(xhr.response);
-                var quoteContainer = document.getElementById("quote");
-                quoteContainer.textContent = quote.quote;
+    "use strict";
+    function main() {
+        var quoteResourcePath = "/dilbert-quote/dev-excuse";
+
+        var configure = function () {
+            var roleContainer = document.getElementById("role");
+
+            var config = JSON.parse(document.location.hash.substr(1));
+            var role = config.role;
+            var quoteId = config.quoteId;
+
+            var manager = "Manager";
+            var programmer = "Programmer";
+            switch (role) {
+                case manager:
+                    roleContainer.textContent = manager;
+                    quoteResourcePath = "/dilbert-quote/manager";
+                    break;
+                case programmer:
+                    roleContainer.textContent = programmer;
+                    quoteResourcePath = "/dilbert-quote/dev-excuse";
+                    break;
+            }
+
+            if (quoteId) {
+                quoteResourcePath += "/" + quoteId;
             }
         };
-        xhr.open("GET", "/dilbert-quote/dev-excuse", true);
-        xhr.send();
+
+        var loadQuote = function () {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var quote = JSON.parse(xhr.response);
+                    var quoteContainer = document.getElementById("quote");
+                    quoteContainer.textContent = quote.quote;
+                }
+            };
+            xhr.open("GET", quoteResourcePath, true);
+            xhr.send();
+        };
+
+        if (document.location.hash) {
+            configure();
+        }
+        loadQuote();
     }
 </script>
 
@@ -33,10 +68,17 @@
         font-family: 'Courgette', cursive;
         margin-top: 30%;
     }
+
+    .quotationMarks {
+        font-size: 55px;
+    }
 </style>
 
-<body onload="loadQuote()">
-<strong>“<span id="quote" onloadeddata="loadQuote()"></span>”</strong><br/><br/>
-<span style="font-size: 20px; float: right;">— Dilbert, the Programmer</span>
+<body onload="main()">
+<strong>
+    <span class="quotationMarks">“</span><span id="quote"></span><span class="quotationMarks">”</span>
+</strong>
+<br/><br/>
+<span style="font-size: 20px; float: right;">— Dilbert, the <span id="role">Programmer</span></span>
 </body>
 
