@@ -317,14 +317,17 @@
             <plugin>
                 <groupId>org.cloudfoundry</groupId>
                 <artifactId>cf-maven-plugin</artifactId>
-                <version>1.3.4.KIWI-RELEASE</version>
+                <version>1.3.5.KIWI-RELEASE</version>
                 <configuration>
                     <server>hybris.CloudFoundry</server>
                     <target>https://api${cloudFoundry.target}</target>
                     <buildpack>https://github.com/cloudfoundry/java-buildpack.git</buildpack>
-                    <appname>${project.artifactId}-${cloudFoundry.stage}-v${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-b${build.number}</appname>
+                    <appname>
+                        ${project.artifactId}-${cloudFoundry.stage}-v${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-b${build.number}
+                    </appname>
                     <urls>
-                        <url>${project.artifactId}-${cloudFoundry.stage}.${cloudFoundry.subdomain}${cloudFoundry.api}</url>
+                        <url>${project.artifactId}-${cloudFoundry.stage}.${cloudFoundry.subdomain}${cloudFoundry.api}
+                        </url>
                         <url>
                             ${project.artifactId}-v${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-b${build.number}.${cloudFoundry.subdomain}${cloudFoundry.api}
                         </url>
@@ -363,6 +366,10 @@
                     <stopKey>someStopKey</stopKey>
                     <stopPort>8101</stopPort>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
