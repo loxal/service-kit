@@ -1,10 +1,8 @@
 # Backlog
 
 ## RELEASE NEXT
-	* provide quotes like http://programmingexcuses.com via /dev-quote
 	* Mirror return via GET what was POSTED or provided via GET
 ## RELEASE 1
-* Dilbert Manager Quote
 * move the Dilbert Quote endpoint to something like a “dilbert” sub-package
 
 * Main IDEA: myBIZ RESTful **devKit.loxal.net** (RESTkit) for DEVs like getVoucher (UUID), getVisitCount
