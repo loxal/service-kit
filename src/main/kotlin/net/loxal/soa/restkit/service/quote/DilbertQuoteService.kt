@@ -21,7 +21,10 @@ import java.util.logging.Logger
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.io.InputStreamReader
 import javax.ws.rs.PathParam
+import javax.ws.rs.Produces
+import javax.ws.rs.core.MediaType
 
+Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 Path(DilbertQuoteService.RESOURCE_PATH)
 public class DilbertQuoteService : Endpoint() {
 

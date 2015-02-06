@@ -17,8 +17,9 @@
             var roleContainer = document.getElementById("role");
             var jsonOutput = document.getElementById("jsonOutput");
 
-            var config = JSON.parse(document.location.hash.substr(1));
+            var config = JSON.parse(decodeURIComponent(window.location.search.substr(1)));
             var role = config.role;
+            console.log(role);
             var quoteId = config.quoteId;
 
             var manager = "Manager";
@@ -53,7 +54,7 @@
             xhr.send();
         };
 
-        if (document.location.hash) {
+        if (document.location.search) {
             configure();
         }
         loadQuote();
@@ -70,7 +71,7 @@
         margin-top: 30%;
     }
 
-    #jsonOutput {
+    a {
         text-decoration: none;
         color: #ccc;
     }
@@ -81,8 +82,12 @@
 </style>
 
 <body onload="main()">
-<a id="jsonOutput" href="/dilbert-quote/dev-excuse">JSON</a>
-<!--/dilbert-quote/index.html#{"role": "Manager", "quoteId": 9}-->
+<div id="overview">
+    <a id="jsonOutput" href="/dilbert-quote/dev-excuse">JSON</a>
+    [<a href="/dilbert-quote/index.html?{&quot;role&quot;: &quot;Programmer&quot;}">Programmer Quotes</a> |
+    <a href="/dilbert-quote/index.html?{&quot;role&quot;: &quot;Manager&quot;, &quot;quoteId&quot;: 24}">Manager
+        Quotes</a>]
+</div>
 <div id="quoteFrame">
     <strong>
         <span class="quotationMarks">“</span><span id="quote"></span><span class="quotationMarks">”</span>
