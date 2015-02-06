@@ -2,8 +2,7 @@
 
 ## RELEASE NEXT
 	* provide quotes like http://programmingexcuses.com via /dev-quote
-		* implement an index.html container to show the quotes to end users
-
+	* Mirror return via GET what was POSTED or provided via GET
 ## RELEASE 1
 * Dilbert Manager Quote
 * move the Dilbert Quote endpoint to something like a “dilbert” sub-package

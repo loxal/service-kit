@@ -39,8 +39,8 @@ public class DilbertQuoteService : Endpoint() {
     Path("$RESOURCE_PATH_DEV/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
     GET
     public fun quoteDev(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
-                     PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
-                     Suspended asyncResponse: AsyncResponse) {
+                        PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
+                        Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val quoteIndex = quoteId - 1

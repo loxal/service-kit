@@ -4,7 +4,7 @@
 
 package net.loxal.soa.restkit.model.dilbert
 
-internal data class Quote(
+data class Quote(
         var id: Int = 0,
         var quote: String = "You must have done something wrong."
 )

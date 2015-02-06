@@ -5,11 +5,11 @@
   },
   {
     "id": 2,
-    "quote": "It's never shown unexpected behaviour like this before."
+    "quote": "It’s never shown unexpected behaviour like this before."
   },
   {
     "id": 3,
-    "quote": "My time was split in a way that meant I couldn't do either project properly."
+    "quote": "My time was split in a way that meant I couldn’t do either project properly."
   },
   {
     "id": 4,
@@ -17,7 +17,7 @@
   },
   {
     "id": 5,
-    "quote": "The third party documentation doesn't exist."
+    "quote": "The third party documentation doesn’t exist."
   },
   {
     "id": 6,
@@ -25,19 +25,19 @@
   },
   {
     "id": 7,
-    "quote": "I couldn't find any library that can even do that."
+    "quote": "I couldn’t find any library that can even do that."
   },
   {
     "id": 8,
-    "quote": "The unit test doesn't cover that eventuality."
+    "quote": "The unit test doesn’t cover that eventuality."
   },
   {
     "id": 9,
-    "quote": "What did I tell you about using parts of the system you don't understand?"
+    "quote": "What did I tell you about using parts of the system you don’t understand?"
   },
   {
     "id": 10,
-    "quote": "The person responsible doesn't work here anymore."
+    "quote": "The person responsible doesn’t work here anymore."
   },
   {
     "id": 11,
@@ -49,11 +49,11 @@
   },
   {
     "id": 13,
-    "quote": "It's a character encoding issue."
+    "quote": "It’s a character encoding issue."
   },
   {
     "id": 14,
-    "quote": "That's interesting, how did you manage to make it do that?"
+    "quote": "That’s interesting, how did you manage to make it do that?"
   },
   {
     "id": 15,
@@ -61,11 +61,11 @@
   },
   {
     "id": 16,
-    "quote": "You're doing it wrong."
+    "quote": "You’re doing it wrong."
   },
   {
     "id": 17,
-    "quote": "It's a known bug with the programming language."
+    "quote": "It’s a known bug with the programming language."
   },
   {
     "id": 18,
@@ -81,7 +81,7 @@
   },
   {
     "id": 21,
-    "quote": "I can't make that a priority right now."
+    "quote": "I can’t make that a priority right now."
   },
   {
     "id": 22,
@@ -89,7 +89,7 @@
   },
   {
     "id": 23,
-    "quote": "It's a remote vendor issue."
+    "quote": "It’s a remote vendor issue."
   },
   {
     "id": 24,
@@ -113,11 +113,11 @@
   },
   {
     "id": 29,
-    "quote": "Oh, you said you DIDN'T want that to happen?"
+    "quote": "Oh, you said you DIDN’T want that to happen?"
   },
   {
     "id": 30,
-    "quote": "THIS can't be the source of THAT."
+    "quote": "THIS can’t be the source of THAT."
   },
   {
     "id": 31,
@@ -125,11 +125,11 @@
   },
   {
     "id": 32,
-    "quote": "I couldn't find any examples of how that can be done anywhere else in the project."
+    "quote": "I couldn’t find any examples of how that can be done anywhere else in the project."
   },
   {
     "id": 33,
-    "quote": "It works, but it's not been tested."
+    "quote": "It works, but it’s not been tested."
   },
   {
     "id": 34,
@@ -137,7 +137,7 @@
   },
   {
     "id": 35,
-    "quote": "That's the fault of the graphic designer."
+    "quote": "That’s the fault of the graphic designer."
   },
   {
     "id": 36,
@@ -149,15 +149,15 @@
   },
   {
     "id": 38,
-    "quote": "I'm surprised that was working at all."
+    "quote": "I’m surprised that was working at all."
   },
   {
     "id": 39,
-    "quote": "Don't worry, that value is only wrong half of the time."
+    "quote": "Don’t worry, that value is only wrong half of the time."
   },
   {
     "id": 40,
-    "quote": "I didn't receive a ticket for it."
+    "quote": "I didn’t receive a ticket for it."
   },
   {
     "id": 41,
@@ -169,6 +169,38 @@
   },
   {
     "id": 43,
-    "quote": "Management insisted we wouldn't need to waste our time writing unit tests."
+    "quote": "Management insisted we wouldn’t need to waste our time writing unit tests."
+  },
+  {
+    "id": 44,
+    "quote": "I thought you signed off on that?"
+  },
+  {
+    "id": 45,
+    "quote": "You must be missing some of the dependencies."
+  },
+  {
+    "id": 46,
+    "quote": "Oh, that was just a temporary fix."
+  },
+  {
+    "id": 47,
+    "quote": "It would take too long to rewrite the code from scratch."
+  },
+  {
+    "id": 48,
+    "quote": "I couldn’t find any examples of how that can be done anywhere online."
+  },
+  {
+    "id": 49,
+    "quote": "That process requires human oversight that nobody was providing."
+  },
+  {
+    "id": 50,
+    "quote": "What did you type in wrong to get it to crash?"
+  },
+  {
+    "id": 51,
+    "quote": "I did a quick fix last time but it broke when we rebooted."
   }
 ]

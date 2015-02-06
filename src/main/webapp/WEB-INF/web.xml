@@ -20,6 +20,7 @@
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>net.loxal.soa.restkit.App</param-value>
         </init-param>
+        <load-on-startup>0</load-on-startup>
         <async-supported>true</async-supported>
     </servlet>
     <servlet-mapping>
@@ -49,6 +50,7 @@
         <servlet-name>default</servlet-name>
         <url-pattern>/api/*</url-pattern>
         <url-pattern>/gadget/*</url-pattern>
-        <url-pattern>/dilbert/*</url-pattern>
+        <url-pattern>/dilbert-quote/index.html</url-pattern>
+        <url-pattern>/favicon.ico</url-pattern>
     </servlet-mapping>
 </web-app>

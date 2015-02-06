@@ -3,7 +3,7 @@
   ~ Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
   -->
 
-<html manifest="cache.appcache">
+<!--<html manifest="cache.appcache">-->
 <meta charset="UTF-8">
 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 <title>Dilbert Quotes</title>
@@ -15,6 +15,7 @@
 
         var configure = function () {
             var roleContainer = document.getElementById("role");
+            var jsonOutput = document.getElementById("jsonOutput");
 
             var config = JSON.parse(document.location.hash.substr(1));
             var role = config.role;
@@ -36,6 +37,7 @@
             if (quoteId) {
                 quoteResourcePath += "/" + quoteId;
             }
+            jsonOutput.href = quoteResourcePath;
         };
 
         var loadQuote = function () {
@@ -61,12 +63,16 @@
 <style type="text/css">
     @import url(http://fonts.googleapis.com/css?family=Courgette|Playball);
 
-    html {
+    #quoteFrame {
         font-size: 40px;
-        vertical-align: middle;
         text-align: center;
         font-family: 'Courgette', cursive;
         margin-top: 30%;
+    }
+
+    #jsonOutput {
+        text-decoration: none;
+        color: #ccc;
     }
 
     .quotationMarks {
@@ -75,10 +81,14 @@
 </style>
 
 <body onload="main()">
-<strong>
-    <span class="quotationMarks">“</span><span id="quote"></span><span class="quotationMarks">”</span>
-</strong>
-<br/><br/>
-<span style="font-size: 20px; float: right;">— Dilbert, the <span id="role">Programmer</span></span>
+<a id="jsonOutput" href="/dilbert-quote/dev-excuse">JSON</a>
+<!--/dilbert-quote/index.html#{"role": "Manager", "quoteId": 9}-->
+<div id="quoteFrame">
+    <strong>
+        <span class="quotationMarks">“</span><span id="quote"></span><span class="quotationMarks">”</span>
+    </strong>
+    <br/><br/>
+    <span style="font-size: 20px; float: right;">— Dilbert, the <span id="role">Programmer</span></span>
+</div>
 </body>
 
