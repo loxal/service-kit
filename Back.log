@@ -1,6 +1,7 @@
 # Backlog
 
 ## RELEASE NEXT
+	* CORS issue
 	* Mirror return via GET what was POSTED or provided via GET
 ## RELEASE 1
 * move the Dilbert Quote endpoint to something like a “dilbert” sub-package
