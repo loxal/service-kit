@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType
 import java.util.logging.Logger
 import javax.ws.rs.client.ClientBuilder
 import kotlin.test.assertEquals
+import net.loxal.soa.restkit.filter.AccessControlFilter
 
 public abstract class AbstractEndpointTest {
 
@@ -24,11 +25,12 @@ public abstract class AbstractEndpointTest {
 
         assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
+        assureHeaders(response)
     }
 
     class object {
-        val NON_EXISTENT: String = "non-existent"
         val LOG = Logger.getGlobal()
+        val NON_EXISTENT: String = "non-existent"
         val SERVICE_TARGET: String
         private val client = ClientBuilder.newClient()
         public var properties: Properties
@@ -57,5 +59,9 @@ public abstract class AbstractEndpointTest {
 
             SERVICE_TARGET = properties.getProperty("deploymentTarget")
         }
+    }
+
+    private fun assureHeaders(response: Response) {
+        assertEquals(AccessControlFilter.allowOriginHeaderValue, response.getHeaderString(AccessControlFilter.allowOriginHeader))
     }
 }

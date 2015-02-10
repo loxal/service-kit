@@ -7,7 +7,6 @@ package net.loxal.soa.restkit.service.quote
 import org.junit.Before
 import org.junit.Test
 import javax.ws.rs.core.Response
-import javax.ws.rs.core.MediaType
 import kotlin.test.assertEquals
 import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
 import net.loxal.soa.restkit.model.dilbert.Quote
@@ -28,7 +27,7 @@ public class DilbertQuoteServiceIT : AbstractEndpointTest() {
     public fun getDevQuote() {
         val response = AbstractEndpointTest.prepareGenericRequest(RESOURCE_PATH_DEV).request().get()
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
+        assertEquals(DilbertQuoteService.mediaType, response.getMediaType().toString())
 
         val quote = response.readEntity(javaClass<Quote>())
         assertNotNull(quote.id)
@@ -43,7 +42,7 @@ public class DilbertQuoteServiceIT : AbstractEndpointTest() {
         val response = AbstractEndpointTest.prepareGenericRequest(RESOURCE_PATH_DEV)
                 .path(quoteId.toString()).request().get()
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
+        assertEquals(DilbertQuoteService.mediaType, response.getMediaType().toString())
 
         val quote = response.readEntity(javaClass<Quote>())
         val quoteIndex = quoteId - 1
@@ -54,7 +53,7 @@ public class DilbertQuoteServiceIT : AbstractEndpointTest() {
     public fun getManagerQuote() {
         val response = AbstractEndpointTest.prepareGenericRequest(RESOURCE_PATH_MANAGER).request().get()
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
+        assertEquals(DilbertQuoteService.mediaType, response.getMediaType().toString())
 
         val quote = response.readEntity(javaClass<Quote>())
         assertNotNull(quote.id)
@@ -69,7 +68,7 @@ public class DilbertQuoteServiceIT : AbstractEndpointTest() {
         val response = AbstractEndpointTest.prepareGenericRequest(RESOURCE_PATH_MANAGER)
                 .path(quoteId.toString()).request().get()
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
+        assertEquals(DilbertQuoteService.mediaType, response.getMediaType().toString())
 
         val quote = response.readEntity(javaClass<Quote>())
         val quoteIndex = quoteId - 1

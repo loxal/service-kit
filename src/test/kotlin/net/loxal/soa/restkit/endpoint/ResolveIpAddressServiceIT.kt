@@ -13,16 +13,14 @@ import kotlin.test.assertEquals
 
 public class ResolveIpAddressServiceIT : AbstractEndpointTest() {
     Before
-    throws(javaClass<Exception>())
     public fun setUp() {
         AbstractEndpointTest.resourcePath = ResolveIpAddressService.RESOURCE_PATH
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun assureHostAddress() {
         val hostName = "loxal.net"
-        val loxalNetIpAddress = "216.239.32.21"
+        val loxalNetIpAddress = "216.239.34.21"
 
         val response = AbstractEndpointTest.prepareGenericRequest(ResolveIpAddressService.RESOURCE_PATH).queryParam(ResolveIpAddressService.HOST_NAME_PARAM, hostName).request().get()
 

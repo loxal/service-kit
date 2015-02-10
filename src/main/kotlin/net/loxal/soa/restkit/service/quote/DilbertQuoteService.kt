@@ -24,9 +24,9 @@ import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
-Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+Produces(DilbertQuoteService.mediaType)
 Path(DilbertQuoteService.RESOURCE_PATH)
-public class DilbertQuoteService : Endpoint() {
+class DilbertQuoteService : Endpoint() {
 
     Path(RESOURCE_PATH_DEV)
     GET
@@ -99,5 +99,6 @@ public class DilbertQuoteService : Endpoint() {
         val RESOURCE_PATH = "dilbert-quote"
         val RESOURCE_PATH_DEV = "dev-excuse"
         val RESOURCE_PATH_MANAGER = "manager"
+        val mediaType = MediaType.APPLICATION_JSON + "; charset=utf-8"
     }
 }
