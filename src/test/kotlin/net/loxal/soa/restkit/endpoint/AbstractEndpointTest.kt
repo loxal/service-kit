@@ -25,7 +25,7 @@ public abstract class AbstractEndpointTest {
 
         assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
-        assureHeaders(response)
+        assureCorsHeaders(response)
     }
 
     class object {
@@ -61,7 +61,8 @@ public abstract class AbstractEndpointTest {
         }
     }
 
-    private fun assureHeaders(response: Response) {
+    private fun assureCorsHeaders(response: Response) {
         assertEquals(AccessControlFilter.allowOriginHeaderValue, response.getHeaderString(AccessControlFilter.allowOriginHeader))
+        assertEquals(AccessControlFilter.allowHeadersValue.toString(), response.getHeaderString(AccessControlFilter.allowHeadersHeader).toString())
     }
 }

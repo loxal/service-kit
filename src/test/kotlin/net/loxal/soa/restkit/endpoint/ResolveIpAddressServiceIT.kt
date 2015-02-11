@@ -10,6 +10,8 @@ import net.loxal.soa.restkit.model.whoami.Host
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.MediaType
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 public class ResolveIpAddressServiceIT : AbstractEndpointTest() {
     Before
@@ -20,7 +22,6 @@ public class ResolveIpAddressServiceIT : AbstractEndpointTest() {
     Test
     public fun assureHostAddress() {
         val hostName = "loxal.net"
-        val loxalNetIpAddress = "216.239.34.21"
 
         val response = AbstractEndpointTest.prepareGenericRequest(ResolveIpAddressService.RESOURCE_PATH).queryParam(ResolveIpAddressService.HOST_NAME_PARAM, hostName).request().get()
 
@@ -28,7 +29,8 @@ public class ResolveIpAddressServiceIT : AbstractEndpointTest() {
         assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
 
         val host = response.readEntity<Host>(javaClass<Host>())
-        assertEquals(loxalNetIpAddress, host.address)
+        assertNotNull(host.address)
+        assertTrue(host.address.length() > 6 && host.address.length() < 20)
         assertEquals(hostName, host.name)
     }
 }

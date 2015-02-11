@@ -202,5 +202,9 @@
   {
     "id": 51,
     "quote": "I did a quick fix last time but it broke when we rebooted."
+  },
+  {
+    "id": 52,
+    "quote": "It’s not my fault, I just copied it."
   }
 ]

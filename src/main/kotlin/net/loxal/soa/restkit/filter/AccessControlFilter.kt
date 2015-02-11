@@ -19,10 +19,14 @@ class AccessControlFilter : ContainerResponseFilter {
 
         headers.add(allowOriginHeader, allowOriginHeaderValue)
         headers.put("Server", listOf("RESTkit v1"))
+
+        headers.add(allowHeadersHeader, allowHeadersValue)
     }
 
     class object {
         val allowOriginHeader = "Access-Control-Allow-Origin"
         val allowOriginHeaderValue = "*"
+        val allowHeadersHeader = "Access-Control-Allow-Headers"
+        val allowHeadersValue = listOf("Origin", "X-Requested-With", "")
     }
 }
