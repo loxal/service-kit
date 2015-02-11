@@ -206,5 +206,61 @@
   {
     "id": 52,
     "quote": "It’s not my fault, I just copied it."
+  },
+  {
+    "id": 53,
+    "quote": "I’m not sure as I’ve never had a look at how that works before."
+  },
+  {
+    "id": 55,
+    "quote": "That behaviour is in the original specification."
+  },
+  {
+    "id": 56,
+    "quote": "I’m surprised it works as well as it does."
+  },
+  {
+    "id": 57,
+    "quote": "That important email must have been marked as spam."
+  },
+  {
+    "id": 59,
+    "quote": "This is a previously known bug you told me not to work on yet."
+  },
+  {
+    "id": 60,
+    "quote": "I haven’t been able to reproduce that."
+  },
+  {
+    "id": 61,
+    "quote": "The program has never collected that information."
+  },
+  {
+    "id": 62,
+    "quote": "I can’t test everything."
+  },
+  {
+    "id": 63,
+    "quote": "It must be a firewall issue."
+  },
+  {
+    "id": 64,
+    "quote": "It was working in my head."
+  },
+  {
+    "id": 65,
+    "quote": "There was too little data to bother with the extra functionality at the time."
+  },
+  {
+    "id": 65,
+    "quote": "It's just some unlucky coincidence."
+  },
+  {
+    "id": 66,
+    "quote": "That feature would be outside of the scope."
+  },
+  {
+    "id": 67,
+    "quote": "Fixing that bug is beyond our scope."
   }
 ]
