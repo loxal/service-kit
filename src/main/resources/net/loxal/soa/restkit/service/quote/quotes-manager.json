@@ -13,11 +13,11 @@
   },
   {
     "id": 4,
-    "quote": "Take care of the problem and I’ll take care of our Go-To-Market strategy."
+    "quote": "Take care of the problem and I’ll take care of the rest."
   },
   {
     "id": 5,
-    "quote": "We need to have a meeting on this topic."
+    "quote": "We need a meeting on this topic."
   },
   {
     "id": 6,
@@ -29,7 +29,7 @@
   },
   {
     "id": 8,
-    "quote": "What’s our current high priority blocker? [BLAH…] Ok, let’s start with the high priority blocker!"
+    "quote": "What’s our current high priority blocker? [yada…] Ok, let’s start with the high priority blocker!"
   },
   {
     "id": 9,
@@ -57,7 +57,7 @@
   },
   {
     "id": 15,
-    "quote": "We need to outsource it to India."
+    "quote": "We should outsource it to India."
   },
   {
     "id": 16,
@@ -118,5 +118,9 @@
   {
     "id": 30,
     "quote": "I don’t know how to do this, so I delegated it."
+  },
+  {
+    "id": 31,
+    "quote": "I’m your manager but I can’t decide on my own."
   }
 ]

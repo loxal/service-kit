@@ -316,7 +316,7 @@
             <plugin>
                 <groupId>org.cloudfoundry</groupId>
                 <artifactId>cf-maven-plugin</artifactId>
-                <version>1.3.5.KIWI-RELEASE</version>
+                <version>1.4.0.KIWI-RELEASE</version>
                 <configuration>
                     <server>hybris.CloudFoundry</server>
                     <target>https://api${cloudFoundry.target}</target>
