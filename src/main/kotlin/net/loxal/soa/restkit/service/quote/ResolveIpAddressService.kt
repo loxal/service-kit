@@ -2,9 +2,10 @@
  * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
-package net.loxal.soa.restkit.endpoint
+package net.loxal.soa.restkit.service.quote
 
 import javax.ws.rs.Path
+import net.loxal.soa.restkit.endpoint.Endpoint
 import javax.ws.rs.GET
 import javax.ws.rs.QueryParam
 import javax.ws.rs.core.Context
@@ -12,13 +13,13 @@ import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
 import javax.ws.rs.container.AsyncResponse
 import java.net.UnknownHostException
+import kotlin.platform.platformStatic
 import java.util.logging.Logger
 import java.util.concurrent.TimeUnit
 import java.net.InetAddress
 import net.loxal.soa.restkit.model.whoami.Host
 import javax.ws.rs.core.Response
 import net.loxal.soa.restkit.model.common.ErrorMessage
-import kotlin.platform.platformStatic
 
 Path(ResolveIpAddressService.RESOURCE_PATH)
 public class ResolveIpAddressService : Endpoint() {

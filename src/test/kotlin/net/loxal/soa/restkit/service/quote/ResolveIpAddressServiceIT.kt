@@ -2,16 +2,14 @@
  * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
-package net.loxal.soa.restkit.endpoint
+package net.loxal.soa.restkit.service.quote
 
+import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
 import org.junit.Before
 import org.junit.Test
 import net.loxal.soa.restkit.model.whoami.Host
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.MediaType
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
 
 public class ResolveIpAddressServiceIT : AbstractEndpointTest() {
     Before
@@ -25,12 +23,12 @@ public class ResolveIpAddressServiceIT : AbstractEndpointTest() {
 
         val response = AbstractEndpointTest.prepareGenericRequest(ResolveIpAddressService.RESOURCE_PATH).queryParam(ResolveIpAddressService.HOST_NAME_PARAM, hostName).request().get()
 
-        assertEquals(Response.Status.OK.getStatusCode().toLong(), response.getStatus().toLong())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
+        test.assertEquals(Response.Status.OK.getStatusCode().toLong(), response.getStatus().toLong())
+        test.assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
 
         val host = response.readEntity<Host>(javaClass<Host>())
-        assertNotNull(host.address)
-        assertTrue(host.address.length() > 6 && host.address.length() < 20)
-        assertEquals(hostName, host.name)
+        test.assertNotNull(host.address)
+        test.assertTrue(host.address.length() > 6 && host.address.length() < 20)
+        test.assertEquals(hostName, host.name)
     }
 }

@@ -14,7 +14,6 @@ import net.loxal.soa.restkit.endpoint.Endpoint
 import java.util.Arrays
 import javax.ws.rs.client.Entity
 import kotlin.test.assertEquals
-import net.loxal.soa.restkit.endpoint.PollResource
 
 public class PollResourceIT : AbstractEndpointTest() {
 

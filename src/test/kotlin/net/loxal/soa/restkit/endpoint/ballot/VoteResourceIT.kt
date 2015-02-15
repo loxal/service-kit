@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType
 import net.loxal.soa.restkit.endpoint.Endpoint
 import javax.ws.rs.client.Entity
 import kotlin.test.assertEquals
-import net.loxal.soa.restkit.endpoint.VoteResource
 
 public class VoteResourceIT : AbstractEndpointTest() {
 

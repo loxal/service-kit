@@ -1,8 +1,13 @@
-package net.loxal.soa.restkit.endpoint
+/*
+ * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ */
+
+package net.loxal.soa.restkit.endpoint.ballot
 
 import javax.ws.rs.Path
+import net.loxal.soa.restkit.endpoint.Endpoint
 import javax.inject.Inject
-import net.loxal.soa.restkit.model.ballot.Poll
+import net.loxal.soa.restkit.model.ballot.Vote
 import net.loxal.soa.restkit.client.RepositoryClient
 import javax.ws.rs.POST
 import javax.validation.constraints.NotNull
@@ -21,22 +26,22 @@ import java.net.URI
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.MediaType
 
-Path(PollResource.RESOURCE_PATH)
-public class PollResource : Endpoint() {
+Path(VoteResource.RESOURCE_PATH)
+public class VoteResource : Endpoint() {
 
     Inject
-    var client: RepositoryClient<Poll> = RepositoryClient()
+    var client: RepositoryClient<Vote> = RepositoryClient()
 
     POST
-    public fun create(NotNull Valid poll: Poll, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    public fun create(NotNull Valid vote: Vote, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val createdPoll = client.post(Entity.json<Poll>(poll))
-        val id = extractIdOfLocation(createdPoll)
+        val createdVote = client.post(Entity.json<Vote>(vote))
+        val id = extractIdOfLocation(createdVote)
 
         val entityLocation = URI.create(requestContext.getUriInfo().getRequestUri().toString() + Endpoint.URI_PATH_SEPARATOR + id)
 
-        asyncResponse.resume(Response.fromResponse(createdPoll).location(entityLocation).build())
+        asyncResponse.resume(Response.fromResponse(createdVote).location(entityLocation).build())
         Endpoint.LOG.info(requestContext.getMethod())
     }
 
@@ -45,7 +50,7 @@ public class PollResource : Endpoint() {
     public fun delete(NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val response = client.delete(javaClass<Poll>(), id)
+        val response = client.delete(javaClass<Vote>(), id)
 
         asyncResponse.resume(Response.fromResponse(response).type(MediaType.APPLICATION_JSON_TYPE).build())
         Endpoint.LOG.info(requestContext.getMethod())
@@ -56,7 +61,7 @@ public class PollResource : Endpoint() {
     public fun retrieve(NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val response = client.get(javaClass<Poll>(), id)
+        val response = client.get(javaClass<Vote>(), id)
 
         asyncResponse.resume(Response.fromResponse(response).build())
         Endpoint.LOG.info(requestContext.getMethod())
@@ -64,17 +69,17 @@ public class PollResource : Endpoint() {
 
     Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
     PUT
-    public fun update(NotNull Valid poll: Poll, NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    public fun update(NotNull Valid vote: Vote, NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val updated = client.put(Entity.json<Poll>(poll), id)
+        val updated = client.put(Entity.json<Vote>(vote), id)
 
         asyncResponse.resume(Response.fromResponse(updated).build())
         Endpoint.LOG.info(requestContext.getMethod())
     }
 
     class object {
-        private val RESOURCE_NAME = "poll"
-        public val RESOURCE_PATH: String = "ballot/" + RESOURCE_NAME
+        private val RESOURCE_NAME = "vote"
+        val RESOURCE_PATH = "ballot/" + RESOURCE_NAME
     }
 }

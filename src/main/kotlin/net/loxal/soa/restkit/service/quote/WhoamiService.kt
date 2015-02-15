@@ -2,9 +2,10 @@
  * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
-package net.loxal.soa.restkit.endpoint
+package net.loxal.soa.restkit.service.quote
 
 import javax.ws.rs.Path
+import net.loxal.soa.restkit.endpoint.Endpoint
 import javax.ws.rs.GET
 import javax.ws.rs.core.Context
 import javax.servlet.http.HttpServletRequest
