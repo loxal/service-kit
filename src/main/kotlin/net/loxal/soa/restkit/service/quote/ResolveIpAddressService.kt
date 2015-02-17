@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response
 import net.loxal.soa.restkit.model.common.ErrorMessage
 
 Path(ResolveIpAddressService.RESOURCE_PATH)
-public class ResolveIpAddressService : Endpoint() {
+class ResolveIpAddressService : Endpoint() {
 
     GET
     public fun resolveIpAddress(QueryParam(HOST_NAME_PARAM) hostName: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {

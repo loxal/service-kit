@@ -99,6 +99,6 @@ class DilbertQuoteService : Endpoint() {
         val RESOURCE_PATH = "dilbert-quote"
         val RESOURCE_PATH_DEV = "dev-excuse"
         val RESOURCE_PATH_MANAGER = "manager"
-        val mediaType = MediaType.APPLICATION_JSON + "; charset=utf-8"
+        val mediaType = MediaType.APPLICATION_JSON + ";charset=utf-8"
     }
 }

@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response
 import java.util.logging.Logger
 
 Path(WhoamiService.RESOURCE_PATH)
-public class WhoamiService : Endpoint() {
+class WhoamiService : Endpoint() {
 
     GET
     public fun whoAmI(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
