@@ -20,7 +20,7 @@ import org.glassfish.jersey.server.ParamException
  * Maps Java exceptions to HTTP error codes.
  */
 Provider
-public class ErrorStatusCodeMapper : ExceptionMapper<WebApplicationException> {
+class ErrorStatusCodeMapper : ExceptionMapper<WebApplicationException> {
     override fun toResponse(exception: WebApplicationException): Response {
         var status: Response.Status? = EXCEPTION_TO_ERROR_MAPPING.get(exception.javaClass)
         if (status == null) {

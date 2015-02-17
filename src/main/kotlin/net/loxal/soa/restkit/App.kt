@@ -8,7 +8,7 @@ import javax.ws.rs.ApplicationPath
 import org.glassfish.jersey.server.ResourceConfig
 
 ApplicationPath("")
-public class App : ResourceConfig() {
+class App : ResourceConfig() {
     {
         packages(javaClass.getPackage().getName())
     }
