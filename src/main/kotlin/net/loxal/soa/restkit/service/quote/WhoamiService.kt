@@ -21,7 +21,7 @@ Path(WhoamiService.RESOURCE_PATH)
 class WhoamiService : Endpoint() {
 
     GET
-    public fun whoAmI(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    fun whoAmI(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val host = Host(request.getRemoteHost(), request.getRemoteAddr())

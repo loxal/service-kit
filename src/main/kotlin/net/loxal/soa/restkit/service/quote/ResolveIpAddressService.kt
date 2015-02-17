@@ -25,7 +25,7 @@ Path(ResolveIpAddressService.RESOURCE_PATH)
 class ResolveIpAddressService : Endpoint() {
 
     GET
-    public fun resolveIpAddress(QueryParam(HOST_NAME_PARAM) hostName: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    fun resolveIpAddress(QueryParam(HOST_NAME_PARAM) hostName: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         try {

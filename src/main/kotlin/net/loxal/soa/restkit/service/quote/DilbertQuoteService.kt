@@ -30,7 +30,7 @@ class DilbertQuoteService : Endpoint() {
 
     Path(RESOURCE_PATH_DEV)
     GET
-    public fun quoteDev(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    fun quoteDev(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val randomQuoteIndex = random.nextInt(quotesDev.size())
@@ -41,7 +41,7 @@ class DilbertQuoteService : Endpoint() {
 
     Path("$RESOURCE_PATH_DEV/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
     GET
-    public fun quoteDev(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
+    fun quoteDev(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
                         PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
                         Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
@@ -54,7 +54,7 @@ class DilbertQuoteService : Endpoint() {
 
     Path(RESOURCE_PATH_MANAGER)
     GET
-    public fun quoteManager(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    fun quoteManager(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val randomQuoteIndex = random.nextInt(quotesManager.size())
@@ -65,7 +65,7 @@ class DilbertQuoteService : Endpoint() {
 
     Path("$RESOURCE_PATH_MANAGER/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
     GET
-    public fun quoteManager(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
+    fun quoteManager(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
                             PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
                             Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)

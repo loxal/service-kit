@@ -27,13 +27,13 @@ import javax.ws.rs.core.Response
 import javax.ws.rs.core.MediaType
 
 Path(PollResource.RESOURCE_PATH)
-public class PollResource : Endpoint() {
+class PollResource : Endpoint() {
 
     Inject
     var client: RepositoryClient<Poll> = RepositoryClient()
 
     POST
-    public fun create(NotNull Valid poll: Poll, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    fun create(NotNull Valid poll: Poll, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val createdPoll = client.post(Entity.json<Poll>(poll))
@@ -47,7 +47,7 @@ public class PollResource : Endpoint() {
 
     Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
     DELETE
-    public fun delete(NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    fun delete(NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val response = client.delete(javaClass<Poll>(), id)
@@ -58,7 +58,7 @@ public class PollResource : Endpoint() {
 
     Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
     GET
-    public fun retrieve(NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    fun retrieve(NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val response = client.get(javaClass<Poll>(), id)
@@ -69,7 +69,7 @@ public class PollResource : Endpoint() {
 
     Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
     PUT
-    public fun update(NotNull Valid poll: Poll, NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    fun update(NotNull Valid poll: Poll, NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val updated = client.put(Entity.json<Poll>(poll), id)
