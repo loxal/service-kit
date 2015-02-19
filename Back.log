@@ -1,8 +1,11 @@
 # Backlog
 
 ## RELEASE NEXT
-	* Mirror return via GET what was POSTED or provided via GET
+	* Creating a Ballot/Vote validator essentially introduces questionnaire business logic
+		* Interviewer app
 ## RELEASE 1
+	* Mirror return via GET what was POSTED or provided via GET
+## RELEASE 2
 * Voting/Polling/Ballot service
   * Planning poker service
 * Marathon ranking service

@@ -17,7 +17,7 @@ import kotlin.test.assertEquals
 public class VoteResourceIT : AbstractEndpointTest() {
 
     Test
-    public fun createVote() {
+    fun createVote() {
         val response = createVoteAssignedToPoll()
 
         assertEquals(Response.Status.CREATED.getStatusCode().toLong(), response.getStatus().toLong())
@@ -29,7 +29,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    public fun deleteNonExistentVote() {
+    fun deleteNonExistentVote() {
         val existingEntity = createVoteAssignedToPoll()
 
         val response = AbstractEndpointTest.prepareTarget("${existingEntity.getLocation()} ${AbstractEndpointTest.NON_EXISTENT}").request().delete()
@@ -42,7 +42,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    public fun deleteExistingVote() {
+    fun deleteExistingVote() {
         val existingVote = createVoteAssignedToPoll()
 
         val deletion = AbstractEndpointTest.prepareTarget(existingVote.getLocation()).request().delete()
@@ -52,20 +52,38 @@ public class VoteResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    public fun retrieveExistingVote() {
+    fun retrieveExistingVote() {
         val existingVote = createVoteAssignedToPoll()
 
         val retrieval = AbstractEndpointTest.prepareTarget(existingVote.getLocation()).request().get()
 
         assertEquals(Response.Status.OK.getStatusCode().toLong(), retrieval.getStatus().toLong())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.getMediaType())
-        val retrievedVote = retrieval.readEntity<net.loxal.soa.restkit.model.ballot.Vote>(javaClass<Vote>())
+
+        val retrievedVote = retrieval.readEntity(javaClass<Vote>())
         assertEquals(ANSWER_OPTION_INDEX.toLong(), retrievedVote.answerOptionIndex.toLong())
         assertEquals(false, retrievedVote.referencePoll.isEmpty())
+        assertEquals("anonymous", retrievedVote.user)
     }
 
     Test
-    public fun retrieveNonExistentVote() {
+    fun retrieveExistingNonAnonymousVote() {
+        val user = "Specific User"
+        val existingVote = createUserVoteAssignedToPoll(user)
+
+        val retrieval = AbstractEndpointTest.prepareTarget(existingVote.getLocation()).request().get()
+
+        assertEquals(Response.Status.OK.getStatusCode().toLong(), retrieval.getStatus().toLong())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.getMediaType())
+
+        val retrievedVote = retrieval.readEntity(javaClass<Vote>())
+        assertEquals(ANSWER_OPTION_INDEX.toLong(), retrievedVote.answerOptionIndex.toLong())
+        assertEquals(false, retrievedVote.referencePoll.isEmpty())
+        assertEquals(user, retrievedVote.user)
+    }
+
+    Test
+    fun retrieveNonExistentVote() {
         val existingEntity = createVoteAssignedToPoll()
 
         val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.getLocation()} ${AbstractEndpointTest.NON_EXISTENT}").request().get()
@@ -77,7 +95,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    public fun updateExistingVote() {
+    fun updateExistingVote() {
         val existingVote = createVoteAssignedToPoll()
 
         val updatedReference = "updated reference"
@@ -96,7 +114,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    public fun updateNonExistentVote() {
+    fun updateNonExistentVote() {
         val existingEntity = createVoteAssignedToPoll()
 
         val someVote = Vote("Irrelevant", Integer.MAX_VALUE)
@@ -109,6 +127,17 @@ public class VoteResourceIT : AbstractEndpointTest() {
     private fun createVoteAssignedToPoll(): Response {
         val poll = PollResourceIT.createPoll()
         val vote = Vote(poll.getLocation().toString(), ANSWER_OPTION_INDEX)
+
+        val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH).request().post(Entity.json<Vote>(vote))
+        assertEquals(Response.Status.CREATED.getStatusCode().toLong(), createdVote.getStatus().toLong())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, createdVote.getMediaType())
+
+        return createdVote
+    }
+
+    private fun createUserVoteAssignedToPoll(user: String): Response {
+        val poll = PollResourceIT.createPoll()
+        val vote = Vote.asUser(poll.getLocation().toString(), ANSWER_OPTION_INDEX, user)
 
         val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH).request().post(Entity.json<Vote>(vote))
         assertEquals(Response.Status.CREATED.getStatusCode().toLong(), createdVote.getStatus().toLong())
