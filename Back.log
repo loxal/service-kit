@@ -3,6 +3,8 @@
 ## RELEASE NEXT
 	* Creating a Ballot/Vote validator essentially introduces questionnaire business logic
 		* Interviewer app
+    * make it possible to run integration tests in parallel in the IDE and on the CI on the same machine
+        * both apps should not run on the same port (one could be random)
 ## RELEASE 1
 	* Mirror return via GET what was POSTED or provided via GET
 ## RELEASE 2
