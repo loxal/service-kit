@@ -26,7 +26,6 @@ public class GroupResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun createEntity() {
         val response = postEntity()
 
@@ -39,7 +38,6 @@ public class GroupResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun deleteNonExistentEntity() {
         val existingEntity = postEntity()
 
@@ -53,7 +51,6 @@ public class GroupResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun deleteExistingEntity() {
         val existingEntity = postEntity()
 
@@ -64,7 +61,6 @@ public class GroupResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun retrieveExistingEntity() {
         val existingEntity = postEntity()
 
@@ -78,7 +74,6 @@ public class GroupResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun retrieveNonExistentEntity() {
         val existingEntity = postEntity()
 
@@ -91,7 +86,6 @@ public class GroupResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun updateExistingEntity() {
         val existingEntity = postEntity()
 
@@ -112,7 +106,6 @@ public class GroupResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    throws(javaClass<Exception>())
     public fun updateNonExistentEntity() {
         val existingEntity = postEntity()
 
