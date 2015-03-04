@@ -17,7 +17,7 @@
       <option name="HTTP_PORT" value="8200" />
       <option name="JNDI_PORT" value="8151" />
     </server-settings>
-    <predefined_log_file id="Tomcat" enabled="true" />
+    <predefined_log_file id="Tomcat" enabled="false" />
     <predefined_log_file id="Tomcat Catalina" enabled="false" />
     <predefined_log_file id="Tomcat Manager" enabled="false" />
     <predefined_log_file id="Tomcat Host Manager" enabled="false" />

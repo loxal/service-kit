@@ -17,13 +17,13 @@ abstract class RestClient<out T> protected() {
         return webTarget.request()
     }
 
-    public abstract fun post(entity: Entity<in T>): Response
+    abstract fun post(entity: Entity<in T>): Response
 
-    public abstract fun delete(entityType: Class<in T>, id: String): Response
+    abstract fun delete(entityType: Class<in T>, id: String): Response
 
-    public abstract fun get(entityType: Class<in T>, id: String): Response
+    abstract fun get(entityType: Class<in T>, id: String): Response
 
-    public abstract fun put(json: Entity<in T>, id: String): Response
+    abstract fun put(json: Entity<in T>, id: String): Response
 
     class object {
         val LOG = Logger.getGlobal()

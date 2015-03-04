@@ -14,7 +14,7 @@ import javax.ws.rs.client.WebTarget
 ManagedBean
 class RepositoryClient<T> : RestClient<T>() {
     Value("\${repositoryServiceUri}")
-    private val repositoryServiceUri: URI? = null
+    private val repositoryServiceUri: URI = URI.create("")
     Value("\${tenant}")
     private val tenant: String = ""
 
