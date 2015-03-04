@@ -11,7 +11,7 @@ import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.Response
 import java.util.logging.Logger
 
-abstract class RestClient1<out T> protected() {
+abstract class RestClient<out T> protected() {
 
     fun targetTenant(webTarget: WebTarget): Invocation.Builder {
         return webTarget.request()
