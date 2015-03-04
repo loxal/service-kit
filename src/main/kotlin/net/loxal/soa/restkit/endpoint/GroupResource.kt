@@ -29,7 +29,7 @@ Path(GroupResource.RESOURCE_PATH)
 class GroupResource : Endpoint() {
 
     Inject
-    var client: RepositoryClient<Group> = RepositoryClient()
+    private var client: RepositoryClient<Group> = RepositoryClient()
 
     POST
     fun create(NotNull Valid group: Group, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {

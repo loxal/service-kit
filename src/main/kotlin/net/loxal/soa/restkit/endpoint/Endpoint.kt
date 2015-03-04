@@ -9,18 +9,12 @@ import java.util.logging.Logger
 import java.text.MessageFormat
 import java.util.regex.Pattern
 
-abstract class Endpoint {
+abstract class Endpoint protected() {
 
     protected fun extractIdOfLocation(createdVote: Response): String {
         val entityId = ENTITY_ID_PATTERN.matcher(createdVote.getLocation().getPath())
 
-        val id: String
-        if (entityId.find()) {
-            id = entityId.group(ENTITY_ID_GROUP)
-        } else {
-            id = ""
-        }
-        return id
+        return if (entityId.find()) entityId.group(ENTITY_ID_GROUP) else ""
     }
 
     class object {

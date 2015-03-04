@@ -12,14 +12,14 @@ import javax.ws.rs.core.Response
 import javax.ws.rs.client.WebTarget
 
 ManagedBean
-public class RepositoryClient<T> : RESTClient<T>() {
+class RepositoryClient<T> : RestClient1<T>() {
     Value("\${repositoryServiceUri}")
     private val repositoryServiceUri: URI? = null
     Value("\${tenant}")
-    private val tenant: String? = null
+    private val tenant: String = ""
 
     {
-        RESTClient.LOG.info("repositoryServiceUri: " + repositoryServiceUri)
+        RestClient1.LOG.info("repositoryServiceUri: " + repositoryServiceUri)
     }
 
     override fun post(entity: Entity<in T>): Response {
@@ -43,8 +43,8 @@ public class RepositoryClient<T> : RESTClient<T>() {
     }
 
     private fun targetServiceRepository(entityType: String): WebTarget {
-        RESTClient.LOG.info("Tenant: $tenant")
-        return RESTClient.CLIENT.target(repositoryServiceUri).path(tenant).path(SERVICE_PATH).path(REPOSITORY_PATH).path(entityType)
+        RestClient1.LOG.info("Tenant: $tenant")
+        return RestClient1.CLIENT.target(repositoryServiceUri).path(tenant).path(SERVICE_PATH).path(REPOSITORY_PATH).path(entityType)
     }
 
     private fun explicitType(entity: Entity<in T>): String {

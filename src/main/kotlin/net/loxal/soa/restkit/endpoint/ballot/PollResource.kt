@@ -30,7 +30,7 @@ Path(PollResource.RESOURCE_PATH)
 class PollResource : Endpoint() {
 
     Inject
-    var client: RepositoryClient<Poll> = RepositoryClient()
+    private var client: RepositoryClient<Poll> = RepositoryClient()
 
     POST
     fun create(NotNull Valid poll: Poll, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {

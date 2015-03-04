@@ -30,7 +30,7 @@ Path(VoteResource.RESOURCE_PATH)
 class VoteResource : Endpoint() {
 
     Inject
-    var client: RepositoryClient<Vote> = RepositoryClient()
+    private var client: RepositoryClient<Vote> = RepositoryClient()
 
     POST
     fun create(NotNull Valid vote: Vote, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
