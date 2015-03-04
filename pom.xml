@@ -37,7 +37,7 @@
         <tenant>loxal${cloudFoundry.subdomain}</tenant>
 
         <deploymentTarget>http://${deployment.host.name}:${deployment.host.port}</deploymentTarget>
-        <deployment.host.port>${local.jetty.port}</deployment.host.port>
+        <!--<deployment.host.port>${local.jetty.port}</deployment.host.port>-->
         <!--<deployment.cargo.tomcat.ajp.port>8009</deployment.cargo.tomcat.ajp.port>-->
         <local.jetty.port>8200</local.jetty.port>
         <deployment.host.name>localhost</deployment.host.name>
@@ -218,7 +218,6 @@
                         </goals>
                         <configuration>
                             <portNames>
-                                <portName>local.jetty.port</portName>
                                 <portName>deployment.host.port</portName>
                                 <portName>deployment.cargo.tomcat.ajp.port</portName>
                             </portNames>
@@ -372,7 +371,14 @@
             </plugin>
         </plugins>
     </build>
-    <profiles/>
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <deployment.host.port>${local.jetty.port}</deployment.host.port>
+            </properties>
+        </profile>
+    </profiles>
 
     <scm>
         <connection>scm:git:git://github.com:loxal/rest-kit.git</connection>
