@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType
 import net.loxal.soa.restkit.endpoint.Endpoint
 import javax.ws.rs.client.Entity
 import kotlin.test.assertEquals
+import net.loxal.soa.restkit.model.ballot.Poll
 
 public class VoteResourceIT : AbstractEndpointTest() {
 
@@ -137,8 +138,93 @@ public class VoteResourceIT : AbstractEndpointTest() {
 
     Test
     fun populateQuestionnaire() {
+        // TODO move this to some manual triggerable “class object” / “object”
         // TODO with sample data for the iOS app
+        // TODO post with ID like simpsons-1 to simpsons-10
+        fun createPolls(): Response {
+            val poll1 = Poll("In which town do the Simpsons reside?",
+                    listOf(
+                            "Springfield-",
+                            "Shelbyville",
+                            "Seinfeld"
+                    )
+            )
 
+            val poll2 = Poll("What is the name of the Simpsons' next door neighbor?",
+                    listOf(
+                            "Barney Gumble",
+                            "Ned Flanders-",
+                            "Principal Skinner"
+                    )
+            )
+
+            val poll3 = Poll("Who founded the Simpsons’ town?",
+                    listOf(
+                            "Jebadiah Springfield-",
+                            "Zachariah Springfield",
+                            "Springfield Manhattan"
+                    )
+            )
+            val poll4 = Poll("How old is Bart?",
+                    listOf(
+                            "10-",
+                            "11",
+                            "12"
+                    )
+            )
+            val poll5 = Poll("What is the name of the clown on Channel 6?",
+                    listOf(
+                            "Gabbo",
+                            "Krusty-",
+                            "Bonko"
+                    )
+            )
+            val poll6 = Poll("What is the name of Lisa’s jazz mentor?",
+                    listOf(
+                            "Billy Jazzman",
+                            "Blind Willy Witherspoon",
+                            "Bleeding Gums Murphy-"
+                    )
+            )
+
+            val poll7 = Poll("Who is Mr Burns’ assistant?",
+                    listOf(
+                            "Seymour Skinner",
+                            "Barnard Gumble",
+                            "Waylon Smithers-"
+                    )
+            )
+            val poll8 = Poll("What is the name of the bar where Homer drinks?",
+                    listOf(
+                            "Moe’s Tavern-",
+                            "Joe’s Cavern",
+                            "The Drink Hole"
+                    )
+            )
+            val poll9 = Poll(" Which one of these is not a catchphrase Bart uses?",
+                    listOf(
+                            "Aye Carumba!",
+                            "Don't have a cow, man!",
+                            "Woohoo!-"
+                    )
+            )
+            val poll10 = Poll("What did the Simpsons get for their first Christmas?",
+                    listOf(
+                            "A dog-",
+                            "A cat",
+                            "A hamster"
+                    )
+            )
+
+
+            val createdPoll = AbstractEndpointTest.prepareGenericRequest(PollResource.RESOURCE_PATH).request().post(Entity.json<Poll>(poll1))
+            assertEquals(Response.Status.CREATED.getStatusCode(), createdPoll.getStatus())
+            assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.getMediaType())
+
+            println(createdPoll.getLocation())
+            return createdPoll
+        }
+        createPolls()
     }
 
     private fun createUserVoteAssignedToPoll(user: String): Response {
