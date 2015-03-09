@@ -14,6 +14,7 @@ import net.loxal.soa.restkit.endpoint.Endpoint
 import javax.ws.rs.client.Entity
 import kotlin.test.assertEquals
 import net.loxal.soa.restkit.model.ballot.Poll
+import kotlin.test.assertTrue
 
 public class VoteResourceIT : AbstractEndpointTest() {
 
@@ -141,7 +142,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
         // TODO move this to some manual triggerable “class object” / “object”
         // TODO with sample data for the iOS app
         // TODO post with ID like simpsons-1 to simpsons-10
-        fun createPolls(): Response {
+        fun createPolls() {
             val poll1 = Poll("In which town do the Simpsons reside?",
                     listOf(
                             "Springfield-",
@@ -217,12 +218,17 @@ public class VoteResourceIT : AbstractEndpointTest() {
             )
 
 
-            val createdPoll = AbstractEndpointTest.prepareGenericRequest(PollResource.RESOURCE_PATH).request().post(Entity.json<Poll>(poll1))
-            assertEquals(Response.Status.CREATED.getStatusCode(), createdPoll.getStatus())
-            assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.getMediaType())
+            val polls = listOf(poll1, poll2, poll3, poll4, poll5, poll6, poll7, poll8, poll9, poll10)
 
-            println(createdPoll.getLocation())
-            return createdPoll
+            polls.forEach {
+                val createdPoll = AbstractEndpointTest.prepareGenericRequest(PollResource.RESOURCE_PATH).request().post(Entity.json<Poll>(poll1))
+                assertEquals(Response.Status.CREATED.getStatusCode(), createdPoll.getStatus())
+                assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.getMediaType())
+                assertTrue(createdPoll.getLocation().getPath().contains("/ballot/poll/"))
+
+                println(createdPoll.getLocation())
+            }
+
         }
         createPolls()
     }
