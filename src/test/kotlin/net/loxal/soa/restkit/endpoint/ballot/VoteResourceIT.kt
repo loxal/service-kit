@@ -20,7 +20,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
     fun createVote() {
         val response = createVoteAssignedToPoll()
 
-        assertEquals(Response.Status.CREATED.getStatusCode().toLong(), response.getStatus().toLong())
+        assertEquals(Response.Status.CREATED.getStatusCode(), response.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
         assertEquals(false, response.getLocation().getPath().endsWith("null"))
         assertEquals(true, response.getLocation().getPath().startsWith(Endpoint.URI_PATH_SEPARATOR + VoteResource.RESOURCE_PATH))
@@ -36,7 +36,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
 
         assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
         val notFoundStatus = Response.Status.NOT_FOUND
-        assertEquals(notFoundStatus.getStatusCode().toLong(), response.getStatus().toLong())
+        assertEquals(notFoundStatus.getStatusCode(), response.getStatus())
         val errorMessage = response.readEntity<ErrorMessage>(javaClass<ErrorMessage>())
         assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), errorMessage.type)
     }
@@ -47,7 +47,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
 
         val deletion = AbstractEndpointTest.prepareTarget(existingVote.getLocation()).request().delete()
 
-        assertEquals(Response.Status.NO_CONTENT.getStatusCode().toLong(), deletion.getStatus().toLong())
+        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), deletion.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.getMediaType())
     }
 
@@ -57,7 +57,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
 
         val retrieval = AbstractEndpointTest.prepareTarget(existingVote.getLocation()).request().get()
 
-        assertEquals(Response.Status.OK.getStatusCode().toLong(), retrieval.getStatus().toLong())
+        assertEquals(Response.Status.OK.getStatusCode(), retrieval.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.getMediaType())
 
         val retrievedVote = retrieval.readEntity(javaClass<Vote>())
@@ -73,7 +73,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
 
         val retrieval = AbstractEndpointTest.prepareTarget(existingVote.getLocation()).request().get()
 
-        assertEquals(Response.Status.OK.getStatusCode().toLong(), retrieval.getStatus().toLong())
+        assertEquals(Response.Status.OK.getStatusCode(), retrieval.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.getMediaType())
 
         val retrievedVote = retrieval.readEntity(javaClass<Vote>())
@@ -88,7 +88,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
 
         val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.getLocation()} ${AbstractEndpointTest.NON_EXISTENT}").request().get()
 
-        assertEquals(Response.Status.NOT_FOUND.getStatusCode().toLong(), retrieval.getStatus().toLong())
+        assertEquals(Response.Status.NOT_FOUND.getStatusCode(), retrieval.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.getMediaType())
         val notFoundError = retrieval.readEntity<ErrorMessage>(javaClass<ErrorMessage>())
         assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), notFoundError.type)
@@ -104,7 +104,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
 
         val update = AbstractEndpointTest.prepareTarget(existingVote.getLocation()).request().put(Entity.json<Vote>(modifiedVote))
 
-        assertEquals(Response.Status.OK.getStatusCode().toLong(), update.getStatus().toLong())
+        assertEquals(Response.Status.OK.getStatusCode(), update.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, update.getMediaType())
 
         val retrievedUpdatedPoll = AbstractEndpointTest.prepareTarget(existingVote.getLocation()).request().get()
@@ -120,7 +120,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
         val someVote = Vote("Irrelevant", Integer.MAX_VALUE)
         val update = AbstractEndpointTest.prepareTarget("${existingEntity.getLocation()} ${AbstractEndpointTest.NON_EXISTENT}").request().put(Entity.json<Vote>(someVote))
 
-        assertEquals(Response.Status.NOT_FOUND.getStatusCode().toLong(), update.getStatus().toLong())
+        assertEquals(Response.Status.NOT_FOUND.getStatusCode(), update.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, update.getMediaType())
     }
 
@@ -129,10 +129,16 @@ public class VoteResourceIT : AbstractEndpointTest() {
         val vote = Vote(poll.getLocation().toString(), ANSWER_OPTION_INDEX)
 
         val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH).request().post(Entity.json<Vote>(vote))
-        assertEquals(Response.Status.CREATED.getStatusCode().toLong(), createdVote.getStatus().toLong())
+        assertEquals(Response.Status.CREATED.getStatusCode(), createdVote.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, createdVote.getMediaType())
 
         return createdVote
+    }
+
+    Test
+    fun populateQuestionnaire() {
+        // TODO with sample data for the iOS app
+
     }
 
     private fun createUserVoteAssignedToPoll(user: String): Response {
@@ -140,7 +146,7 @@ public class VoteResourceIT : AbstractEndpointTest() {
         val vote = Vote.asUser(poll.getLocation().toString(), ANSWER_OPTION_INDEX, user)
 
         val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH).request().post(Entity.json<Vote>(vote))
-        assertEquals(Response.Status.CREATED.getStatusCode().toLong(), createdVote.getStatus().toLong())
+        assertEquals(Response.Status.CREATED.getStatusCode(), createdVote.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, createdVote.getMediaType())
 
         return createdVote
