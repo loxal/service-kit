@@ -8,7 +8,6 @@ import javax.annotation.ManagedBean
 import org.springframework.beans.factory.annotation.Value
 import java.net.URI
 import javax.ws.rs.client.Entity
-import javax.ws.rs.core.Response
 import javax.ws.rs.client.WebTarget
 
 ManagedBean
@@ -22,38 +21,26 @@ class RepositoryClient<T> : RestClient<T>() {
         RestClient.LOG.info("repositoryServiceUri: " + repositoryServiceUri)
     }
 
-    override fun post(entity: Entity<in T>): Response {
+    override fun post(entity: Entity<in T>, id: String) =
+            targetTenant(targetServiceRepository(explicitType(entity)).path(id)).post(entity)
 
-        return targetTenant(targetServiceRepository(explicitType(entity))).post(entity)
-    }
+    override fun put(json: Entity<in T>, id: String)=
+        targetTenant(targetServiceRepository(explicitType(json)).path(id)).put(json)
 
-    override fun put(json: Entity<in T>, id: String): Response {
+    override fun delete(entityType: Class<in T>, id: String)=
+        targetTenant(targetServiceRepository(explicitType(entityType)).path(id)).delete()
 
-        return targetTenant(targetServiceRepository(explicitType(json)).path(id)).put(json)
-    }
-
-    override fun delete(entityType: Class<in T>, id: String): Response {
-
-        return targetTenant(targetServiceRepository(explicitType(entityType)).path(id)).delete()
-    }
-
-    override fun get(entityType: Class<in T>, id: String): Response {
-
-        return targetTenant(targetServiceRepository(explicitType(entityType)).path(id)).get()
-    }
+    override fun get(entityType: Class<in T>, id: String)=
+        targetTenant(targetServiceRepository(explicitType(entityType)).path(id)).get()
 
     private fun targetServiceRepository(entityType: String): WebTarget {
         RestClient.LOG.info("Tenant: $tenant")
         return RestClient.CLIENT.target(repositoryServiceUri).path(tenant).path(SERVICE_PATH).path(REPOSITORY_PATH).path(entityType)
     }
 
-    private fun explicitType(entity: Entity<in T>): String {
-        return entity.getEntity()!!.javaClass.getSimpleName().toLowerCase()
-    }
+    private fun explicitType(entity: Entity<in T>)= entity.getEntity()!!.javaClass.getSimpleName().toLowerCase()
 
-    private fun explicitType(entity: Class<in T>): String {
-        return entity.getSimpleName().toLowerCase()
-    }
+    private fun explicitType(entity: Class<in T>)= entity.getSimpleName().toLowerCase()
 
     class object {
         public val SERVICE_PATH: String = "rest-kit"

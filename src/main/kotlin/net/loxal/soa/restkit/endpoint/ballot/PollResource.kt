@@ -25,6 +25,7 @@ import javax.ws.rs.client.Entity
 import java.net.URI
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.MediaType
+import java.util.UUID
 
 Path(PollResource.RESOURCE_PATH)
 class PollResource : Endpoint() {
@@ -33,10 +34,11 @@ class PollResource : Endpoint() {
     private var client: RepositoryClient<Poll> = RepositoryClient()
 
     POST
+    Path("{id}")
     fun create(NotNull Valid poll: Poll, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val createdPoll = client.post(Entity.json<Poll>(poll))
+        val createdPoll = client.post(Entity.json<Poll>(poll), id = UUID.randomUUID().toString())
         val id = extractIdOfLocation(createdPoll)
 
         val entityLocation = URI.create(requestContext.getUriInfo().getRequestUri().toString() + Endpoint.URI_PATH_SEPARATOR + id)

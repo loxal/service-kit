@@ -13,11 +13,9 @@ import java.util.logging.Logger
 
 abstract class RestClient<out T> protected() {
 
-    fun targetTenant(webTarget: WebTarget): Invocation.Builder {
-        return webTarget.request()
-    }
+    fun targetTenant(webTarget: WebTarget): Invocation.Builder = webTarget.request()
 
-    abstract fun post(entity: Entity<in T>): Response
+    abstract fun post(entity: Entity<in T>, id: String): Response
 
     abstract fun delete(entityType: Class<in T>, id: String): Response
 

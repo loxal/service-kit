@@ -24,6 +24,6 @@ abstract class Endpoint protected() {
         val ID_PATH_PARAM_PLACEHOLDER: String = "{" + ID_PATH_PARAM + "}"
         val LOG: Logger = Logger.getGlobal()
         private val ENTITY_ID_GROUP = "entityIdGroup"
-        private val ENTITY_ID_PATTERN = Pattern.compile(MessageFormat.format("/(?<{0}>[0-9a-f]+)$", ENTITY_ID_GROUP))
+        private val ENTITY_ID_PATTERN = Pattern.compile(MessageFormat.format("/(?<{0}>[0-9a-f-]+)$", ENTITY_ID_GROUP))
     }
 }
