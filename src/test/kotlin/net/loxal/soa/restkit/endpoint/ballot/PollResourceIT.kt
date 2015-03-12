@@ -102,17 +102,15 @@ public class PollResourceIT : AbstractEndpointTest() {
 
             val polls = listOf(poll1, poll2, poll3, poll4, poll5, poll6, poll7, poll8, poll9, poll10)
 
-            polls.forEach {
-                // TODO make use of already existing function
-                val createdPoll = AbstractEndpointTest.prepareGenericRequest(PollResource.RESOURCE_PATH).path("simpsons-N${UUID.randomUUID()}").request().post(Entity.json<Poll>(poll1))
+            polls.forEach { poll ->
+                val createdPoll = createPoll("simpsons-${UUID.randomUUID()}", poll)
                 assertEquals(Response.Status.CREATED.getStatusCode(), createdPoll.getStatus())
                 assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.getMediaType())
                 assertTrue(createdPoll.getLocation().getPath().contains("/ballot/poll/"))
                 assertFalse(createdPoll.getLocation().getPath().endsWith("/"))
 
-                println(createdPoll.getLocation())
+                AbstractEndpointTest.LOG.info("Created poll: ${createdPoll.getLocation()}")
             }
-
         }
         createPolls()
     }
@@ -222,11 +220,10 @@ public class PollResourceIT : AbstractEndpointTest() {
         private val POLL_QUESTION = "What is the meaning of life?"
         private val POLL_ANSWERS = Arrays.asList<String>("Yes", "No")
 
-        fun createPoll(): Response {
-            val poll = Poll(POLL_QUESTION, POLL_ANSWERS)
-
+        fun createPoll(id: String = UUID.randomUUID().toString(), poll: Poll = Poll(POLL_QUESTION, POLL_ANSWERS)): Response {
             val createdPoll = AbstractEndpointTest.prepareGenericRequest(PollResource.RESOURCE_PATH)
-                    .path(UUID.randomUUID().toString()).request().post(Entity.json<Poll>(poll))
+                    .path(id).request()
+                    .post(Entity.json<Poll>(poll))
             assertEquals(Response.Status.CREATED.getStatusCode(), createdPoll.getStatus())
             assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.getMediaType())
 
