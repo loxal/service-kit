@@ -19,7 +19,7 @@ import net.loxal.soa.restkit.filter.AccessControlFilter
 abstract class AbstractEndpointTest {
 
     Test
-    public fun nonExistentPathNotFound() {
+    fun nonExistentPathNotFound() {
         val response = prepareGenericRequest(resourcePath).path(NON_EXISTENT).request().get()
         LOG.info("resourcePath: $resourcePath")
 

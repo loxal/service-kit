@@ -13,11 +13,24 @@ import javax.ws.rs.core.MediaType
 
 class PopulateQuestionnaire : AbstractEndpointTest() {
     Test
-    fun populateQuestionnaire() {
+    fun populateSimpsonsQuestionnaire() {
+        fun populate(polls: List<Poll>) {
+            var idx: Int = 0
+            polls.forEach { poll ->
+                val createdPoll = PollResourceIT.createEntity("simpsons-${++idx}${UUID.randomUUID()}", poll)
+                test.assertEquals(Response.Status.CREATED.getStatusCode(), createdPoll.getStatus())
+                test.assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.getMediaType())
+                test.assertEquals(true, createdPoll.getLocation().getPath().contains("/ballot/poll/"))
+                test.assertEquals(false, createdPoll.getLocation().getPath().endsWith("/"))
+
+                AbstractEndpointTest.LOG.info("Created poll: ${createdPoll.getLocation()}")
+            }
+        }
+
         // TODO move this to some manual triggerable “class object” / “object” (and not part of a regular test)
-        // TODO populateQuestionnaire with sample data for the iOS app
+        // TODO populateSimpsonsQuestionnaire with sample data for the iOS app
         // TODO post with ID like simpsons-1 to simpsons-10
-        fun createPolls() {
+        fun createPolls(): List<Poll> {
             val poll1 = Poll("In which town do the Simpsons reside?",
                     listOf(
                             "Springfield-",
@@ -92,18 +105,10 @@ class PopulateQuestionnaire : AbstractEndpointTest() {
                     )
             )
 
-            val polls = listOf(poll1, poll2, poll3, poll4, poll5, poll6, poll7, poll8, poll9, poll10)
-            var idx: Int = 0
-            polls.forEach { poll ->
-                val createdPoll = PollResourceIT.createPoll("simpsons-${++idx}${UUID.randomUUID()}", poll)
-                test.assertEquals(Response.Status.CREATED.getStatusCode(), createdPoll.getStatus())
-                test.assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.getMediaType())
-                test.assertEquals(true, createdPoll.getLocation().getPath().contains("/ballot/poll/"))
-                test.assertEquals(false, createdPoll.getLocation().getPath().endsWith("/"))
-
-                AbstractEndpointTest.LOG.info("Created poll: ${createdPoll.getLocation()}")
-            }
+            return listOf(poll1, poll2, poll3, poll4, poll5, poll6, poll7, poll8, poll9, poll10)
         }
-        createPolls()
+
+        val polls = createPolls()
+        populate(polls)
     }
 }

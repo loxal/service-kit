@@ -19,7 +19,7 @@ class GroupResourceIT : AbstractEndpointTest() {
     private fun postEntity(): Response {
         val group = Group("name", ENTRIES)
 
-        // TODO make this enity creation function generic to use it for creation of other entities (reduce code duplication)
+        // TODO make this entity creation function generic to use it for creation of other entities (reduce code duplication)
         val createdEntity = AbstractEndpointTest.prepareGenericRequest(GroupResource.RESOURCE_PATH)
                 .path(UUID.randomUUID().toString())
                 .request().post(Entity.json<Group>(group))
@@ -121,7 +121,6 @@ class GroupResourceIT : AbstractEndpointTest() {
     }
 
     class object {
-
         private val ENTRIES = Arrays.asList<String>("first", "second", "third")
     }
 }

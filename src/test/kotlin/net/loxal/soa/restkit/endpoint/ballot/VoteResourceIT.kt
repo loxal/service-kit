@@ -126,7 +126,7 @@ class VoteResourceIT : AbstractEndpointTest() {
     }
 
     private fun createVoteAssignedToPoll(): Response {
-        val poll = PollResourceIT.createPoll()
+        val poll = PollResourceIT.createEntity()
         val vote = Vote(poll.getLocation().toString(), ANSWER_OPTION_INDEX)
 
         val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH)
@@ -139,7 +139,7 @@ class VoteResourceIT : AbstractEndpointTest() {
     }
 
     private fun createUserVoteAssignedToPoll(user: String): Response {
-        val poll = PollResourceIT.createPoll()
+        val poll = PollResourceIT.createEntity()
         val vote = Vote.asUser(poll.getLocation().toString(), ANSWER_OPTION_INDEX, user)
 
         val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH)
