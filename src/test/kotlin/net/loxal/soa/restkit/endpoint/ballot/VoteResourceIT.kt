@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType
 import net.loxal.soa.restkit.endpoint.Endpoint
 import javax.ws.rs.client.Entity
 import kotlin.test.assertEquals
+import java.util.UUID
 
 public class VoteResourceIT : AbstractEndpointTest() {
 
@@ -128,7 +129,9 @@ public class VoteResourceIT : AbstractEndpointTest() {
         val poll = PollResourceIT.createPoll()
         val vote = Vote(poll.getLocation().toString(), ANSWER_OPTION_INDEX)
 
-        val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH).request().post(Entity.json<Vote>(vote))
+        val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH)
+                .path(UUID.randomUUID().toString())
+                .request().post(Entity.json<Vote>(vote))
         assertEquals(Response.Status.CREATED.getStatusCode(), createdVote.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, createdVote.getMediaType())
 
@@ -139,7 +142,9 @@ public class VoteResourceIT : AbstractEndpointTest() {
         val poll = PollResourceIT.createPoll()
         val vote = Vote.asUser(poll.getLocation().toString(), ANSWER_OPTION_INDEX, user)
 
-        val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH).request().post(Entity.json<Vote>(vote))
+        val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH)
+                .path(UUID.randomUUID().toString())
+                .request().post(Entity.json<Vote>(vote))
         assertEquals(Response.Status.CREATED.getStatusCode(), createdVote.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, createdVote.getMediaType())
 

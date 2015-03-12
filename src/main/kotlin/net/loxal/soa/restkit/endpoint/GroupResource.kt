@@ -21,10 +21,8 @@ import javax.ws.rs.GET
 import javax.ws.rs.PUT
 import java.util.concurrent.TimeUnit
 import javax.ws.rs.client.Entity
-import java.net.URI
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.MediaType
-import java.util.UUID
 
 Path(GroupResource.RESOURCE_PATH)
 class GroupResource : Endpoint() {
@@ -32,14 +30,16 @@ class GroupResource : Endpoint() {
     Inject
     private var client: RepositoryClient<Group> = RepositoryClient()
 
+    Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
     POST
-    fun create(NotNull Valid group: Group, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    fun create(NotNull Valid group: Group,
+               PathParam(Endpoint.ID_PATH_PARAM) id: String,
+               Context requestContext: ContainerRequestContext,
+               Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val response = client.post(Entity.json<Group>(group), id = UUID.randomUUID().toString())
-        val id = extractIdOfLocation(response)
-
-        val entityLocation = URI.create(requestContext.getUriInfo().getRequestUri().toString() + Endpoint.URI_PATH_SEPARATOR + id)
+        val response = client.post(Entity.json<Group>(group), id = id)
+        val entityLocation = requestContext.getUriInfo().getRequestUri()
 
         asyncResponse.resume(Response.fromResponse(response).location(entityLocation).build())
         Endpoint.LOG.info(requestContext.getMethod())

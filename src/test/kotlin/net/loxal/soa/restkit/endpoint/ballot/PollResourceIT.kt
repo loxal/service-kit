@@ -103,6 +103,7 @@ public class PollResourceIT : AbstractEndpointTest() {
             val polls = listOf(poll1, poll2, poll3, poll4, poll5, poll6, poll7, poll8, poll9, poll10)
 
             polls.forEach {
+                // TODO make use of already existing function
                 val createdPoll = AbstractEndpointTest.prepareGenericRequest(PollResource.RESOURCE_PATH).path("simpsons-N${UUID.randomUUID()}").request().post(Entity.json<Poll>(poll1))
                 assertEquals(Response.Status.CREATED.getStatusCode(), createdPoll.getStatus())
                 assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.getMediaType())
@@ -117,7 +118,7 @@ public class PollResourceIT : AbstractEndpointTest() {
     }
 
     Test
-    public fun createNewPoll() {
+    fun createNewPoll() {
         val response = createPoll()
 
         assertEquals(Response.Status.CREATED.getStatusCode(), response.getStatus())
@@ -224,7 +225,8 @@ public class PollResourceIT : AbstractEndpointTest() {
         fun createPoll(): Response {
             val poll = Poll(POLL_QUESTION, POLL_ANSWERS)
 
-            val createdPoll = AbstractEndpointTest.prepareGenericRequest(PollResource.RESOURCE_PATH).request().post(Entity.json<Poll>(poll))
+            val createdPoll = AbstractEndpointTest.prepareGenericRequest(PollResource.RESOURCE_PATH)
+                    .path(UUID.randomUUID().toString()).request().post(Entity.json<Poll>(poll))
             assertEquals(Response.Status.CREATED.getStatusCode(), createdPoll.getStatus())
             assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.getMediaType())
 

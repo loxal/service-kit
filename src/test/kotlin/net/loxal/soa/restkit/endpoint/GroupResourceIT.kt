@@ -12,13 +12,16 @@ import javax.ws.rs.client.Entity
 import javax.ws.rs.core.MediaType
 import java.util.Arrays
 import kotlin.test.assertEquals
+import java.util.UUID
 
 public class GroupResourceIT : AbstractEndpointTest() {
 
     private fun postEntity(): Response {
         val group = Group("name", ENTRIES)
 
-        val createdEntity = AbstractEndpointTest.prepareGenericRequest(GroupResource.RESOURCE_PATH).request().post(Entity.json<Group>(group))
+        val createdEntity = AbstractEndpointTest.prepareGenericRequest(GroupResource.RESOURCE_PATH)
+                .path(UUID.randomUUID().toString())
+                .request().post(Entity.json<Group>(group))
         assertEquals(Response.Status.CREATED.getStatusCode().toLong(), createdEntity.getStatus().toLong())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, createdEntity.getMediaType())
 

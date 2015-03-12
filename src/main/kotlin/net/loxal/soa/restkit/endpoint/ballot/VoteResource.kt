@@ -22,10 +22,8 @@ import javax.ws.rs.GET
 import javax.ws.rs.PUT
 import java.util.concurrent.TimeUnit
 import javax.ws.rs.client.Entity
-import java.net.URI
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.MediaType
-import java.util.UUID
 
 Path(VoteResource.RESOURCE_PATH)
 class VoteResource : Endpoint() {
@@ -33,14 +31,16 @@ class VoteResource : Endpoint() {
     Inject
     private var client: RepositoryClient<Vote> = RepositoryClient()
 
+    Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
     POST
-    fun create(NotNull Valid vote: Vote, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    fun create(NotNull Valid vote: Vote,
+               PathParam(Endpoint.ID_PATH_PARAM) id: String,
+               Context requestContext: ContainerRequestContext,
+               Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val createdVote = client.post(Entity.json<Vote>(vote), id = UUID.randomUUID().toString())
-        val id = extractIdOfLocation(createdVote)
-
-        val entityLocation = URI.create(requestContext.getUriInfo().getRequestUri().toString() + Endpoint.URI_PATH_SEPARATOR + id)
+        val createdVote = client.post(Entity.json<Vote>(vote), id = id)
+        val entityLocation = requestContext.getUriInfo().getRequestUri()
 
         asyncResponse.resume(Response.fromResponse(createdVote).location(entityLocation).build())
         Endpoint.LOG.info(requestContext.getMethod())

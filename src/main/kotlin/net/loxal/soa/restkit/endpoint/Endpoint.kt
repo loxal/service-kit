@@ -4,19 +4,11 @@
 
 package net.loxal.soa.restkit.endpoint
 
-import javax.ws.rs.core.Response
 import java.util.logging.Logger
 import java.text.MessageFormat
 import java.util.regex.Pattern
 
 abstract class Endpoint protected() {
-
-    protected fun extractIdOfLocation(createdVote: Response): String {
-        val entityId = ENTITY_ID_PATTERN.matcher(createdVote.getLocation().getPath())
-
-        return if (entityId.find()) entityId.group(ENTITY_ID_GROUP) else ""
-    }
-
     class object {
         public val URI_PATH_SEPARATOR: String = "/"
         val ASYNC_RESPONSE_TIMEOUT: Int = 3
