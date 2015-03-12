@@ -14,7 +14,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-public class ResolveIpAddressServiceIT : AbstractEndpointTest() {
+class ResolveIpAddressServiceIT : AbstractEndpointTest() {
     Before
     public fun setUp() {
         AbstractEndpointTest.resourcePath = ResolveIpAddressService.RESOURCE_PATH

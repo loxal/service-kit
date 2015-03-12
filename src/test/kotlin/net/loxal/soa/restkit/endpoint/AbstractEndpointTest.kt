@@ -16,7 +16,7 @@ import javax.ws.rs.client.ClientBuilder
 import kotlin.test.assertEquals
 import net.loxal.soa.restkit.filter.AccessControlFilter
 
-public abstract class AbstractEndpointTest {
+abstract class AbstractEndpointTest {
 
     Test
     public fun nonExistentPathNotFound() {

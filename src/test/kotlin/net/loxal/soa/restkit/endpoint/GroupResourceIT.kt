@@ -14,7 +14,7 @@ import java.util.Arrays
 import kotlin.test.assertEquals
 import java.util.UUID
 
-public class GroupResourceIT : AbstractEndpointTest() {
+class GroupResourceIT : AbstractEndpointTest() {
 
     private fun postEntity(): Response {
         val group = Group("name", ENTRIES)

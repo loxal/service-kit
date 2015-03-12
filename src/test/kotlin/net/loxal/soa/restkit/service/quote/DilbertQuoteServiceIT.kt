@@ -13,7 +13,7 @@ import net.loxal.soa.restkit.model.dilbert.Quote
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-public class DilbertQuoteServiceIT : AbstractEndpointTest() {
+class DilbertQuoteServiceIT : AbstractEndpointTest() {
 
     private val RESOURCE_PATH_DEV = "${DilbertQuoteService.RESOURCE_PATH}/${DilbertQuoteService.RESOURCE_PATH_DEV}"
     private val RESOURCE_PATH_MANAGER = "${DilbertQuoteService.RESOURCE_PATH}/${DilbertQuoteService.RESOURCE_PATH_MANAGER}"

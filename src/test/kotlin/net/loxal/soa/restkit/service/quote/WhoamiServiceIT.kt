@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response
 import javax.ws.rs.core.MediaType
 import kotlin.test.assertEquals
 
-public class WhoamiServiceIT : AbstractEndpointTest() {
+class WhoamiServiceIT : AbstractEndpointTest() {
     Before
     public fun setUp() {
         AbstractEndpointTest.resourcePath = WhoamiService.RESOURCE_PATH

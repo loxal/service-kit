@@ -15,7 +15,7 @@ import javax.ws.rs.client.Entity
 import kotlin.test.assertEquals
 import java.util.UUID
 
-public class VoteResourceIT : AbstractEndpointTest() {
+class VoteResourceIT : AbstractEndpointTest() {
 
     Test
     fun createVote() {
