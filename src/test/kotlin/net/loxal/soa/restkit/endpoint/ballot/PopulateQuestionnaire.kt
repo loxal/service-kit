@@ -10,6 +10,7 @@ import net.loxal.soa.restkit.model.ballot.Poll
 import java.util.UUID
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.MediaType
+import kotlin.test.assertEquals
 
 class PopulateQuestionnaire : AbstractEndpointTest() {
     Test
@@ -18,10 +19,10 @@ class PopulateQuestionnaire : AbstractEndpointTest() {
             var idx: Int = 0
             polls.forEach { poll ->
                 val createdPoll = PollResourceIT.createEntity("simpsons-${++idx}${UUID.randomUUID()}", poll)
-                test.assertEquals(Response.Status.CREATED.getStatusCode(), createdPoll.getStatus())
-                test.assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.getMediaType())
-                test.assertEquals(true, createdPoll.getLocation().getPath().contains("/ballot/poll/"))
-                test.assertEquals(false, createdPoll.getLocation().getPath().endsWith("/"))
+                assertEquals(Response.Status.CREATED.getStatusCode(), createdPoll.getStatus())
+                assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.getMediaType())
+                assertEquals(true, createdPoll.getLocation().getPath().contains("/ballot/poll/"))
+                assertEquals(false, createdPoll.getLocation().getPath().endsWith("/"))
 
                 AbstractEndpointTest.LOG.info("Created poll: ${createdPoll.getLocation()}")
             }
