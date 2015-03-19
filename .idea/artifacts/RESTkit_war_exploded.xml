@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="rest-kit:war exploded">
+  <artifact type="exploded-war" name="RESTkit:war exploded">
     <output-path>$PROJECT_DIR$/target/rest-kit-1.4.1-SNAPSHOT</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
@@ -7,8 +7,8 @@
           <element id="module-output" name="RESTkit" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:0.10.770" />
-          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-runtime:0.10.770" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:0.11.91" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-runtime:0.11.91" />
           <element id="library" level="project" name="Maven: org.glassfish.jersey.ext:jersey-spring3:2.16" />
           <element id="library" level="project" name="Maven: org.glassfish.jersey.containers:jersey-container-servlet-core:2.16" />
           <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2:2.4.0-b09" />
