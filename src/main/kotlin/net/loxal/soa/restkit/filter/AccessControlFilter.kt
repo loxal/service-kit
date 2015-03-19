@@ -23,7 +23,7 @@ class AccessControlFilter : ContainerResponseFilter {
         headers.add(allowHeadersHeader, allowHeadersValue)
     }
 
-    class object {
+    companion object {
         val allowOriginHeader = "Access-Control-Allow-Origin"
         val allowOriginHeaderValue = "*"
         val allowHeadersHeader = "Access-Control-Allow-Headers"

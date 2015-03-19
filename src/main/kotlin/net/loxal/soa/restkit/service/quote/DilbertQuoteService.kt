@@ -4,25 +4,25 @@
 
 package net.loxal.soa.restkit.service.quote
 
-import javax.ws.rs.Path
-import net.loxal.soa.restkit.endpoint.Endpoint
-import javax.ws.rs.GET
-import javax.ws.rs.core.Context
-import javax.servlet.http.HttpServletRequest
-import javax.ws.rs.container.ContainerRequestContext
-import javax.ws.rs.container.Suspended
-import javax.ws.rs.container.AsyncResponse
-import net.loxal.soa.restkit.model.dilbert.Quote
 import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
+import net.loxal.soa.restkit.endpoint.Endpoint
+import net.loxal.soa.restkit.model.dilbert.Quote
+import java.io.InputStreamReader
 import java.util.Random
 import java.util.concurrent.TimeUnit
-import javax.ws.rs.core.Response
 import java.util.logging.Logger
-import com.fasterxml.jackson.databind.ObjectMapper
-import java.io.InputStreamReader
+import javax.servlet.http.HttpServletRequest
+import javax.ws.rs.GET
+import javax.ws.rs.Path
 import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
+import javax.ws.rs.container.AsyncResponse
+import javax.ws.rs.container.ContainerRequestContext
+import javax.ws.rs.container.Suspended
+import javax.ws.rs.core.Context
 import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.Response
 
 Produces(DilbertQuoteService.mediaType)
 Path(DilbertQuoteService.RESOURCE_PATH)
@@ -76,12 +76,12 @@ class DilbertQuoteService : Endpoint() {
         LOG.info("${requestContext.getMethod()} for $quoteId ${request.getContextPath()}")
     }
 
-    {
+    init {
         quotesDevReader.close()
         quotesManagerReader.close()
     }
 
-    class object {
+    companion object {
         private val LOG = Logger.getGlobal()
 
         private data class Quotes : TypeReference<List<Quote>>()

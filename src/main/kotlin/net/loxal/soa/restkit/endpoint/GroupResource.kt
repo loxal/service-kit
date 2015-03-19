@@ -4,25 +4,20 @@
 
 package net.loxal.soa.restkit.endpoint
 
-import javax.ws.rs.Path
-import javax.inject.Inject
-import net.loxal.soa.restkit.model.generic.Group
 import net.loxal.soa.restkit.client.RepositoryClient
-import javax.ws.rs.POST
-import javax.validation.constraints.NotNull
+import net.loxal.soa.restkit.model.generic.Group
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 import javax.validation.Valid
-import javax.ws.rs.core.Context
+import javax.validation.constraints.NotNull
+import javax.ws.rs.*
+import javax.ws.rs.client.Entity
+import javax.ws.rs.container.AsyncResponse
 import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
-import javax.ws.rs.container.AsyncResponse
-import javax.ws.rs.DELETE
-import javax.ws.rs.PathParam
-import javax.ws.rs.GET
-import javax.ws.rs.PUT
-import java.util.concurrent.TimeUnit
-import javax.ws.rs.client.Entity
-import javax.ws.rs.core.Response
+import javax.ws.rs.core.Context
 import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.Response
 
 Path(GroupResource.RESOURCE_PATH)
 class GroupResource : Endpoint() {
@@ -78,7 +73,7 @@ class GroupResource : Endpoint() {
         Endpoint.LOG.info(requestContext.getMethod())
     }
 
-    class object {
+    companion object {
         public val RESOURCE_PATH: String = "group"
     }
 }

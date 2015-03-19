@@ -4,15 +4,15 @@
 
 package net.loxal.soa.restkit.endpoint
 
-import javax.ws.rs.core.Response
+import net.loxal.soa.restkit.model.common.ErrorMessage
 import net.loxal.soa.restkit.model.generic.Group
 import org.junit.Test
-import net.loxal.soa.restkit.model.common.ErrorMessage
+import java.util.Arrays
+import java.util.UUID
 import javax.ws.rs.client.Entity
 import javax.ws.rs.core.MediaType
-import java.util.Arrays
+import javax.ws.rs.core.Response
 import kotlin.test.assertEquals
-import java.util.UUID
 
 class GroupResourceIT : AbstractEndpointTest() {
 
@@ -120,7 +120,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         assertEquals(MediaType.APPLICATION_JSON_TYPE, update.getMediaType())
     }
 
-    class object {
+    companion object {
         private val ENTRIES = Arrays.asList<String>("first", "second", "third")
     }
 }

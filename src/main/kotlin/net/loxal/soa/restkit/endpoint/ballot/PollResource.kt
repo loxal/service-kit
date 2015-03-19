@@ -4,26 +4,21 @@
 
 package net.loxal.soa.restkit.endpoint.ballot
 
-import javax.ws.rs.Path
-import net.loxal.soa.restkit.endpoint.Endpoint
-import javax.inject.Inject
-import net.loxal.soa.restkit.model.ballot.Poll
 import net.loxal.soa.restkit.client.RepositoryClient
-import javax.ws.rs.POST
-import javax.validation.constraints.NotNull
+import net.loxal.soa.restkit.endpoint.Endpoint
+import net.loxal.soa.restkit.model.ballot.Poll
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 import javax.validation.Valid
-import javax.ws.rs.core.Context
+import javax.validation.constraints.NotNull
+import javax.ws.rs.*
+import javax.ws.rs.client.Entity
+import javax.ws.rs.container.AsyncResponse
 import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
-import javax.ws.rs.container.AsyncResponse
-import javax.ws.rs.DELETE
-import javax.ws.rs.PathParam
-import javax.ws.rs.GET
-import javax.ws.rs.PUT
-import java.util.concurrent.TimeUnit
-import javax.ws.rs.client.Entity
-import javax.ws.rs.core.Response
+import javax.ws.rs.core.Context
 import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.Response
 
 Path(PollResource.RESOURCE_PATH)
 class PollResource : Endpoint() {
@@ -79,7 +74,7 @@ class PollResource : Endpoint() {
         Endpoint.LOG.info(requestContext.getMethod())
     }
 
-    class object {
+    companion object {
         private val RESOURCE_NAME = "poll"
         public val RESOURCE_PATH: String = "ballot/" + RESOURCE_NAME
     }

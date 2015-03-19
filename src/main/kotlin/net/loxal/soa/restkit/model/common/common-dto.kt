@@ -4,12 +4,12 @@
 
 package net.loxal.soa.restkit.model.common
 
+import javax.validation.constraints.Max
+import javax.validation.constraints.Min
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Pattern
-import javax.validation.constraints.Min
-import javax.validation.constraints.Max
-import kotlin.platform.platformStatic
 import javax.ws.rs.core.Response
+import kotlin.platform.platformStatic
 
 /**
  * Detailed error message used in response to provide all errors triggered by a request.
@@ -25,7 +25,7 @@ data class ErrorMessage private() {
     var moreInfo: String = ""
     var details: Set<ErrorDetail> = emptySet()
 
-    class object {
+    companion object {
         val TYPE_REGEXP_PATTERN = "[a-z]+[[a-z]_]*[a-z]+"
 
         platformStatic fun create(errorMsg: String?): ErrorMessage {

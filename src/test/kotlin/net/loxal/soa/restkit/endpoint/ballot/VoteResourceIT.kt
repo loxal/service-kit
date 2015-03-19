@@ -5,15 +5,15 @@
 package net.loxal.soa.restkit.endpoint.ballot
 
 import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
-import org.junit.Test
-import net.loxal.soa.restkit.model.common.ErrorMessage
-import net.loxal.soa.restkit.model.ballot.Vote
-import javax.ws.rs.core.Response
-import javax.ws.rs.core.MediaType
 import net.loxal.soa.restkit.endpoint.Endpoint
-import javax.ws.rs.client.Entity
-import kotlin.test.assertEquals
+import net.loxal.soa.restkit.model.ballot.Vote
+import net.loxal.soa.restkit.model.common.ErrorMessage
+import org.junit.Test
 import java.util.UUID
+import javax.ws.rs.client.Entity
+import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.Response
+import kotlin.test.assertEquals
 
 class VoteResourceIT : AbstractEndpointTest() {
 
@@ -151,7 +151,7 @@ class VoteResourceIT : AbstractEndpointTest() {
         return createdVote
     }
 
-    class object {
+    companion object {
         private val ANSWER_OPTION_INDEX = 1
     }
 }

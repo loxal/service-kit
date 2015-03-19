@@ -4,22 +4,22 @@
 
 package net.loxal.soa.restkit.service.quote
 
-import javax.ws.rs.Path
 import net.loxal.soa.restkit.endpoint.Endpoint
+import net.loxal.soa.restkit.model.common.ErrorMessage
+import net.loxal.soa.restkit.model.whoami.Host
+import java.net.InetAddress
+import java.net.UnknownHostException
+import java.util.concurrent.TimeUnit
+import java.util.logging.Logger
 import javax.ws.rs.GET
+import javax.ws.rs.Path
 import javax.ws.rs.QueryParam
-import javax.ws.rs.core.Context
+import javax.ws.rs.container.AsyncResponse
 import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
-import javax.ws.rs.container.AsyncResponse
-import java.net.UnknownHostException
-import kotlin.platform.platformStatic
-import java.util.logging.Logger
-import java.util.concurrent.TimeUnit
-import java.net.InetAddress
-import net.loxal.soa.restkit.model.whoami.Host
+import javax.ws.rs.core.Context
 import javax.ws.rs.core.Response
-import net.loxal.soa.restkit.model.common.ErrorMessage
+import kotlin.platform.platformStatic
 
 Path(ResolveIpAddressService.RESOURCE_PATH)
 class ResolveIpAddressService : Endpoint() {
@@ -44,7 +44,7 @@ class ResolveIpAddressService : Endpoint() {
         }
     }
 
-    class object {
+    companion object {
         platformStatic val HOST_NAME_PARAM: String = "hostName"
         protected val LOG: Logger = Logger.getGlobal()
         val RESOURCE_PATH = "resolve-ip-address"

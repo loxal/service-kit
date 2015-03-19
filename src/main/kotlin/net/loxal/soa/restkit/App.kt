@@ -4,12 +4,12 @@
 
 package net.loxal.soa.restkit
 
-import javax.ws.rs.ApplicationPath
 import org.glassfish.jersey.server.ResourceConfig
+import javax.ws.rs.ApplicationPath
 
 ApplicationPath("")
 class App : ResourceConfig() {
-    {
+    init {
         packages(javaClass.getPackage().getName())
     }
 }

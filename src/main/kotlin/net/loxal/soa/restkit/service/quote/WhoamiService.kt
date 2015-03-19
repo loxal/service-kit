@@ -4,18 +4,18 @@
 
 package net.loxal.soa.restkit.service.quote
 
-import javax.ws.rs.Path
 import net.loxal.soa.restkit.endpoint.Endpoint
-import javax.ws.rs.GET
-import javax.ws.rs.core.Context
+import net.loxal.soa.restkit.model.whoami.Host
+import java.util.concurrent.TimeUnit
+import java.util.logging.Logger
 import javax.servlet.http.HttpServletRequest
+import javax.ws.rs.GET
+import javax.ws.rs.Path
+import javax.ws.rs.container.AsyncResponse
 import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
-import javax.ws.rs.container.AsyncResponse
-import java.util.concurrent.TimeUnit
-import net.loxal.soa.restkit.model.whoami.Host
+import javax.ws.rs.core.Context
 import javax.ws.rs.core.Response
-import java.util.logging.Logger
 
 Path(WhoamiService.RESOURCE_PATH)
 class WhoamiService : Endpoint() {
@@ -30,7 +30,7 @@ class WhoamiService : Endpoint() {
         LOG.info(requestContext.getMethod())
     }
 
-    class object {
+    companion object {
         private val LOG = Logger.getGlobal()
         val RESOURCE_PATH = "who-am-i"
     }

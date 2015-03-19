@@ -4,12 +4,12 @@
 
 package net.loxal.soa.restkit.endpoint
 
-import java.util.logging.Logger
 import java.text.MessageFormat
+import java.util.logging.Logger
 import java.util.regex.Pattern
 
 abstract class Endpoint protected() {
-    class object {
+    companion object {
         public val URI_PATH_SEPARATOR: String = "/"
         val ASYNC_RESPONSE_TIMEOUT: Int = 3
         val ID_PATH_PARAM: String = "id"

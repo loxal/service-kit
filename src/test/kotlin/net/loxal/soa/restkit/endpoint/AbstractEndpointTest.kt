@@ -4,17 +4,17 @@
 
 package net.loxal.soa.restkit.endpoint
 
+import net.loxal.soa.restkit.filter.AccessControlFilter
 import org.junit.Test
-import java.util.Properties
-import javax.ws.rs.client.WebTarget
-import java.net.URI
 import java.io.IOException
-import javax.ws.rs.core.Response
-import javax.ws.rs.core.MediaType
+import java.net.URI
+import java.util.Properties
 import java.util.logging.Logger
 import javax.ws.rs.client.ClientBuilder
+import javax.ws.rs.client.WebTarget
+import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.Response
 import kotlin.test.assertEquals
-import net.loxal.soa.restkit.filter.AccessControlFilter
 
 abstract class AbstractEndpointTest {
 
@@ -28,7 +28,7 @@ abstract class AbstractEndpointTest {
         assureCorsHeaders(response)
     }
 
-    class object {
+    companion object {
         val LOG = Logger.getGlobal()
         val NON_EXISTENT: String = "non-existent"
         val SERVICE_TARGET: String
@@ -48,7 +48,7 @@ abstract class AbstractEndpointTest {
             return client.target(target)
         }
 
-        {
+        init {
             val classLoader = Thread.currentThread().getContextClassLoader()
             properties = Properties()
             try {

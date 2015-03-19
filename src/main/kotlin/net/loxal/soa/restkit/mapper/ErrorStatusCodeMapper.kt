@@ -4,17 +4,13 @@
 
 package net.loxal.soa.restkit.mapper
 
-import javax.ws.rs.ext.Provider
-import javax.ws.rs.WebApplicationException
-import javax.ws.rs.ext.ExceptionMapper
-import javax.ws.rs.core.Response
-import javax.ws.rs.NotFoundException
-import javax.ws.rs.ForbiddenException
-import javax.ws.rs.InternalServerErrorException
-import javax.ws.rs.NotAuthorizedException
-import javax.ws.rs.core.MediaType
 import net.loxal.soa.restkit.model.common.ErrorMessage
 import org.glassfish.jersey.server.ParamException
+import javax.ws.rs.*
+import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.Response
+import javax.ws.rs.ext.ExceptionMapper
+import javax.ws.rs.ext.Provider
 
 /**
  * Maps Java exceptions to HTTP error codes.
@@ -35,7 +31,7 @@ class ErrorStatusCodeMapper : ExceptionMapper<WebApplicationException> {
         return Response.status(status!!.getStatusCode()).type(MediaType.APPLICATION_JSON_TYPE).entity(errorMessage).build()
     }
 
-    class object {
+    companion object {
         private val EXCEPTION_TO_ERROR_MAPPING = mapOf(
                 javaClass<NotFoundException>() to Response.Status.NOT_FOUND,
                 javaClass<ParamException.PathParamException>() to Response.Status.NOT_FOUND,

@@ -4,9 +4,9 @@
 
 package net.loxal.soa.restkit.client
 
-import javax.annotation.ManagedBean
 import org.springframework.beans.factory.annotation.Value
 import java.net.URI
+import javax.annotation.ManagedBean
 import javax.ws.rs.client.Entity
 import javax.ws.rs.client.WebTarget
 
@@ -17,7 +17,7 @@ class RepositoryClient<T> : RestClient<T>() {
     Value("\${tenant}")
     private val tenant: String = ""
 
-    {
+    init {
         RestClient.LOG.info("repositoryServiceUri: " + repositoryServiceUri)
     }
 
@@ -42,7 +42,7 @@ class RepositoryClient<T> : RestClient<T>() {
 
     private fun explicitType(entity: Class<in T>)= entity.getSimpleName().toLowerCase()
 
-    class object {
+    companion object {
         public val SERVICE_PATH: String = "rest-kit"
         public val REPOSITORY_PATH: String = "data"
     }

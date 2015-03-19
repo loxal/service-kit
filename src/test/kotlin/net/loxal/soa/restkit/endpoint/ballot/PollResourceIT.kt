@@ -5,16 +5,16 @@
 package net.loxal.soa.restkit.endpoint.ballot
 
 import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
-import org.junit.Test
-import net.loxal.soa.restkit.model.common.ErrorMessage
-import net.loxal.soa.restkit.model.ballot.Poll
-import javax.ws.rs.core.Response
-import javax.ws.rs.core.MediaType
 import net.loxal.soa.restkit.endpoint.Endpoint
+import net.loxal.soa.restkit.model.ballot.Poll
+import net.loxal.soa.restkit.model.common.ErrorMessage
+import org.junit.Test
 import java.util.Arrays
-import javax.ws.rs.client.Entity
-import kotlin.test.assertEquals
 import java.util.UUID
+import javax.ws.rs.client.Entity
+import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.Response
+import kotlin.test.assertEquals
 
 class PollResourceIT : AbstractEndpointTest() {
     Test
@@ -118,7 +118,7 @@ class PollResourceIT : AbstractEndpointTest() {
         assertEquals(MediaType.APPLICATION_JSON_TYPE, update.getMediaType())
     }
 
-    class object {
+    companion object {
         private val POLL_QUESTION = "What is the meaning of life?"
         private val POLL_ANSWERS = Arrays.asList<String>("Yes", "No")
 
