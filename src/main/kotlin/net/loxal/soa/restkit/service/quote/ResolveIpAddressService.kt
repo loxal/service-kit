@@ -19,7 +19,6 @@ import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
 import javax.ws.rs.core.Context
 import javax.ws.rs.core.Response
-import kotlin.platform.platformStatic
 
 Path(ResolveIpAddressService.RESOURCE_PATH)
 class ResolveIpAddressService : Endpoint() {
@@ -45,7 +44,7 @@ class ResolveIpAddressService : Endpoint() {
     }
 
     companion object {
-        platformStatic val HOST_NAME_PARAM: String = "hostName"
+        val HOST_NAME_PARAM: String = "hostName"
         protected val LOG: Logger = Logger.getGlobal()
         val RESOURCE_PATH = "resolve-ip-address"
     }
