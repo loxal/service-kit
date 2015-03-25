@@ -15,7 +15,7 @@
 
     <groupId>net.loxal.soa</groupId>
     <artifactId>rest-kit</artifactId>
-    <version>1.4.1-SNAPSHOT</version>
+    <version>1.5.0-SNAPSHOT</version>
     <name>RESTkit</name>
     <packaging>war</packaging>
     <description>Microservice Toolkit</description>
@@ -31,7 +31,8 @@
         <cloudFoundry.org>hybris_${cloudFoundry.subdomain}</cloudFoundry.org>
         <cloudFoundry.api>.cf.hybris.com</cloudFoundry.api>
         <cloudFoundry.target>.cf4.hybris.com</cloudFoundry.target>
-        <cf.domain.suffix>.yaas.io</cf.domain.suffix>
+        <!--<cf.domain.suffix>.yaas.io</cf.domain.suffix>-->
+        <cf.domain.suffix>.cf.hybris.com</cf.domain.suffix>
         <build.number>0</build.number>
 
         <repositoryServiceUri>http://repository-v2.${cloudFoundry.subdomain}${cloudFoundry.api}</repositoryServiceUri>
@@ -325,7 +326,8 @@
                         ${project.artifactId}-${cloudFoundry.stage}-v${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-b${build.number}
                     </appname>
                     <urls>
-                        <url>${project.artifactId}-${cloudFoundry.stage}.${cloudFoundry.subdomain}${cf.domain.suffix}
+                        <url>
+                            ${project.artifactId}-${cloudFoundry.stage}.${cloudFoundry.subdomain}${cf.domain.suffix}
                         </url>
                         <url>
                             ${project.artifactId}-v${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-b${build.number}.${cloudFoundry.subdomain}${cf.domain.suffix}
@@ -340,10 +342,10 @@
                     <trustSelfSignedCerts>true</trustSelfSignedCerts>
                     <services>
                         <service>
-                            <name>logstash-${cloudFoundry.stage}</name>
+                            <name>log-${cloudFoundry.stage}</name>
                             <label>user-provided</label>
                             <userProvidedCredentials/>
-                            <syslogDrainUrl>syslog://logstash.cf4.hybris.com:5000</syslogDrainUrl>
+                            <syslogDrainUrl>syslog://logstash${cloudFoundry.target}:5000</syslogDrainUrl>
                         </service>
                     </services>
                     <env>
