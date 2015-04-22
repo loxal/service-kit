@@ -5,13 +5,13 @@
 package net.loxal.soa.restkit.service.quote
 
 import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
+import net.loxal.soa.restkit.model.whoami.Host
 import org.junit.Before
 import org.junit.Test
-import net.loxal.soa.restkit.model.whoami.Host
-import javax.ws.rs.core.Response
 import javax.ws.rs.core.MediaType
-import kotlin.test.assertNotNull
+import javax.ws.rs.core.Response
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class ResolveIpAddressServiceIT : AbstractEndpointTest() {
@@ -22,7 +22,7 @@ class ResolveIpAddressServiceIT : AbstractEndpointTest() {
 
     Test
     public fun assureHostAddress() {
-        val hostName = "loxal.net"
+        val hostName = "localhost"
 
         val response = AbstractEndpointTest.prepareGenericRequest(ResolveIpAddressService.RESOURCE_PATH).queryParam(ResolveIpAddressService.HOST_NAME_PARAM, hostName).request().get()
 

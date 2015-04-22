@@ -7,8 +7,8 @@
           <element id="module-output" name="RESTkit" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:0.11.91" />
-          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-runtime:0.11.91" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:0.11.91.2" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-runtime:0.11.91.2" />
           <element id="library" level="project" name="Maven: org.glassfish.jersey.ext:jersey-spring3:2.17" />
           <element id="library" level="project" name="Maven: org.glassfish.jersey.containers:jersey-container-servlet-core:2.17" />
           <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2:2.4.0-b10" />
@@ -75,7 +75,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/rest-kit-1.5.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="RESTkit/web/Web" />
     </root>
