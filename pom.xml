@@ -30,9 +30,9 @@
         <cloudFoundry.stage>v${parsedVersion.majorVersion}</cloudFoundry.stage>
         <cloudFoundry.org>hybris_${cloudFoundry.subdomain}</cloudFoundry.org>
         <cloudFoundry.api>.cf.hybris.com</cloudFoundry.api>
-        <cloudFoundry.target>.cf4.hybris.com</cloudFoundry.target>
-        <cf.domain.suffix>.yaas.io</cf.domain.suffix>
-        <!--<cf.domain.suffix>.cf.hybris.com</cf.domain.suffix>-->
+        <cloudFoundry.target>.cf3.hybris.com</cloudFoundry.target>
+        <!--<cf.domain.suffix>.yaas.io</cf.domain.suffix>-->
+        <cf.domain.suffix>.cf.hybris.com</cf.domain.suffix>
         <build.number>0</build.number>
 
         <repositoryServiceUri>http://repository-v2.${cloudFoundry.subdomain}${cloudFoundry.api}</repositoryServiceUri>
