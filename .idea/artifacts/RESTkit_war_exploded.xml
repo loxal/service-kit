@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="RESTkit:war exploded">
-    <output-path>$PROJECT_DIR$/target/rest-kit-1.5.0-SNAPSHOT</output-path>
+    <output-path>$PROJECT_DIR$/target/rest-kit-1.5.1-SNAPSHOT</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -30,7 +30,7 @@
           <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:3.2.3.RELEASE" />
           <element id="library" level="project" name="Maven: javax.ws.rs:javax.ws.rs-api:2.0.1" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.1.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.1.6.RELEASE" />
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
           <element id="library" level="project" name="Maven: org.glassfish.jersey.ext:jersey-bean-validation:2.17" />
           <element id="library" level="project" name="Maven: org.glassfish.hk2.external:javax.inject:2.4.0-b10" />
@@ -75,7 +75,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/rest-kit-1.5.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/rest-kit-1.5.1-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="RESTkit/web/Web" />
     </root>
