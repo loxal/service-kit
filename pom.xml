@@ -36,7 +36,9 @@
         <build.number>0</build.number>
 
         <repositoryServiceUri>http://repository-v2.${cloudFoundry.subdomain}${cloudFoundry.api}</repositoryServiceUri>
-        <tenant>loxal${cloudFoundry.subdomain}</tenant>
+        <tenant>${organization.name}</tenant>
+        <app.clientId>${yaas.app.clientId}</app.clientId>
+        <app.clientSecret>${yaas.app.clientSecret}</app.clientSecret>
 
         <deploymentTarget>http://${deployment.host.name}:${deployment.host.port}</deploymentTarget>
         <!--<deployment.host.port>${local.jetty.port}</deployment.host.port>-->
@@ -309,7 +311,7 @@
                         <repositoryServiceUri>invalid</repositoryServiceUri>
                     </systemPropertyVariables>
                     <environmentVariables>
-                        <tenant>loxal${cloudFoundry.subdomain}</tenant>
+                        <tenant>${tenant}</tenant>
                         <repositoryServiceUri>${repositoryServiceUri}</repositoryServiceUri>
                     </environmentVariables>
                 </configuration>

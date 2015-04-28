@@ -11,6 +11,6 @@
         <Locale messages="ALL_ALL.xml"/>
     </ModulePrefs>
 
-    <Content href="http://rest-kit-test-v1.test.cf.hybris.com/who-am-i" type="url"/>
+    <Content href="http://rest-kit-v1.prod.cf.hybris.com/who-am-i" type="url"/>
 </Module>
         
