@@ -31,14 +31,16 @@
         <cloudFoundry.org>hybris_${cloudFoundry.subdomain}</cloudFoundry.org>
         <cloudFoundry.api>.cf.hybris.com</cloudFoundry.api>
         <cloudFoundry.target>.cf3.hybris.com</cloudFoundry.target>
-        <!--<cf.domain.suffix>.yaas.io</cf.domain.suffix>-->
+        <proxy.domain.suffix>.yaas.io</proxy.domain.suffix>
         <cf.domain.suffix>.cf.hybris.com</cf.domain.suffix>
         <build.number>0</build.number>
 
         <repositoryServiceUri>http://repository-v2.${cloudFoundry.subdomain}${cloudFoundry.api}</repositoryServiceUri>
-        <tenant>${organization.name}</tenant>
+        <tenant>muctool</tenant>
+        <repositoryServiceUriProxy>https://api${proxy.domain.suffix}/repository/v2/${tenant}</repositoryServiceUriProxy>
         <app.clientId>${yaas.app.clientId}</app.clientId>
         <app.clientSecret>${yaas.app.clientSecret}</app.clientSecret>
+        <oAuth2ServiceUri>https://api${proxy.domain.suffix}/hybris/oauth2/v2/token</oAuth2ServiceUri>
 
         <deploymentTarget>http://${deployment.host.name}:${deployment.host.port}</deploymentTarget>
         <!--<deployment.host.port>${local.jetty.port}</deployment.host.port>-->

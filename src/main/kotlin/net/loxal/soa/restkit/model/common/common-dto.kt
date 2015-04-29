@@ -44,3 +44,10 @@ data class ErrorDetail private() {
     var type: String = ""
     var message: String = ""
 }
+
+data class AccessToken private() {
+    var access_token: String = ""
+    var expires_in: Int = 0
+    var token_type: String = ""
+    var scope: String = ""
+}
