@@ -45,13 +45,12 @@ class GroupResourceIT : AbstractEndpointTest() {
     public fun deleteNonExistentEntity() {
         val existingEntity = postEntity()
 
-        val response = AbstractEndpointTest.prepareTarget("${existingEntity.getLocation()} ${AbstractEndpointTest.NON_EXISTENT}").request().delete()
+        val deletion = AbstractEndpointTest.prepareTarget("${existingEntity.getLocation()} ${AbstractEndpointTest.NON_EXISTENT}").request().delete()
 
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.getMediaType())
         val notFoundStatus = Response.Status.NOT_FOUND
-        assertEquals(notFoundStatus.getStatusCode().toLong(), response.getStatus().toLong())
-        val errorMessage = response.readEntity<ErrorMessage>(javaClass<ErrorMessage>())
-        assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), errorMessage.type)
+        assertEquals(notFoundStatus.getStatusCode().toLong(), deletion.getStatus().toLong())
+        validateError(deletion)
     }
 
     Test
@@ -85,7 +84,11 @@ class GroupResourceIT : AbstractEndpointTest() {
 
         assertEquals(Response.Status.NOT_FOUND.getStatusCode().toLong(), retrieval.getStatus().toLong())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.getMediaType())
-        val notFoundError = retrieval.readEntity<ErrorMessage>(javaClass<ErrorMessage>())
+        validateError(retrieval)
+    }
+
+    private fun validateError(error: Response) {
+        val notFoundError = error.readEntity(javaClass<ErrorMessage>())
         assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), notFoundError.type)
     }
 

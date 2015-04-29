@@ -38,7 +38,7 @@ class PollResourceIT : AbstractEndpointTest() {
         assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
         val notFoundStatus = Response.Status.NOT_FOUND
         assertEquals(notFoundStatus.getStatusCode(), response.getStatus())
-        val errorMessage = response.readEntity<ErrorMessage>(javaClass<ErrorMessage>())
+        val errorMessage = response.readEntity(javaClass<ErrorMessage>())
         assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), errorMessage.type)
     }
 
@@ -77,7 +77,7 @@ class PollResourceIT : AbstractEndpointTest() {
 
         assertEquals(Response.Status.NOT_FOUND.getStatusCode(), retrieval.getStatus())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.getMediaType())
-        val notFoundError = retrieval.readEntity<ErrorMessage>(javaClass<ErrorMessage>())
+        val notFoundError = retrieval.readEntity(javaClass<ErrorMessage>())
         assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), notFoundError.type)
     }
 

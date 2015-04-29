@@ -18,15 +18,15 @@ ManagedBean
 class RepositoryClient<T> : RestClient<T>() {
     Value("\${repositoryServiceUri}")
     private val repositoryServiceUri: URI = URI.create("")
-    Value("\${repositoryServiceUriProxy}")
-    private val repositoryServiceUriProxy: URI = URI.create("")
+    Value("\${repositoryServiceProxyUri}")
+    private val repositoryServiceProxyUri: URI = URI.create("")
     Value("\${tenant}")
     private val tenant: String = ""
 
     private val token: String = ""
 
     init {
-        RestClient.LOG.info("repositoryServiceUri: " + repositoryServiceUri)
+        RestClient.LOG.info("repositoryServiceUri: ${repositoryServiceUri}")
     }
 
     override fun post(entity: Entity<in T>, id: String) =
@@ -43,7 +43,12 @@ class RepositoryClient<T> : RestClient<T>() {
 
     private fun targetServiceRepository(entityType: String): WebTarget {
         RestClient.LOG.info("Tenant: $tenant")
-        return RestClient.CLIENT.target(repositoryServiceUri).path(tenant).path(SERVICE_PATH).path(REPOSITORY_PATH).path(entityType)
+        return RestClient.CLIENT.target(repositoryServiceUri).path(tenant).path(clientId).path(INFIX_PATH).path(entityType)
+    }
+
+    private fun targetRepository(entityType: String): WebTarget {
+        RestClient.LOG.info("Tenant: $tenant")
+        return RestClient.CLIENT.target(repositoryServiceProxyUri).path(tenant).path(clientId).path(INFIX_PATH).path(entityType)
     }
 
     private fun explicitType(entity: Entity<in T>) = entity.getEntity()!!.javaClass.getSimpleName().toLowerCase()
@@ -51,19 +56,20 @@ class RepositoryClient<T> : RestClient<T>() {
     private fun explicitType(entity: Class<in T>) = entity.getSimpleName().toLowerCase()
 
     companion object {
-        public val SERVICE_PATH: String = "rest-kit"
-        public val REPOSITORY_PATH: String = "data"
+        public val clientId: String
+        val INFIX_PATH: String = "data"
         private val properties = Properties()
 
         init {
             properties.load(javaClass<RepositoryClient<Any>>().getResourceAsStream("/local.properties"))
+            clientId = properties.getProperty("app.clientId")
         }
 
         final fun retrieveToken(): AccessToken {
             val tokenRequestBody = MultivaluedHashMap<String, String>()
             tokenRequestBody.putSingle("grant_type", "client_credentials")
             tokenRequestBody.putSingle("scope", "loxal.some_scope")
-            tokenRequestBody.putSingle("client_id", properties.getProperty("app.clientId"))
+            tokenRequestBody.putSingle("client_id", clientId)
             tokenRequestBody.putSingle("client_secret", properties.getProperty("app.clientSecret"))
 
             val tokenRequestForm = Form(tokenRequestBody)
