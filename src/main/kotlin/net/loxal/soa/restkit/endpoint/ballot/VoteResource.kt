@@ -48,7 +48,11 @@ class VoteResource : Endpoint() {
 
         val response = client.delete(javaClass<Vote>(), id)
 
-        asyncResponse.resume(Response.fromResponse(response).type(MediaType.APPLICATION_JSON_TYPE).build())
+        asyncResponse.resume(Response
+                .status(response.getStatus())
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .entity(response.readEntity(javaClass<String>()))
+                .build())
         Endpoint.LOG.info(requestContext.getMethod())
     }
 
@@ -59,7 +63,11 @@ class VoteResource : Endpoint() {
 
         val response = client.get(javaClass<Vote>(), id)
 
-        asyncResponse.resume(Response.fromResponse(response).build())
+        asyncResponse.resume(Response
+                .status(response.getStatus())
+                .type(response.getMediaType())
+                .entity(response.readEntity(javaClass<String>()))
+                .build())
         Endpoint.LOG.info(requestContext.getMethod())
     }
 

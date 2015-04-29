@@ -30,24 +30,24 @@ class RepositoryClient<T> : RestClient<T>() {
     }
 
     override fun post(entity: Entity<in T>, id: String) =
-            targetTenant(targetServiceRepository(explicitType(entity)).path(id)).post(entity)
+            authorizeRequest(targetProxy(explicitType(entity)).path(id)).post(entity)
 
     override fun put(json: Entity<in T>, id: String) =
-            targetTenant(targetServiceRepository(explicitType(json)).path(id)).put(json)
+            authorizeRequest(targetProxy(explicitType(json)).path(id)).put(json)
 
     override fun delete(entityType: Class<in T>, id: String) =
-            targetTenant(targetServiceRepository(explicitType(entityType)).path(id)).delete()
+            authorizeRequest(targetProxy(explicitType(entityType)).path(id)).delete()
 
     override fun get(entityType: Class<in T>, id: String) =
-            targetTenant(targetServiceRepository(explicitType(entityType)).path(id)).get()
+            authorizeRequest(targetProxy(explicitType(entityType)).path(id)).get()
 
-    private fun targetServiceRepository(entityType: String): WebTarget {
-        RestClient.LOG.info("Tenant: $tenant")
+    private fun targetDirect(entityType: String): WebTarget {
+        RestClient.LOG.info("tenant: $tenant | clientId: $clientId")
         return RestClient.CLIENT.target(repositoryServiceUri).path(tenant).path(clientId).path(INFIX_PATH).path(entityType)
     }
 
-    private fun targetRepository(entityType: String): WebTarget {
-        RestClient.LOG.info("Tenant: $tenant")
+    private fun targetProxy(entityType: String): WebTarget {
+        RestClient.LOG.info("tenant: $tenant | clientId: $clientId")
         return RestClient.CLIENT.target(repositoryServiceProxyUri).path(tenant).path(clientId).path(INFIX_PATH).path(entityType)
     }
 
