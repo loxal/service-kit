@@ -5,13 +5,13 @@
 
 <html manifest="cache.appcache">
 <meta charset="UTF-8">
-<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="../favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 <title>Dilbert Quotes</title>
 
 <script>
     "use strict";
     function main() {
-        var quoteResourcePath = "/dilbert-quote/dev-excuse";
+        var quoteResourcePath = "dev-excuse";
 
         var configure = function () {
             var roleContainer = document.getElementById("role");
@@ -26,11 +26,11 @@
             switch (role) {
                 case manager:
                     roleContainer.textContent = manager;
-                    quoteResourcePath = "/dilbert-quote/manager";
+                    quoteResourcePath = "manager";
                     break;
                 case programmer:
                     roleContainer.textContent = programmer;
-                    quoteResourcePath = "/dilbert-quote/dev-excuse";
+                    quoteResourcePath = "dev-excuse";
                     break;
             }
 
@@ -82,10 +82,10 @@
 
 <body onload="main()">
 <div id="overview">
-    <a id="jsonOutput" href="/dilbert-quote/dev-excuse">JSON</a>
+    <a id="jsonOutput" href="dev-excuse">JSON</a>
     [
-    <a href="/dilbert-quote/index.html?{&quot;role&quot;: &quot;Programmer&quot;}">Programmer Quotes</a> |
-    <a href="/dilbert-quote/index.html?{&quot;role&quot;: &quot;Manager&quot;}">Manager Quotes</a>
+    <a href="index.html?{&quot;role&quot;: &quot;Programmer&quot;}">Programmer Quotes</a> |
+    <a href="index.html?{&quot;role&quot;: &quot;Manager&quot;}">Manager Quotes</a>
     ]
 </div>
 <div id="quoteFrame">

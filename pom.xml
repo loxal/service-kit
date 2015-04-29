@@ -37,7 +37,7 @@
 
         <repositoryServiceUri>http://repository-v2.${cloudFoundry.subdomain}${cloudFoundry.api}</repositoryServiceUri>
         <tenant>muctool</tenant>
-        <repositoryServiceUriProxy>https://api${proxy.domain.suffix}/repository/v2/${tenant}</repositoryServiceUriProxy>
+        <repositoryServiceProxyUri>https://api${proxy.domain.suffix}/repository/v2</repositoryServiceProxyUri>
         <app.clientId>${yaas.app.clientId}</app.clientId>
         <app.clientSecret>${yaas.app.clientSecret}</app.clientSecret>
         <oAuth2ServiceUri>https://api${proxy.domain.suffix}/hybris/oauth2/v2/token</oAuth2ServiceUri>
