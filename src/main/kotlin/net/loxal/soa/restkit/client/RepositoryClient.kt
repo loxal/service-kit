@@ -4,7 +4,7 @@
 
 package net.loxal.soa.restkit.client
 
-import net.loxal.soa.restkit.model.common.AccessToken
+import net.loxal.soa.restkit.model.common.Authorization
 import org.springframework.beans.factory.annotation.Value
 import java.net.URI
 import java.util.Properties
@@ -59,7 +59,7 @@ class RepositoryClient<T> : RestClient<T>() {
     companion object {
         public val clientId: String
         val INFIX_PATH: String = "data"
-        var accessToken = AccessToken()
+        var authorization = Authorization()
         private val properties = Properties()
         private val tokenRefresher: ScheduledExecutorService = Executors.newScheduledThreadPool(1)
 
@@ -71,20 +71,20 @@ class RepositoryClient<T> : RestClient<T>() {
         }
 
         private final fun refreshToken() = Runnable {
-            val newToken: AccessToken
+            val newAuthorization: Authorization
             //            do {
-            newToken = retrieveToken()
-            //            } while (newToken.access_token.isEmpty())
-            accessToken = newToken
+            newAuthorization = authorize()
+            //            } while (newAuthorization.access_token.isEmpty())
+            authorization = newAuthorization
 
-            RestClient.LOG.info("A new accessToken ${accessToken.access_token} has been fetched")
-            println("A new accessToken ${accessToken.toString()} ${accessToken} ${accessToken.access_token} has been fetched")
+            RestClient.LOG.info("A new token ${authorization.access_token} has been fetched")
+            println("A new token ${authorization.access_token} has been fetched")
         }
 
-        final fun retrieveToken(): AccessToken {
+        final fun authorize(): Authorization {
             val tokenRequestBody = MultivaluedHashMap<String, String>()
             tokenRequestBody.putSingle("grant_type", "client_credentials")
-            tokenRequestBody.putSingle("scope", "loxal.some_scope")
+            tokenRequestBody.putSingle("scope", "")
             tokenRequestBody.putSingle("client_id", clientId)
             tokenRequestBody.putSingle("client_secret", properties.getProperty("app.clientSecret"))
 
@@ -94,7 +94,7 @@ class RepositoryClient<T> : RestClient<T>() {
                     .request()
                     .post(Entity.form(tokenRequestForm))
 
-            return accessToken.readEntity(javaClass<AccessToken>())
+            return accessToken.readEntity(javaClass<Authorization>())
         }
     }
 }

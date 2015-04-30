@@ -18,7 +18,7 @@ class RepositoryClientIT : AbstractEndpointTest() {
 
     Test
     public fun retrieveToken() {
-        val token = RepositoryClient.retrieveToken()
+        val token = RepositoryClient.authorize()
 
         assertEquals(32, token.access_token.length())
         assertEquals(3600, token.expires_in)

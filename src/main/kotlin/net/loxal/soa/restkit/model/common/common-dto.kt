@@ -45,7 +45,7 @@ data class ErrorDetail private() {
     var message: String = ""
 }
 
-data class AccessToken () {
+data class Authorization () {
     var access_token: String = ""
     var expires_in: Int = 0
     var token_type: String = ""
