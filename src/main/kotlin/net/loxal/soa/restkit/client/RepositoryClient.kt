@@ -81,7 +81,7 @@ class RepositoryClient<T> : RestClient<T>() {
             println("A new accessToken ${accessToken.toString()} ${accessToken} ${accessToken.access_token} has been fetched")
         }
 
-        private final fun retrieveToken(): AccessToken {
+        final fun retrieveToken(): AccessToken {
             val tokenRequestBody = MultivaluedHashMap<String, String>()
             tokenRequestBody.putSingle("grant_type", "client_credentials")
             tokenRequestBody.putSingle("scope", "loxal.some_scope")
