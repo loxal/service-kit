@@ -8,6 +8,9 @@ import net.loxal.soa.restkit.model.common.AccessToken
 import org.springframework.beans.factory.annotation.Value
 import java.net.URI
 import java.util.Properties
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.TimeUnit
 import javax.annotation.ManagedBean
 import javax.ws.rs.client.Entity
 import javax.ws.rs.client.WebTarget
@@ -22,8 +25,6 @@ class RepositoryClient<T> : RestClient<T>() {
     private val repositoryServiceProxyUri: URI = URI.create("")
     Value("\${tenant}")
     private val tenant: String = ""
-
-    private val token: String = ""
 
     init {
         RestClient.LOG.info("repositoryServiceUri: ${repositoryServiceUri}")
@@ -58,14 +59,29 @@ class RepositoryClient<T> : RestClient<T>() {
     companion object {
         public val clientId: String
         val INFIX_PATH: String = "data"
+        var accessToken = AccessToken()
         private val properties = Properties()
+        private val tokenRefresher: ScheduledExecutorService = Executors.newScheduledThreadPool(1)
 
         init {
             properties.load(javaClass<RepositoryClient<Any>>().getResourceAsStream("/local.properties"))
             clientId = properties.getProperty("app.clientId")
+
+            tokenRefresher.scheduleAtFixedRate(refreshToken(), 0, 3500, TimeUnit.SECONDS)
         }
 
-        final fun retrieveToken(): AccessToken {
+        private final fun refreshToken() = Runnable {
+            val newToken: AccessToken
+            //            do {
+            newToken = retrieveToken()
+            //            } while (newToken.access_token.isEmpty())
+            accessToken = newToken
+
+            RestClient.LOG.info("A new accessToken ${accessToken.access_token} has been fetched")
+            println("A new accessToken ${accessToken.toString()} ${accessToken} ${accessToken.access_token} has been fetched")
+        }
+
+        private final fun retrieveToken(): AccessToken {
             val tokenRequestBody = MultivaluedHashMap<String, String>()
             tokenRequestBody.putSingle("grant_type", "client_credentials")
             tokenRequestBody.putSingle("scope", "loxal.some_scope")

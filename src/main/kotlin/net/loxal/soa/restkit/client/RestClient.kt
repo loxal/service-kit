@@ -16,7 +16,7 @@ abstract class RestClient<out T> protected() {
 
     fun targetTenant(webTarget: WebTarget): Invocation.Builder = webTarget.request()
 
-    fun applyToken(request: Invocation.Builder): Invocation.Builder = request.header(HttpHeaders.AUTHORIZATION, "Bearer ${RepositoryClient.retrieveToken().access_token}")
+    fun applyToken(request: Invocation.Builder): Invocation.Builder = request.header(HttpHeaders.AUTHORIZATION, "Bearer ${RepositoryClient.accessToken.access_token}")
 
     fun authorizeRequest(target: WebTarget): Invocation.Builder = applyToken(targetTenant(target))
 
