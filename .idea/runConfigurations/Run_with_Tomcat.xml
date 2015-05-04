@@ -2,7 +2,7 @@
   <configuration default="false" name="Run with Tomcat" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.x" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="">
     <option name="OPEN_IN_BROWSER" value="false" />
     <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8200" />
-    <option name="COMMON_VM_ARGUMENTS" value="-Djava.awt.headless=true -Duser.timezone=GMT -Dfile.encoding=UTF-8 -Xmx256m " />
+    <option name="COMMON_VM_ARGUMENTS" value="-Djava.awt.headless=true -Duser.timezone=GMT -Dfile.encoding=UTF-8 -Xmx512m " />
     <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
     <option name="UPDATING_POLICY" value="restart-server" />
     <deployment>
