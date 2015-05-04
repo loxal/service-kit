@@ -6,10 +6,10 @@ package net.loxal.soa.restkit.endpoint
 
 import net.loxal.soa.restkit.filter.AccessControlFilter
 import org.junit.Test
+import org.slf4j.LoggerFactory
 import java.io.IOException
 import java.net.URI
 import java.util.Properties
-import java.util.logging.Logger
 import javax.ws.rs.client.ClientBuilder
 import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.MediaType
@@ -29,7 +29,7 @@ abstract class AbstractEndpointTest {
     }
 
     companion object {
-        val LOG = Logger.getGlobal()
+        val LOG = LoggerFactory.getLogger(javaClass<AbstractEndpointTest>())
         val NON_EXISTENT: String = "non-existent"
         val SERVICE_TARGET: String
         private val client = ClientBuilder.newClient()
@@ -54,7 +54,7 @@ abstract class AbstractEndpointTest {
             try {
                 properties.load(classLoader.getResourceAsStream("local.properties"))
             } catch (e: IOException) {
-                LOG.severe("Impossible to load property file. \n ${e.getMessage()}")
+                LOG.error("Impossible to load property file. \n ${e.getMessage()}")
             }
 
             SERVICE_TARGET = properties.getProperty("deploymentTarget")

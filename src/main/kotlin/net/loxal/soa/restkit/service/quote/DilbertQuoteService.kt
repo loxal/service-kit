@@ -8,10 +8,10 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import net.loxal.soa.restkit.endpoint.Endpoint
 import net.loxal.soa.restkit.model.dilbert.Quote
+import org.slf4j.LoggerFactory
 import java.io.InputStreamReader
 import java.util.Random
 import java.util.concurrent.TimeUnit
-import java.util.logging.Logger
 import javax.servlet.http.HttpServletRequest
 import javax.ws.rs.GET
 import javax.ws.rs.Path
@@ -82,7 +82,7 @@ class DilbertQuoteService : Endpoint() {
     }
 
     companion object {
-        private val LOG = Logger.getGlobal()
+        private val LOG = LoggerFactory.getLogger(javaClass<DilbertQuoteService>())
 
         private data class Quotes : TypeReference<List<Quote>>()
 

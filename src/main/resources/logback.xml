@@ -4,9 +4,11 @@
   -->
 
 <configuration>
+    <property name="PATTERN" value="%d{HH:mm:ss.SSS} %-5level %msg%n"/>
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>${PATTERN}</pattern>
         </encoder>
     </appender>
 

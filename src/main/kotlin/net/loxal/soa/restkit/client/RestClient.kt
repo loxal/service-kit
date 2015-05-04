@@ -4,7 +4,7 @@
 
 package net.loxal.soa.restkit.client
 
-import java.util.logging.Logger
+import org.slf4j.LoggerFactory
 import javax.ws.rs.client.ClientBuilder
 import javax.ws.rs.client.Entity
 import javax.ws.rs.client.Invocation
@@ -29,7 +29,7 @@ abstract class RestClient<out T> protected() {
     abstract fun put(json: Entity<in T>, id: String): Response
 
     companion object {
-        val LOG = Logger.getGlobal()
+        val LOG = LoggerFactory.getLogger(javaClass<RestClient<Any>>())
         val CLIENT = ClientBuilder.newClient()
     }
 }

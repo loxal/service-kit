@@ -6,8 +6,8 @@ package net.loxal.soa.restkit.service.quote
 
 import net.loxal.soa.restkit.endpoint.Endpoint
 import net.loxal.soa.restkit.model.whoami.Host
+import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit
-import java.util.logging.Logger
 import javax.servlet.http.HttpServletRequest
 import javax.ws.rs.GET
 import javax.ws.rs.Path
@@ -31,7 +31,7 @@ class WhoamiService : Endpoint() {
     }
 
     companion object {
-        private val LOG = Logger.getGlobal()
+        private val LOG = LoggerFactory.getLogger(javaClass<WhoamiService>())
         val RESOURCE_PATH = "who-am-i"
     }
 }

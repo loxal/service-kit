@@ -72,13 +72,10 @@ class RepositoryClient<T> : RestClient<T>() {
 
         private final fun refreshToken() = Runnable {
             val newAuthorization: Authorization
-            //            do {
             newAuthorization = authorize()
-            //            } while (newAuthorization.access_token.isEmpty())
             authorization = newAuthorization
 
             RestClient.LOG.info("A new token ${authorization.access_token} has been fetched")
-            println("A new token ${authorization.access_token} has been fetched")
         }
 
         final fun authorize(): Authorization {

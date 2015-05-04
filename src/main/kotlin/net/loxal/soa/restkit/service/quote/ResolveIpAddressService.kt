@@ -7,10 +7,11 @@ package net.loxal.soa.restkit.service.quote
 import net.loxal.soa.restkit.endpoint.Endpoint
 import net.loxal.soa.restkit.model.common.ErrorMessage
 import net.loxal.soa.restkit.model.whoami.Host
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.net.InetAddress
 import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
-import java.util.logging.Logger
 import javax.ws.rs.GET
 import javax.ws.rs.Path
 import javax.ws.rs.QueryParam
@@ -39,13 +40,13 @@ class ResolveIpAddressService : Endpoint() {
             val errorMessage = ErrorMessage.create(errorMsg)
 
             asyncResponse.resume(Response.serverError().entity(errorMessage).build())
-            LOG.severe(errorMsg)
+            LOG.error(errorMsg)
         }
     }
 
     companion object {
         val HOST_NAME_PARAM: String = "hostName"
-        protected val LOG: Logger = Logger.getGlobal()
+        protected val LOG: Logger = LoggerFactory.getLogger(javaClass<ResolveIpAddressService>())
         val RESOURCE_PATH = "resolve-ip-address"
     }
 }
