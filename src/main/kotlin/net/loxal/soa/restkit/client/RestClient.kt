@@ -12,7 +12,7 @@ import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.HttpHeaders
 import javax.ws.rs.core.Response
 
-abstract class RestClient<out T> protected() {
+abstract class RestClient<out T> protected constructor() {
 
     fun targetTenant(webTarget: WebTarget): Invocation.Builder = webTarget.request()
 

@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory
 import java.text.MessageFormat
 import java.util.regex.Pattern
 
-abstract class Endpoint protected() {
+abstract class Endpoint protected constructor() {
     companion object {
         public val URI_PATH_SEPARATOR: String = "/"
         val ASYNC_RESPONSE_TIMEOUT: Int = 3

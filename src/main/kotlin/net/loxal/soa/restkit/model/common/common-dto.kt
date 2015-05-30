@@ -14,7 +14,7 @@ import kotlin.platform.platformStatic
 /**
  * Detailed error message used in response to provide all errors triggered by a request.
  */
-data class ErrorMessage private() {
+data class ErrorMessage private constructor() {
     NotNull Pattern(regexp = TYPE_REGEXP_PATTERN)
     var type: String? = Response.Status.BAD_REQUEST.getReasonPhrase()
     NotNull
@@ -37,7 +37,7 @@ data class ErrorMessage private() {
     }
 }
 
-data class ErrorDetail private() {
+data class ErrorDetail private constructor() {
     var field: String = ""
     NotNull
     Pattern(regexp = ErrorMessage.TYPE_REGEXP_PATTERN)
