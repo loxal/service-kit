@@ -23,7 +23,7 @@
     <properties>
         <tomcat.version>8.0.23</tomcat.version>
         <jetty-maven-plugin.version>9.2.3.v20140905</jetty-maven-plugin.version>
-        <jersey.version>2.17</jersey.version>
+        <jersey.version>2.18</jersey.version>
         <spring.version>4.1.6.RELEASE</spring.version>
 
         <cloudFoundry.subdomain>prod</cloudFoundry.subdomain>
@@ -350,14 +350,6 @@
                     <retainNumberOfBuilds>2</retainNumberOfBuilds>
                     <memory>512</memory>
                     <trustSelfSignedCerts>true</trustSelfSignedCerts>
-                    <services>
-                        <service>
-                            <name>log-${cloudFoundry.stage}</name>
-                            <label>user-provided</label>
-                            <userProvidedCredentials/>
-                            <syslogDrainUrl>syslog://logstash${cloudFoundry.target}:5000</syslogDrainUrl>
-                        </service>
-                    </services>
                     <env>
                         <tenant>${tenant}</tenant>
                         <repositoryServiceUri>${repositoryServiceUri}</repositoryServiceUri>
