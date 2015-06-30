@@ -19,15 +19,15 @@ import javax.ws.rs.core.MultivaluedHashMap
 
 ManagedBean
 class RepositoryClient<T> : RestClient<T>() {
-    Value("\${repositoryServiceUri}")
-    private val repositoryServiceUri: URI = URI.create("")
+    Value("\${repositoryServiceUrl}")
+    private val repositoryServiceUrl: URI = URI.create("")
     Value("\${repositoryServiceProxyUri}")
     private val repositoryServiceProxyUri: URI = URI.create("")
     Value("\${tenant}")
     private val tenant: String = ""
 
     init {
-        RestClient.LOG.info("repositoryServiceUri: ${repositoryServiceUri}")
+        RestClient.LOG.info("repositoryServiceUrl: ${repositoryServiceUrl}")
     }
 
     override fun post(entity: Entity<in T>, id: String) =
@@ -44,7 +44,7 @@ class RepositoryClient<T> : RestClient<T>() {
 
     private fun targetDirect(entityType: String): WebTarget {
         RestClient.LOG.info("tenant: $tenant | clientId: $clientId")
-        return RestClient.CLIENT.target(repositoryServiceUri).path(tenant).path(clientId).path(INFIX_PATH).path(entityType)
+        return RestClient.CLIENT.target(repositoryServiceUrl).path(tenant).path(clientId).path(INFIX_PATH).path(entityType)
     }
 
     private fun targetProxy(entityType: String): WebTarget {

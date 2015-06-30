@@ -35,7 +35,7 @@
         <cf.domain.suffix>.cf.hybris.com</cf.domain.suffix>
         <build.number>0</build.number>
 
-        <repositoryServiceUri>http://repository-v2.${cloudFoundry.subdomain}${cloudFoundry.api}</repositoryServiceUri>
+        <repositoryServiceUrl>http://repository-v2.${cloudFoundry.subdomain}${cloudFoundry.api}</repositoryServiceUrl>
         <tenant>muctool</tenant>
         <repositoryServiceProxyUri>https://api${proxy.domain.suffix}/repository/v2</repositoryServiceProxyUri>
         <app.clientId>${yaas.app.muctool.rest-kit.clientId}</app.clientId>
@@ -316,11 +316,11 @@
                 <version>2.17</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <repositoryServiceUri>invalid</repositoryServiceUri>
+                        <repositoryServiceUrl>invalid</repositoryServiceUrl>
                     </systemPropertyVariables>
                     <environmentVariables>
                         <tenant>${tenant}</tenant>
-                        <repositoryServiceUri>${repositoryServiceUri}</repositoryServiceUri>
+                        <repositoryServiceUrl>${repositoryServiceUrl}</repositoryServiceUrl>
                     </environmentVariables>
                 </configuration>
             </plugin>
@@ -352,7 +352,7 @@
                     <trustSelfSignedCerts>true</trustSelfSignedCerts>
                     <env>
                         <tenant>${tenant}</tenant>
-                        <repositoryServiceUri>${repositoryServiceUri}</repositoryServiceUri>
+                        <repositoryServiceUrl>${repositoryServiceUrl}</repositoryServiceUrl>
                     </env>
                 </configuration>
             </plugin>
