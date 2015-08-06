@@ -24,10 +24,6 @@ class RepositoryClient<T> : RestClient<T>() {
     Value("\${tenant}")
     private val tenant: String = ""
 
-    init {
-        RestClient.LOG.info("repositoryServiceProxyUri: ${repositoryServiceProxyUri}")
-    }
-
     override fun post(entity: Entity<in T>, id: String) =
             authorizeRequest(targetProxy(explicitType(entity)).path(id)).post(entity)
 
