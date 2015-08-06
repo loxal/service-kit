@@ -23,8 +23,8 @@
     <properties>
         <tomcat.version>8.0.24</tomcat.version>
         <jetty-maven-plugin.version>9.2.3.v20140905</jetty-maven-plugin.version>
-        <jersey.version>2.19</jersey.version>
-        <spring.version>4.1.6.RELEASE</spring.version>
+        <jersey.version>2.17</jersey.version>
+        <spring.version>4.2.0.RELEASE</spring.version>
 
         <cloudFoundry.subdomain>prod</cloudFoundry.subdomain>
         <cloudFoundry.stage>v${parsedVersion.majorVersion}</cloudFoundry.stage>
@@ -35,15 +35,15 @@
         <cf.domain.suffix>.cf.hybris.com</cf.domain.suffix>
         <build.number>0</build.number>
 
-        <repositoryServiceUrl>http://repository-v2.${cloudFoundry.subdomain}${cloudFoundry.api}</repositoryServiceUrl>
         <tenant>muctool</tenant>
-        <repositoryServiceProxyUri>https://api${proxy.domain.suffix}/repository/v2</repositoryServiceProxyUri>
+        <appId>${tenant}.restkit</appId>
+        <repositoryServiceProxyUri>https://api${proxy.domain.suffix}/hybris/repository/b1</repositoryServiceProxyUri>
         <app.clientId>${yaas.app.muctool.rest-kit.clientId}</app.clientId>
         <app.clientSecret>${yaas.app.muctool.rest-kit.clientSecret}</app.clientSecret>
         <oAuth2ServiceUri>https://api${proxy.domain.suffix}/hybris/oauth2/v2/token</oAuth2ServiceUri>
 
         <deploymentTarget>http://${deployment.host.name}:${deployment.host.port}</deploymentTarget>
-        <!--<deployment.host.port>${local.jetty.port}</deployment.host.port>-->
+        <deployment.host.port>${local.jetty.port}</deployment.host.port>
         <!--<deployment.cargo.tomcat.ajp.port>8009</deployment.cargo.tomcat.ajp.port>-->
         <local.jetty.port>8200</local.jetty.port>
         <deployment.host.name>localhost</deployment.host.name>
@@ -316,11 +316,9 @@
                 <version>2.17</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <repositoryServiceUrl>invalid</repositoryServiceUrl>
                     </systemPropertyVariables>
                     <environmentVariables>
                         <tenant>${tenant}</tenant>
-                        <repositoryServiceUrl>${repositoryServiceUrl}</repositoryServiceUrl>
                     </environmentVariables>
                 </configuration>
             </plugin>
@@ -352,7 +350,6 @@
                     <trustSelfSignedCerts>true</trustSelfSignedCerts>
                     <env>
                         <tenant>${tenant}</tenant>
-                        <repositoryServiceUrl>${repositoryServiceUrl}</repositoryServiceUrl>
                     </env>
                 </configuration>
             </plugin>
