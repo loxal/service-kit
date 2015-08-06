@@ -2,10 +2,10 @@
  * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
-package net.loxal.soa.restkit.service.quote
+package net.loxal.soa.restkit.client
 
-import net.loxal.soa.restkit.client.RepositoryClient
 import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
+import net.loxal.soa.restkit.service.quote.ResolveIpAddressService
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -23,6 +23,6 @@ class RepositoryClientIT : AbstractEndpointTest() {
         assertEquals(32, token.access_token.length())
         assertEquals(3600, token.expires_in)
         assertEquals("Bearer", token.token_type)
-        assertEquals("hybris.tenant=muctool", token.scope)
+        assertEquals("hybris.tenant=muctool hybris.repository_manage", token.scope)
     }
 }

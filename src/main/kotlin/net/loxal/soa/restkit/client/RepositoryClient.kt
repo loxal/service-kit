@@ -19,15 +19,13 @@ import javax.ws.rs.core.MultivaluedHashMap
 
 ManagedBean
 class RepositoryClient<T> : RestClient<T>() {
-    Value("\${repositoryServiceUrl}")
-    private val repositoryServiceUrl: URI = URI.create("")
     Value("\${repositoryServiceProxyUri}")
     private val repositoryServiceProxyUri: URI = URI.create("")
     Value("\${tenant}")
     private val tenant: String = ""
 
     init {
-        RestClient.LOG.info("repositoryServiceUrl: ${repositoryServiceUrl}")
+        RestClient.LOG.info("repositoryServiceProxyUri: ${repositoryServiceProxyUri}")
     }
 
     override fun post(entity: Entity<in T>, id: String) =
@@ -42,14 +40,9 @@ class RepositoryClient<T> : RestClient<T>() {
     override fun get(entityType: Class<in T>, id: String) =
             authorizeRequest(targetProxy(explicitType(entityType)).path(id)).get()
 
-    private fun targetDirect(entityType: String): WebTarget {
-        RestClient.LOG.info("tenant: $tenant | clientId: $clientId")
-        return RestClient.CLIENT.target(repositoryServiceUrl).path(tenant).path(clientId).path(INFIX_PATH).path(entityType)
-    }
-
     private fun targetProxy(entityType: String): WebTarget {
-        RestClient.LOG.info("tenant: $tenant | clientId: $clientId")
-        return RestClient.CLIENT.target(repositoryServiceProxyUri).path(tenant).path(clientId).path(INFIX_PATH).path(entityType)
+        RestClient.LOG.info("tenant: $tenant | clientId: $clientId | appId: $appId")
+        return RestClient.CLIENT.target(repositoryServiceProxyUri).path(tenant).path(appId).path(INFIX_PATH).path(entityType)
     }
 
     private fun explicitType(entity: Entity<in T>) = entity.getEntity()!!.javaClass.getSimpleName().toLowerCase()
@@ -57,6 +50,7 @@ class RepositoryClient<T> : RestClient<T>() {
     private fun explicitType(entity: Class<in T>) = entity.getSimpleName().toLowerCase()
 
     companion object {
+        public val appId: String
         public val clientId: String
         val INFIX_PATH: String = "data"
         var authorization = Authorization()
@@ -66,6 +60,7 @@ class RepositoryClient<T> : RestClient<T>() {
         init {
             properties.load(javaClass<RepositoryClient<Any>>().getResourceAsStream("/local.properties"))
             clientId = properties.getProperty("app.clientId")
+            appId = properties.getProperty("appId")
 
             tokenRefresher.scheduleAtFixedRate(refreshToken(), 0, 3500, TimeUnit.SECONDS)
         }
@@ -81,7 +76,7 @@ class RepositoryClient<T> : RestClient<T>() {
         final fun authorize(): Authorization {
             val tokenRequestBody = MultivaluedHashMap<String, String>()
             tokenRequestBody.putSingle("grant_type", "client_credentials")
-            tokenRequestBody.putSingle("scope", "")
+            tokenRequestBody.putSingle("scope", "hybris.repository_manage")
             tokenRequestBody.putSingle("client_id", clientId)
             tokenRequestBody.putSingle("client_secret", properties.getProperty("app.clientSecret"))
 
