@@ -382,7 +382,7 @@
             </properties>
         </profile>
         <profile>
-            <id>aws-prod</id>
+            <id>cf-aws-prod</id>
             <properties>
                 <api.domain>api.yaas.ninja</api.domain>
                 <cloudFoundry.org>core-prod</cloudFoundry.org>
