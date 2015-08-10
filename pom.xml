@@ -31,6 +31,7 @@
         <cloudFoundry.org>hybris_${cloudFoundry.subdomain}</cloudFoundry.org>
         <cloudFoundry.api>.cf.hybris.com</cloudFoundry.api>
         <cloudFoundry.target>.cf3.hybris.com</cloudFoundry.target>
+        <cf.space>team-seven-up</cf.space>
         <proxy.domain.suffix>.yaas.io</proxy.domain.suffix>
         <cf.domain.suffix>.cf.hybris.com</cf.domain.suffix>
         <build.number>0</build.number>
@@ -342,7 +343,7 @@
                         </url>
                     </urls>
                     <org>${cloudFoundry.org}</org>
-                    <space>team-seven-up</space>
+                    <space>${cf.space}</space>
                     <path>${project.build.directory}/${project.build.finalName}.war</path>
                     <instances>2</instances>
                     <retainNumberOfBuilds>2</retainNumberOfBuilds>
@@ -378,6 +379,17 @@
             <id>local</id>
             <properties>
                 <deployment.host.port>${local.jetty.port}</deployment.host.port>
+            </properties>
+        </profile>
+        <profile>
+            <id>aws-prod</id>
+            <properties>
+                <api.domain>api.yaas.ninja</api.domain>
+                <cloudFoundry.org>core-prod</cloudFoundry.org>
+                <cf.space>sevenup</cf.space>
+                <cloudFoundry.target>.us-east.cf${proxy.domain.suffix}</cloudFoundry.target>
+                <cloudFoundry.subdomain>us-east.internal</cloudFoundry.subdomain>
+                <cf.domain.suffix>${proxy.domain.suffix}</cf.domain.suffix>
             </properties>
         </profile>
     </profiles>
