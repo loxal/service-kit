@@ -3,7 +3,7 @@
   ~ Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
   -->
 
-<html manifest="cache.appcache">
+<!--<html manifest="cache.appcache">-->
 <meta charset="UTF-8">
 <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 <title>Dilbert Quotes</title>
@@ -11,8 +11,7 @@
 <script>
     "use strict";
     function main() {
-        var quoteResourcePath = "dev-excuse";
-
+        var quoteResourcePath = "programmer";
         var configure = function () {
             var roleContainer = document.getElementById("role");
             var jsonOutput = document.getElementById("jsonOutput");
@@ -21,16 +20,19 @@
             var role = config.role;
             var quoteId = config.quoteId;
 
-            var manager = "Manager";
-            var programmer = "Programmer";
+            var enterprise = "enterprise";
+            var manager = "manager";
+            var programmer = "programmer";
+            quoteResourcePath = role;
             switch (role) {
+                case enterprise:
+                    roleContainer.textContent = " Enterprises, Inc.";
+                    break;
                 case manager:
-                    roleContainer.textContent = manager;
-                    quoteResourcePath = "manager";
+                    roleContainer.textContent = ", the Manager";
                     break;
                 case programmer:
-                    roleContainer.textContent = programmer;
-                    quoteResourcePath = "dev-excuse";
+                    roleContainer.textContent = ", the Programmer";
                     break;
             }
 
@@ -82,10 +84,11 @@
 
 <body onload="main()">
 <div id="overview">
-    <a id="jsonOutput" href="dev-excuse">JSON</a>
+    <a id="jsonOutput" href="programmer">JSON</a>
     [
-    <a href="index.html?{&quot;role&quot;: &quot;Programmer&quot;}">Programmer Quotes</a> |
-    <a href="index.html?{&quot;role&quot;: &quot;Manager&quot;}">Manager Quotes</a>
+    <a href="index.html?{&quot;role&quot;:&quot;enterprise&quot;}">Enterprise Environment Working Conditions</a> |
+    <a href="index.html?{&quot;role&quot;:&quot;manager&quot;}">Manager Quotes</a> |
+    <a href="index.html?{&quot;role&quot;:&quot;programmer&quot;}">Programmer Quotes</a>
     ]
 </div>
 <div id="quoteFrame">
@@ -93,7 +96,7 @@
         <span class="quotationMarks">“</span><span id="quote"></span><span class="quotationMarks">”</span>
     </strong>
     <br/><br/>
-    <span style="font-size: 20px; float: right;">— Dilbert, the <span id="role">Programmer</span></span>
+    <span style="font-size: 20px; float: right;">— Dilbert<span id="role">, the Programmer</span></span>
 </div>
 </body>
 

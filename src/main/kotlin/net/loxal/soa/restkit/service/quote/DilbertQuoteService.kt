@@ -28,28 +28,16 @@ Produces(DilbertQuoteService.mediaType)
 Path(DilbertQuoteService.RESOURCE_PATH)
 class DilbertQuoteService : Endpoint() {
 
-    Path(RESOURCE_PATH_DEV)
+
+    Path(RESOURCE_PATH_ENTERPRISE)
     GET
-    fun quoteDev(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    fun quoteEnterprise(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val randomQuoteIndex = random.nextInt(quotesDev.size())
-        asyncResponse.resume(Response.ok(quotesDev[randomQuoteIndex]).build())
+        val randomQuoteIndex = random.nextInt(quotesEnterprise.size())
+        asyncResponse.resume(Response.ok(quotesEnterprise[randomQuoteIndex]).build())
 
         LOG.info("${requestContext.getMethod()} for $randomQuoteIndex ${request.getContextPath()}")
-    }
-
-    Path("$RESOURCE_PATH_DEV/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
-    GET
-    fun quoteDev(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
-                        PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
-                        Suspended asyncResponse: AsyncResponse) {
-        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
-
-        val quoteIndex = quoteId - 1
-        asyncResponse.resume(Response.ok(quotesDev[quoteIndex]).build())
-
-        LOG.info("${requestContext.getMethod()} for $quoteId ${request.getContextPath()}")
     }
 
     Path(RESOURCE_PATH_MANAGER)
@@ -63,11 +51,35 @@ class DilbertQuoteService : Endpoint() {
         LOG.info("${requestContext.getMethod()} for $randomQuoteIndex ${request.getContextPath()}")
     }
 
+    Path(RESOURCE_PATH_PROGRAMMER)
+    GET
+    fun quoteProgrammer(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+
+        val randomQuoteIndex = random.nextInt(quotesProgrammer.size())
+        asyncResponse.resume(Response.ok(quotesProgrammer[randomQuoteIndex]).build())
+
+        LOG.info("${requestContext.getMethod()} for $randomQuoteIndex ${request.getContextPath()}")
+    }
+
+    Path("$RESOURCE_PATH_PROGRAMMER/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
+    GET
+    fun quoteProgrammer(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
+                        PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
+                        Suspended asyncResponse: AsyncResponse) {
+        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+
+        val quoteIndex = quoteId - 1
+        asyncResponse.resume(Response.ok(quotesProgrammer[quoteIndex]).build())
+
+        LOG.info("${requestContext.getMethod()} for $quoteId ${request.getContextPath()}")
+    }
+
     Path("$RESOURCE_PATH_MANAGER/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
     GET
     fun quoteManager(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
-                            PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
-                            Suspended asyncResponse: AsyncResponse) {
+                     PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
+                     Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val quoteIndex = quoteId - 1
@@ -76,8 +88,21 @@ class DilbertQuoteService : Endpoint() {
         LOG.info("${requestContext.getMethod()} for $quoteId ${request.getContextPath()}")
     }
 
+    Path("$RESOURCE_PATH_ENTERPRISE/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
+    GET
+    fun quoteEnterprise(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
+                            PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
+                            Suspended asyncResponse: AsyncResponse) {
+        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+
+        val quoteIndex = quoteId - 1
+        asyncResponse.resume(Response.ok(quotesEnterprise[quoteIndex]).build())
+
+        LOG.info("${requestContext.getMethod()} for $quoteId ${request.getContextPath()}")
+    }
+
     init {
-        quotesDevReader.close()
+        quotesProgrammerReader.close()
         quotesManagerReader.close()
     }
 
@@ -88,17 +113,21 @@ class DilbertQuoteService : Endpoint() {
 
         private val quotesType = Quotes()
         private val objectMapper = ObjectMapper()
-        private val quotesDevReader = InputStreamReader(javaClass.getResourceAsStream("quotes-dev.json"))
-        private val quotesManagerReader = InputStreamReader(javaClass.getResourceAsStream("quotes-manager.json"))
-        private val quoteDevData = quotesDevReader.readText()
+        private val quotesEnterpriseReader = InputStreamReader(javaClass.getResourceAsStream("quotes-dilbert-enterprise.json"))
+        private val quotesManagerReader = InputStreamReader(javaClass.getResourceAsStream("quotes-dilbert-manager.json"))
+        private val quotesProgrammerReader = InputStreamReader(javaClass.getResourceAsStream("quotes-dilbert-programmer.json"))
+        private val quoteEnterpriseData = quotesEnterpriseReader.readText()
         private val quoteManagerData = quotesManagerReader.readText()
-        val quotesDev: List<Quote> = objectMapper.readValue(quoteDevData, quotesType)
+        private val quoteProgrammerData = quotesProgrammerReader.readText()
+        val quotesEnterprise: List<Quote> = objectMapper.readValue(quoteEnterpriseData, quotesType)
         val quotesManager: List<Quote> = objectMapper.readValue(quoteManagerData, quotesType)
+        val quotesProgrammer: List<Quote> = objectMapper.readValue(quoteProgrammerData, quotesType)
         private val random: Random = Random()
 
         val RESOURCE_PATH = "dilbert-quote"
-        val RESOURCE_PATH_DEV = "dev-excuse"
+        val RESOURCE_PATH_PROGRAMMER = "programmer"
         val RESOURCE_PATH_MANAGER = "manager"
+        val RESOURCE_PATH_ENTERPRISE = "enterprise"
         val mediaType = MediaType.APPLICATION_JSON + ";charset=utf-8"
     }
 }

@@ -33,7 +33,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="rest-kit" target="1.7" />
       <module name="RESTkit" target="1.7" />
     </bytecodeTargetLevel>
   </component>
