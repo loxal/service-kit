@@ -32,10 +32,14 @@ class DilbertQuoteService : Endpoint() {
     Path(RESOURCE_PATH_ENTERPRISE)
     GET
     fun quoteEnterprise(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+        fetchRandomQuote(asyncResponse, request, requestContext, quotes = quotesEnterprise)
+    }
+
+    private fun fetchRandomQuote(asyncResponse: AsyncResponse, request: HttpServletRequest, requestContext: ContainerRequestContext, quotes: List<Quote>) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val randomQuoteIndex = random.nextInt(quotesEnterprise.size())
-        asyncResponse.resume(Response.ok(quotesEnterprise[randomQuoteIndex]).build())
+        val randomQuoteIndex = random.nextInt(quotes.size())
+        asyncResponse.resume(Response.ok(quotes[randomQuoteIndex]).build())
 
         LOG.info("${requestContext.getMethod()} for $randomQuoteIndex ${request.getContextPath()}")
     }
@@ -43,34 +47,29 @@ class DilbertQuoteService : Endpoint() {
     Path(RESOURCE_PATH_MANAGER)
     GET
     fun quoteManager(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
-        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
-
-        val randomQuoteIndex = random.nextInt(quotesManager.size())
-        asyncResponse.resume(Response.ok(quotesManager[randomQuoteIndex]).build())
-
-        LOG.info("${requestContext.getMethod()} for $randomQuoteIndex ${request.getContextPath()}")
+        fetchRandomQuote(asyncResponse, request, requestContext, quotes = quotesManager)
     }
 
     Path(RESOURCE_PATH_PROGRAMMER)
     GET
     fun quoteProgrammer(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
-        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
-
-        val randomQuoteIndex = random.nextInt(quotesProgrammer.size())
-        asyncResponse.resume(Response.ok(quotesProgrammer[randomQuoteIndex]).build())
-
-        LOG.info("${requestContext.getMethod()} for $randomQuoteIndex ${request.getContextPath()}")
+        fetchRandomQuote(asyncResponse, request, requestContext, quotes = quotesProgrammer)
     }
 
-    Path("$RESOURCE_PATH_PROGRAMMER/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
+
+    Path("$RESOURCE_PATH_ENTERPRISE/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
     GET
-    fun quoteProgrammer(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
+    fun quoteEnterprise(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
                         PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
                         Suspended asyncResponse: AsyncResponse) {
+        fetchQuoteById(asyncResponse, quoteId, request, requestContext, quotes = quotesEnterprise)
+    }
+
+    private fun fetchQuoteById(asyncResponse: AsyncResponse, quoteId: Int, request: HttpServletRequest, requestContext: ContainerRequestContext, quotes: List<Quote>) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val quoteIndex = quoteId - 1
-        asyncResponse.resume(Response.ok(quotesProgrammer[quoteIndex]).build())
+        asyncResponse.resume(Response.ok(quotes[quoteIndex]).build())
 
         LOG.info("${requestContext.getMethod()} for $quoteId ${request.getContextPath()}")
     }
@@ -80,30 +79,21 @@ class DilbertQuoteService : Endpoint() {
     fun quoteManager(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
                      PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
                      Suspended asyncResponse: AsyncResponse) {
-        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
-
-        val quoteIndex = quoteId - 1
-        asyncResponse.resume(Response.ok(quotesManager[quoteIndex]).build())
-
-        LOG.info("${requestContext.getMethod()} for $quoteId ${request.getContextPath()}")
+        fetchQuoteById(asyncResponse, quoteId, request, requestContext, quotes = quotesManager)
     }
 
-    Path("$RESOURCE_PATH_ENTERPRISE/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
+    Path("$RESOURCE_PATH_PROGRAMMER/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
     GET
-    fun quoteEnterprise(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
-                            PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
-                            Suspended asyncResponse: AsyncResponse) {
-        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
-
-        val quoteIndex = quoteId - 1
-        asyncResponse.resume(Response.ok(quotesEnterprise[quoteIndex]).build())
-
-        LOG.info("${requestContext.getMethod()} for $quoteId ${request.getContextPath()}")
+    fun quoteProgrammer(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
+                        PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
+                        Suspended asyncResponse: AsyncResponse) {
+        fetchQuoteById(asyncResponse, quoteId, request, requestContext, quotes = quotesProgrammer)
     }
 
     init {
-        quotesProgrammerReader.close()
+        quotesEnterpriseReader.close()
         quotesManagerReader.close()
+        quotesProgrammerReader.close()
     }
 
     companion object {
