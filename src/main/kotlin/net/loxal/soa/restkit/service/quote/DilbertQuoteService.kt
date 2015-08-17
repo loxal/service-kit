@@ -28,7 +28,6 @@ Produces(DilbertQuoteService.mediaType)
 Path(DilbertQuoteService.RESOURCE_PATH)
 class DilbertQuoteService : Endpoint() {
 
-
     Path(RESOURCE_PATH_ENTERPRISE)
     GET
     fun quoteEnterprise(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
@@ -55,7 +54,6 @@ class DilbertQuoteService : Endpoint() {
     fun quoteProgrammer(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
         fetchRandomQuote(asyncResponse, request, requestContext, quotes = quotesProgrammer)
     }
-
 
     Path("$RESOURCE_PATH_ENTERPRISE/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
     GET
