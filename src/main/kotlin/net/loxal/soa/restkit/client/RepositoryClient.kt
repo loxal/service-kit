@@ -72,7 +72,7 @@ class RepositoryClient<T> : RestClient<T>() {
         final fun authorize(): Authorization {
             val tokenRequestBody = MultivaluedHashMap<String, String>()
             tokenRequestBody.putSingle("grant_type", "client_credentials")
-            tokenRequestBody.putSingle("scope", "hybris.repository_manage")
+            tokenRequestBody.putSingle("scope", "hybris.document_manage hybris.document_view")
             tokenRequestBody.putSingle("client_id", clientId)
             tokenRequestBody.putSingle("client_secret", properties.getProperty("app.clientSecret"))
 
