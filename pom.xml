@@ -39,8 +39,8 @@
         <tenant>default</tenant>
         <appId>loxal.rest-kit</appId>
         <repositoryServiceProxyUri>https://api${proxy.domain.suffix}/hybris/document/b2</repositoryServiceProxyUri>
-        <app.clientId>${yaas.app.muctool.rest-kit.clientId}</app.clientId>
-        <app.clientSecret>${yaas.app.muctool.rest-kit.clientSecret}</app.clientSecret>
+        <app.clientId>${yaas.app.loxal.rest-kit.clientId}</app.clientId>
+        <app.clientSecret>${yaas.app.loxal.rest-kit.clientSecret}</app.clientSecret>
         <oAuth2ServiceUri>https://api${proxy.domain.suffix}/hybris/oauth2/b1/token</oAuth2ServiceUri>
 
         <deploymentTarget>http://${deployment.host.name}:${deployment.host.port}</deploymentTarget>
