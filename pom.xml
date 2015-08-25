@@ -26,14 +26,13 @@
         <jersey.version>2.21</jersey.version>
         <spring.version>4.2.0.RELEASE</spring.version>
 
-        <cloudFoundry.subdomain>prod</cloudFoundry.subdomain>
+        <cf.env.class>prod</cf.env.class>
         <cloudFoundry.stage>v${parsedVersion.majorVersion}</cloudFoundry.stage>
-        <cloudFoundry.org>hybris_${cloudFoundry.subdomain}</cloudFoundry.org>
-        <cloudFoundry.api>.cf.hybris.com</cloudFoundry.api>
-        <cloudFoundry.target>.cf3.hybris.com</cloudFoundry.target>
-        <cf.space>team-seven-up</cf.space>
+        <cloudFoundry.org>core-${cf.env.class}</cloudFoundry.org>
+        <cloudFoundry.target>.us-east.stage.cf${proxy.domain.suffix}</cloudFoundry.target>
+        <cf.space>sevenup</cf.space>
+        <cf.domain.suffix>${proxy.domain.suffix}</cf.domain.suffix>
         <proxy.domain.suffix>.yaas.io</proxy.domain.suffix>
-        <cf.domain.suffix>.cf.hybris.com</cf.domain.suffix>
         <build.number>0</build.number>
 
         <tenant>default</tenant>
@@ -385,11 +384,18 @@
             <id>cf-aws-prod</id>
             <properties>
                 <api.domain>api.yaas.io</api.domain>
-                <cloudFoundry.org>core-prod</cloudFoundry.org>
-                <cf.space>sevenup</cf.space>
+                <cf.env.class>prod</cf.env.class>
                 <cloudFoundry.target>.us-east.cf${proxy.domain.suffix}</cloudFoundry.target>
                 <cloudFoundry.subdomain>us-east.internal</cloudFoundry.subdomain>
-                <cf.domain.suffix>${proxy.domain.suffix}</cf.domain.suffix>
+            </properties>
+        </profile>
+        <profile>
+            <id>cf-aws-stage</id>
+            <properties>
+                <api.domain>api.stage.yaas.io</api.domain>
+                <cf.env.class>stage</cf.env.class>
+                <cloudFoundry.target>.us-east.stage.cf${proxy.domain.suffix}</cloudFoundry.target>
+                <cloudFoundry.subdomain>us-east.stage.internal</cloudFoundry.subdomain>
             </properties>
         </profile>
     </profiles>
