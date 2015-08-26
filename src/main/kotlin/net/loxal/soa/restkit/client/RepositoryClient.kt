@@ -5,24 +5,22 @@
 package net.loxal.soa.restkit.client
 
 import net.loxal.soa.restkit.model.common.Authorization
-import org.springframework.beans.factory.annotation.Value
 import java.net.URI
 import java.util.Properties
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
-import javax.annotation.ManagedBean
 import javax.ws.rs.client.Entity
 import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.Form
 import javax.ws.rs.core.MultivaluedHashMap
 
-ManagedBean
+//ManagedBean
 class RepositoryClient<T> : RestClient<T>() {
-    Value("\${repositoryServiceProxyUri}")
-    private val repositoryServiceProxyUri: URI = URI.create("")
-    Value("\${tenant}")
-    private val tenant: String = ""
+    //    Value("\${repositoryServiceProxyUri}")
+    private val repositoryServiceProxyUri: URI = URI.create("https://api.yaas.io/hybris/document/b2")
+    //    Value("\${tenant}")
+    private val tenant: String = "default"
 
     override fun post(entity: Entity<in T>, id: String) =
             authorizeRequest(targetProxy(explicitType(entity)).path(id)).post(entity)

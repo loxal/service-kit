@@ -24,7 +24,6 @@
         <tomcat.version>8.0.24</tomcat.version>
         <jetty-maven-plugin.version>9.2.3.v20140905</jetty-maven-plugin.version>
         <jersey.version>2.21</jersey.version>
-        <spring.version>4.2.0.RELEASE</spring.version>
 
         <cf.env.class>prod</cf.env.class>
         <cloudFoundry.stage>v${parsedVersion.majorVersion}</cloudFoundry.stage>
@@ -61,18 +60,6 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.ext</groupId>
-            <artifactId>jersey-spring3</artifactId>
-            <version>${jersey.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.ext</groupId>

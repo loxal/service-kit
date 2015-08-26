@@ -8,7 +8,6 @@ import net.loxal.soa.restkit.client.RepositoryClient
 import net.loxal.soa.restkit.endpoint.Endpoint
 import net.loxal.soa.restkit.model.ballot.Poll
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 import javax.validation.Valid
 import javax.validation.constraints.NotNull
 import javax.ws.rs.*
@@ -23,7 +22,6 @@ import javax.ws.rs.core.Response
 Path(PollResource.RESOURCE_PATH)
 class PollResource : Endpoint() {
 
-    Inject
     private var client: RepositoryClient<Poll> = RepositoryClient()
 
     POST

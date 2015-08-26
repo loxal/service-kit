@@ -28,15 +28,6 @@
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:/META-INF/applicationContext.xml</param-value>
-    </context-param>
-
     <servlet>
         <servlet-name>default</servlet-name>
         <!--required for GAE 1.9.17-->

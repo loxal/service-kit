@@ -7,7 +7,6 @@ package net.loxal.soa.restkit.endpoint
 import net.loxal.soa.restkit.client.RepositoryClient
 import net.loxal.soa.restkit.model.generic.Group
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 import javax.validation.Valid
 import javax.validation.constraints.NotNull
 import javax.ws.rs.*
@@ -22,7 +21,6 @@ import javax.ws.rs.core.Response
 Path(GroupResource.RESOURCE_PATH)
 class GroupResource : Endpoint() {
 
-    Inject
     private var client: RepositoryClient<Group> = RepositoryClient()
 
     Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
