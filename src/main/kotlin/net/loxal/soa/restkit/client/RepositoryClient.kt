@@ -15,12 +15,7 @@ import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.Form
 import javax.ws.rs.core.MultivaluedHashMap
 
-//ManagedBean
 class RepositoryClient<T> : RestClient<T>() {
-    //    Value("\${repositoryServiceProxyUri}")
-    private val repositoryServiceProxyUri: URI = URI.create("https://api.yaas.io/hybris/document/b2")
-    //    Value("\${tenant}")
-    private val tenant: String = "default"
 
     override fun post(entity: Entity<in T>, id: String) =
             authorizeRequest(targetProxy(explicitType(entity)).path(id)).post(entity)
@@ -36,7 +31,7 @@ class RepositoryClient<T> : RestClient<T>() {
 
     private fun targetProxy(entityType: String): WebTarget {
         RestClient.LOG.info("tenant: $tenant | clientId: $clientId | appId: $appId")
-        return RestClient.CLIENT.target(repositoryServiceProxyUri).path(tenant).path(appId).path(INFIX_PATH).path(entityType)
+        return RestClient.CLIENT.target(repositoryServiceProxyUrl).path(tenant).path(appId).path(INFIX_PATH).path(entityType)
     }
 
     private fun explicitType(entity: Entity<in T>) = entity.getEntity()!!.javaClass.getSimpleName().toLowerCase()
@@ -50,11 +45,15 @@ class RepositoryClient<T> : RestClient<T>() {
         var authorization = Authorization()
         private val properties = Properties()
         private val tokenRefresher: ScheduledExecutorService = Executors.newScheduledThreadPool(1)
+        val repositoryServiceProxyUrl: URI
+        val tenant: String
 
         init {
             properties.load(javaClass<RepositoryClient<Any>>().getResourceAsStream("/local.properties"))
             clientId = properties.getProperty("app.clientId")
             appId = properties.getProperty("appId")
+            tenant = properties.getProperty("tenant")
+            repositoryServiceProxyUrl = URI.create(properties.getProperty("repositoryServiceProxyUrl"))
 
             tokenRefresher.scheduleAtFixedRate(refreshToken(), 0, 3500, TimeUnit.SECONDS)
         }
