@@ -6,6 +6,7 @@
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
     <application>rest-kit-loxal</application>
     <version>1</version>
+    <vm>true</vm>
 
     <ssl-enabled>true</ssl-enabled>
     <sessions-enabled>false</sessions-enabled>
@@ -37,7 +38,7 @@
 
     <system-properties>
         <property name="admin.name" value="Alexander Orlov"/>
-        <property name="admin.mail" value="alexander.orlov@loxal.net"/>
+        <property name="admin.email" value="alexander.orlov@loxal.net"/>
     </system-properties>
 
     <env-variables>
