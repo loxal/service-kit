@@ -189,6 +189,20 @@
                 <version>1.9.25</version>
             </plugin>
             <plugin>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>gcloud-maven-plugin</artifactId>
+                <version>2.0.9.74.v20150814</version>
+                <configuration>
+                    <max_module_instances>default:1</max_module_instances>
+                    <version>
+                        ${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}
+                    </version>
+                    <log_level>info</log_level>
+                    <verbosity>debug</verbosity>
+                    <set_default>true</set_default>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.2</version>

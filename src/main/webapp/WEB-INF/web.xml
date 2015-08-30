@@ -20,7 +20,7 @@
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>net.loxal.soa.restkit.App</param-value>
         </init-param>
-        <load-on-startup>0</load-on-startup>
+        <load-on-startup>1</load-on-startup>
         <async-supported>true</async-supported>
     </servlet>
     <servlet-mapping>
@@ -31,7 +31,7 @@
     <servlet>
         <servlet-name>default</servlet-name>
         <!--required for GAE 1.9.x-->
-        <!--<servlet-class>org.mortbay.jetty.servlet.DefaultServlet</servlet-class>-->
+        <servlet-class>org.mortbay.jetty.servlet.DefaultServlet</servlet-class>
         <init-param>
             <param-name>dirAllowed</param-name>
             <param-value>false</param-value>
