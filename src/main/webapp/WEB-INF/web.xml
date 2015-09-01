@@ -31,7 +31,7 @@
     <servlet>
         <servlet-name>default</servlet-name>
         <!--required for GAE 1.9.x-->
-        <servlet-class>org.mortbay.jetty.servlet.DefaultServlet</servlet-class>
+        <!--<servlet-class>org.mortbay.jetty.servlet.DefaultServlet</servlet-class>-->
         <init-param>
             <param-name>dirAllowed</param-name>
             <param-value>false</param-value>
