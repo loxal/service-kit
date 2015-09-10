@@ -30,5 +30,17 @@
   {
     "id": 8,
     "quote": "You receive 100 e-mails per day and 99 of them have absolutely no relevance for you."
+  },
+  {
+    "id": 9,
+    "quote": "You receive an e-mail to download a license key from a Windows share for an internally purchased application."
+  },
+  {
+    "id": 10,
+    "quote": "You need to click “Edit” in order to reply to a ticket."
+  },
+  {
+    "id": 11,
+    "quote": "You need to decide using the corporate network or to do your actual job but you cannot do both."
   }
 ]
