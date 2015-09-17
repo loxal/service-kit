@@ -18,65 +18,65 @@ import javax.ws.rs.core.Context
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
-Path(GroupResource.RESOURCE_PATH)
+@Path(GroupResource.RESOURCE_PATH)
 class GroupResource : Endpoint() {
 
     private var client: RepositoryClient<Group> = RepositoryClient()
 
-    Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
-    POST
-    fun create(NotNull Valid group: Group,
-               PathParam(Endpoint.ID_PATH_PARAM) id: String,
-               Context requestContext: ContainerRequestContext,
-               Suspended asyncResponse: AsyncResponse) {
+    @Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
+    @POST
+    fun create(@NotNull @Valid group: Group,
+               @PathParam(Endpoint.ID_PATH_PARAM) id: String,
+               @Context requestContext: ContainerRequestContext,
+               @Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val response = client.post(Entity.json<Group>(group), id = id)
-        val entityLocation = requestContext.getUriInfo().getRequestUri()
+        val entityLocation = requestContext.uriInfo.requestUri
 
         asyncResponse.resume(Response.fromResponse(response).location(entityLocation).build())
-        Endpoint.LOG.info(requestContext.getMethod())
+        Endpoint.LOG.info(requestContext.method)
     }
 
-    Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
-    DELETE
-    fun delete(NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    @Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
+    @DELETE
+    fun delete(@NotNull @PathParam(Endpoint.ID_PATH_PARAM) id: String, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val response = client.delete(javaClass<Group>(), id)
+        val response = client.delete(Group::class.java, id)
 
         asyncResponse.resume(Response
-                .status(response.getStatus())
+                .status(response.status)
                 .type(MediaType.APPLICATION_JSON_TYPE)
-                .entity(response.readEntity(javaClass<String>()))
+                .entity(response.readEntity(String::class.java))
                 .build())
-        Endpoint.LOG.info(requestContext.getMethod())
+        Endpoint.LOG.info(requestContext.method)
     }
 
-    Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
-    GET
-    fun retrieve(NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    @Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
+    @GET
+    fun retrieve(@NotNull @PathParam(Endpoint.ID_PATH_PARAM) id: String, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val response = client.get(javaClass<Group>(), id)
+        val response = client.get(Group::class.java, id)
 
         asyncResponse.resume(Response
-                .status(response.getStatus())
-                .type(response.getMediaType())
-                .entity(response.readEntity(javaClass<String>()))
+                .status(response.status)
+                .type(response.mediaType)
+                .entity(response.readEntity(String::class.java))
                 .build())
-        Endpoint.LOG.info(requestContext.getMethod())
+        Endpoint.LOG.info(requestContext.method)
     }
 
-    Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
-    PUT
-    fun update(NotNull Valid group: Group, NotNull PathParam(Endpoint.ID_PATH_PARAM) id: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    @Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
+    @PUT
+    fun update(@NotNull @Valid group: Group, @NotNull @PathParam(Endpoint.ID_PATH_PARAM) id: String, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val response = client.put(Entity.json<Group>(group), id)
 
         asyncResponse.resume(Response.fromResponse(response).build())
-        Endpoint.LOG.info(requestContext.getMethod())
+        Endpoint.LOG.info(requestContext.method)
     }
 
     companion object {

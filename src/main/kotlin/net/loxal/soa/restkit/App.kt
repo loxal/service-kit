@@ -8,6 +8,6 @@ import org.glassfish.jersey.server.ResourceConfig
 
 class App : ResourceConfig() {
     init {
-        packages(javaClass.getPackage().getName())
+        packages(javaClass.`package`.name)
     }
 }

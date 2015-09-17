@@ -7,8 +7,7 @@ package net.loxal.soa.restkit.endpoint
 import net.loxal.soa.restkit.model.common.ErrorMessage
 import net.loxal.soa.restkit.model.generic.Group
 import org.junit.Test
-import java.util.Arrays
-import java.util.UUID
+import java.util.*
 import javax.ws.rs.client.Entity
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
@@ -23,76 +22,76 @@ class GroupResourceIT : AbstractEndpointTest() {
         val createdEntity = AbstractEndpointTest.prepareGenericRequest(GroupResource.RESOURCE_PATH)
                 .path(UUID.randomUUID().toString())
                 .request().post(Entity.json<Group>(group))
-        assertEquals(Response.Status.CREATED.getStatusCode().toLong(), createdEntity.getStatus().toLong())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, createdEntity.getMediaType())
+        assertEquals(Response.Status.CREATED.statusCode.toLong(), createdEntity.status.toLong())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, createdEntity.mediaType)
 
         return createdEntity
     }
 
-    Test
+    @Test
     public fun createEntity() {
         val response = postEntity()
 
-        assertEquals(Response.Status.CREATED.getStatusCode().toLong(), response.getStatus().toLong())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
-        assertEquals(false, response.getLocation().getPath().endsWith("null"))
-        assertEquals(true, response.getLocation().getPath().startsWith(Endpoint.URI_PATH_SEPARATOR + GroupResource.RESOURCE_PATH))
-        assertEquals(true, response.getLocation().getSchemeSpecificPart().contains(GroupResource.RESOURCE_PATH + Endpoint.URI_PATH_SEPARATOR))
-        assertEquals(false, response.getLocation().getSchemeSpecificPart().endsWith(GroupResource.RESOURCE_PATH))
+        assertEquals(Response.Status.CREATED.statusCode.toLong(), response.status.toLong())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.mediaType)
+        assertEquals(false, response.location.path.endsWith("null"))
+        assertEquals(true, response.location.path.startsWith(Endpoint.URI_PATH_SEPARATOR + GroupResource.RESOURCE_PATH))
+        assertEquals(true, response.location.schemeSpecificPart.contains(GroupResource.RESOURCE_PATH + Endpoint.URI_PATH_SEPARATOR))
+        assertEquals(false, response.location.schemeSpecificPart.endsWith(GroupResource.RESOURCE_PATH))
     }
 
-    Test
+    @Test
     public fun deleteNonExistentEntity() {
         val existingEntity = postEntity()
 
-        val deletion = AbstractEndpointTest.prepareTarget("${existingEntity.getLocation()} ${AbstractEndpointTest.NON_EXISTENT}").request().delete()
+        val deletion = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().delete()
 
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.getMediaType())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.mediaType)
         val notFoundStatus = Response.Status.NOT_FOUND
-        assertEquals(notFoundStatus.getStatusCode().toLong(), deletion.getStatus().toLong())
+        assertEquals(notFoundStatus.statusCode.toLong(), deletion.status.toLong())
         validateError(deletion)
     }
 
-    Test
+    @Test
     public fun deleteExistingEntity() {
         val existingEntity = postEntity()
 
-        val deletion = AbstractEndpointTest.prepareTarget(existingEntity.getLocation()).request().delete()
+        val deletion = AbstractEndpointTest.prepareTarget(existingEntity.location).request().delete()
 
-        assertEquals(Response.Status.NO_CONTENT.getStatusCode().toLong(), deletion.getStatus().toLong())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.getMediaType())
+        assertEquals(Response.Status.NO_CONTENT.statusCode.toLong(), deletion.status.toLong())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.mediaType)
     }
 
-    Test
+    @Test
     public fun retrieveExistingEntity() {
         val existingEntity = postEntity()
 
-        val retrieval = AbstractEndpointTest.prepareTarget(existingEntity.getLocation()).request().get()
+        val retrieval = AbstractEndpointTest.prepareTarget(existingEntity.location).request().get()
 
-        assertEquals(Response.Status.OK.getStatusCode().toLong(), retrieval.getStatus().toLong())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.getMediaType())
-        val retrievedEntity = retrieval.readEntity<Group>(javaClass<Group>())
+        assertEquals(Response.Status.OK.statusCode.toLong(), retrieval.status.toLong())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
+        val retrievedEntity = retrieval.readEntity<Group>(Group::class.java)
         assertEquals(ENTRIES.size().toLong(), retrievedEntity.entityReferences.size().toLong())
         assertEquals(false, retrievedEntity.entityReferences.isEmpty())
     }
 
-    Test
+    @Test
     public fun retrieveNonExistentEntity() {
         val existingEntity = postEntity()
 
-        val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.getLocation()} ${AbstractEndpointTest.NON_EXISTENT}").request().get()
+        val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().get()
 
-        assertEquals(Response.Status.NOT_FOUND.getStatusCode().toLong(), retrieval.getStatus().toLong())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.getMediaType())
+        assertEquals(Response.Status.NOT_FOUND.statusCode.toLong(), retrieval.status.toLong())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
         validateError(retrieval)
     }
 
     private fun validateError(error: Response) {
-        val notFoundError = error.readEntity(javaClass<ErrorMessage>())
-        assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), notFoundError.type)
+        val notFoundError = error.readEntity(ErrorMessage::class.java)
+        assertEquals(Response.Status.BAD_REQUEST.reasonPhrase, notFoundError.type)
     }
 
-    Test
+    @Test
     public fun updateExistingEntity() {
         val existingEntity = postEntity()
 
@@ -100,27 +99,27 @@ class GroupResourceIT : AbstractEndpointTest() {
         val entries = Arrays.asList<String>("first", "second")
         val modifiedEntity = Group(updatedField, entries)
 
-        val update = AbstractEndpointTest.prepareTarget(existingEntity.getLocation()).request().put(Entity.json<Group>(modifiedEntity))
+        val update = AbstractEndpointTest.prepareTarget(existingEntity.location).request().put(Entity.json<Group>(modifiedEntity))
 
-        assertEquals(Response.Status.OK.getStatusCode().toLong(), update.getStatus().toLong())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, update.getMediaType())
+        assertEquals(Response.Status.OK.statusCode.toLong(), update.status.toLong())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, update.mediaType)
 
-        val retrievedUpdatedEntity = AbstractEndpointTest.prepareTarget(existingEntity.getLocation()).request().get()
-        val updatedEntity = retrievedUpdatedEntity.readEntity<Group>(javaClass<Group>())
+        val retrievedUpdatedEntity = AbstractEndpointTest.prepareTarget(existingEntity.location).request().get()
+        val updatedEntity = retrievedUpdatedEntity.readEntity<Group>(Group::class.java)
         assertEquals(updatedField, updatedEntity.name)
         assertEquals(entries.size().toLong(), updatedEntity.entityReferences.size().toLong())
         assertEquals(entries, updatedEntity.entityReferences)
     }
 
-    Test
+    @Test
     public fun updateNonExistentEntity() {
         val existingEntity = postEntity()
 
         val someEntity = Group("Irrelevant", listOf<String>())
-        val update = AbstractEndpointTest.prepareTarget("${existingEntity.getLocation()} ${AbstractEndpointTest.NON_EXISTENT}").request().put(Entity.json<Group>(someEntity))
+        val update = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().put(Entity.json<Group>(someEntity))
 
-        assertEquals(Response.Status.NOT_FOUND.getStatusCode().toLong(), update.getStatus().toLong())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, update.getMediaType())
+        assertEquals(Response.Status.NOT_FOUND.statusCode.toLong(), update.status.toLong())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, update.mediaType)
     }
 
     companion object {

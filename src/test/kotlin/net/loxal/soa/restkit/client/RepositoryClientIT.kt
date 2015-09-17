@@ -11,12 +11,12 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 class RepositoryClientIT : AbstractEndpointTest() {
-    Before
+    @Before
     public fun setUp() {
         AbstractEndpointTest.resourcePath = ResolveIpAddressService.RESOURCE_PATH
     }
 
-    Test
+    @Test
     public fun retrieveToken() {
         val token = RepositoryClient.authorize()
 

@@ -29,7 +29,7 @@ abstract class RestClient<out T> protected constructor() {
     abstract fun put(json: Entity<in T>, id: String): Response
 
     companion object {
-        val LOG = LoggerFactory.getLogger(javaClass<RestClient<Any>>())
+        val LOG = LoggerFactory.getLogger(RestClient::class.java)
         val CLIENT = ClientBuilder.newClient()
     }
 }

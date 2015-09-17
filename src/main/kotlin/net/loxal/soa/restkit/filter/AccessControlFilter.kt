@@ -11,11 +11,11 @@ import javax.ws.rs.container.ContainerResponseContext
 import javax.ws.rs.container.ContainerResponseFilter
 import javax.ws.rs.ext.Provider
 
-Provider
-Priority(Priorities.HEADER_DECORATOR)
+@Provider
+@Priority(Priorities.HEADER_DECORATOR)
 class AccessControlFilter : ContainerResponseFilter {
     override fun filter(requestContext: ContainerRequestContext, responseContext: ContainerResponseContext) {
-        val headers = responseContext.getHeaders()
+        val headers = responseContext.headers
 
         headers.add(allowOriginHeader, allowOriginHeaderValue)
         headers.put("Server", listOf("RESTkit v1"))

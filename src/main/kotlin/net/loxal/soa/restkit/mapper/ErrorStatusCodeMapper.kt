@@ -15,7 +15,7 @@ import javax.ws.rs.ext.Provider
 /**
  * Maps Java exceptions to HTTP error codes.
  */
-Provider
+@Provider
 class ErrorStatusCodeMapper : ExceptionMapper<WebApplicationException> {
     override fun toResponse(exception: WebApplicationException): Response {
         var status: Response.Status? = EXCEPTION_TO_ERROR_MAPPING.get(exception.javaClass)
@@ -33,11 +33,11 @@ class ErrorStatusCodeMapper : ExceptionMapper<WebApplicationException> {
 
     companion object {
         private val EXCEPTION_TO_ERROR_MAPPING = mapOf(
-                javaClass<NotFoundException>() to Response.Status.NOT_FOUND,
-                javaClass<ParamException.PathParamException>() to Response.Status.NOT_FOUND,
-                javaClass<ForbiddenException>()to Response.Status.FORBIDDEN,
-                javaClass<InternalServerErrorException>() to Response.Status.INTERNAL_SERVER_ERROR,
-                javaClass<NotAuthorizedException>() to Response.Status.UNAUTHORIZED
+                NotFoundException::class.java to Response.Status.NOT_FOUND,
+                ParamException.PathParamException::class.java to Response.Status.NOT_FOUND,
+                ForbiddenException::class.java to Response.Status.FORBIDDEN,
+                InternalServerErrorException::class.java to Response.Status.INTERNAL_SERVER_ERROR,
+                NotAuthorizedException::class.java to Response.Status.UNAUTHORIZED
         )
     }
 }

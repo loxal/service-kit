@@ -9,58 +9,57 @@ import net.loxal.soa.restkit.endpoint.Endpoint
 import net.loxal.soa.restkit.model.ballot.Poll
 import net.loxal.soa.restkit.model.common.ErrorMessage
 import org.junit.Test
-import java.util.Arrays
-import java.util.UUID
+import java.util.*
 import javax.ws.rs.client.Entity
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 import kotlin.test.assertEquals
 
 class PollResourceIT : AbstractEndpointTest() {
-    Test
+    @Test
     fun createNewPoll() {
         val response = createEntity()
 
-        assertEquals(Response.Status.CREATED.getStatusCode(), response.getStatus())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
-        assertEquals(false, response.getLocation().getPath().endsWith("null"))
-        assertEquals(true, response.getLocation().getPath().startsWith(Endpoint.URI_PATH_SEPARATOR + PollResource.RESOURCE_PATH))
-        assertEquals(true, response.getLocation().getSchemeSpecificPart().contains(PollResource.RESOURCE_PATH + Endpoint.URI_PATH_SEPARATOR))
-        assertEquals(false, response.getLocation().getSchemeSpecificPart().endsWith(PollResource.RESOURCE_PATH))
+        assertEquals(Response.Status.CREATED.statusCode, response.status)
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.mediaType)
+        assertEquals(false, response.location.path.endsWith("null"))
+        assertEquals(true, response.location.path.startsWith(Endpoint.URI_PATH_SEPARATOR + PollResource.RESOURCE_PATH))
+        assertEquals(true, response.location.schemeSpecificPart.contains(PollResource.RESOURCE_PATH + Endpoint.URI_PATH_SEPARATOR))
+        assertEquals(false, response.location.schemeSpecificPart.endsWith(PollResource.RESOURCE_PATH))
     }
 
-    Test
+    @Test
     public fun deleteNonExistentPoll() {
         val existingEntity = createEntity()
 
-        val response = AbstractEndpointTest.prepareTarget("${existingEntity.getLocation()} ${AbstractEndpointTest.NON_EXISTENT}").request().delete()
+        val response = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().delete()
 
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.mediaType)
         val notFoundStatus = Response.Status.NOT_FOUND
-        assertEquals(notFoundStatus.getStatusCode(), response.getStatus())
-        val errorMessage = response.readEntity(javaClass<ErrorMessage>())
-        assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), errorMessage.type)
+        assertEquals(notFoundStatus.statusCode, response.status)
+        val errorMessage = response.readEntity(ErrorMessage::class.java)
+        assertEquals(Response.Status.BAD_REQUEST.reasonPhrase, errorMessage.type)
     }
 
-    Test
+    @Test
     public fun deleteExistingPoll() {
         val existingPoll = createEntity()
 
-        val deletion = AbstractEndpointTest.prepareTarget(existingPoll.getLocation()).request().delete()
+        val deletion = AbstractEndpointTest.prepareTarget(existingPoll.location).request().delete()
 
-        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), deletion.getStatus())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.getMediaType())
+        assertEquals(Response.Status.NO_CONTENT.statusCode, deletion.status)
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.mediaType)
     }
 
-    Test
+    @Test
     public fun retrieveExistingPoll() {
         val existingPoll = createEntity()
 
-        val retrieval = AbstractEndpointTest.prepareTarget(existingPoll.getLocation()).request().get()
+        val retrieval = AbstractEndpointTest.prepareTarget(existingPoll.location).request().get()
 
-        assertEquals(Response.Status.OK.getStatusCode(), retrieval.getStatus())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.getMediaType())
-        val retrievedPoll = retrieval.readEntity<net.loxal.soa.restkit.model.ballot.Poll>(javaClass<Poll>())
+        assertEquals(Response.Status.OK.statusCode, retrieval.status)
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
+        val retrievedPoll = retrieval.readEntity<net.loxal.soa.restkit.model.ballot.Poll>(Poll::class.java)
         assertEquals(POLL_QUESTION, retrievedPoll.question)
         assertEquals(POLL_ANSWERS, retrievedPoll.answers)
         assertEquals(2, retrievedPoll.answers.size())
@@ -68,20 +67,20 @@ class PollResourceIT : AbstractEndpointTest() {
         assertEquals("No", retrievedPoll.answers.get(1))
     }
 
-    Test
+    @Test
     public fun retrieveNonExistentPoll() {
         val existingEntity = createEntity()
 
-        val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.getLocation()} ${AbstractEndpointTest.NON_EXISTENT}").request().get()
+        val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().get()
 
 
-        assertEquals(Response.Status.NOT_FOUND.getStatusCode(), retrieval.getStatus())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.getMediaType())
-        val notFoundError = retrieval.readEntity(javaClass<ErrorMessage>())
-        assertEquals(Response.Status.BAD_REQUEST.getReasonPhrase(), notFoundError.type)
+        assertEquals(Response.Status.NOT_FOUND.statusCode, retrieval.status)
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
+        val notFoundError = retrieval.readEntity(ErrorMessage::class.java)
+        assertEquals(Response.Status.BAD_REQUEST.reasonPhrase, notFoundError.type)
     }
 
-    Test
+    @Test
     public fun updateExistingPoll() {
         val existingPoll = createEntity()
 
@@ -93,13 +92,13 @@ class PollResourceIT : AbstractEndpointTest() {
 
         val modifiedPoll = Poll(newQuestion, newAnswerOptions)
 
-        val update = AbstractEndpointTest.prepareTarget(existingPoll.getLocation()).request().put(Entity.json<Poll>(modifiedPoll))
+        val update = AbstractEndpointTest.prepareTarget(existingPoll.location).request().put(Entity.json<Poll>(modifiedPoll))
 
-        assertEquals(Response.Status.OK.getStatusCode(), update.getStatus())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, update.getMediaType())
+        assertEquals(Response.Status.OK.statusCode, update.status)
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, update.mediaType)
 
-        val retrievedUpdatedPoll = AbstractEndpointTest.prepareTarget(existingPoll.getLocation()).request().get()
-        val updatedPoll = retrievedUpdatedPoll.readEntity<net.loxal.soa.restkit.model.ballot.Poll>(javaClass<Poll>())
+        val retrievedUpdatedPoll = AbstractEndpointTest.prepareTarget(existingPoll.location).request().get()
+        val updatedPoll = retrievedUpdatedPoll.readEntity<net.loxal.soa.restkit.model.ballot.Poll>(Poll::class.java)
         assertEquals(newQuestion, updatedPoll.question)
         assertEquals(newAnswerOptions.size().toInt(), updatedPoll.answers.size().toInt())
         assertEquals(firstAnswerOption, updatedPoll.answers.get(0))
@@ -107,15 +106,15 @@ class PollResourceIT : AbstractEndpointTest() {
         assertEquals(thirdAnswerOption, updatedPoll.answers.get(2))
     }
 
-    Test
+    @Test
     public fun updateNonExistentPoll() {
         val existingEntity = createEntity()
 
         val somePoll = Poll("Irrelevant", listOf<String>())
-        val update = AbstractEndpointTest.prepareTarget("${existingEntity.getLocation()} ${AbstractEndpointTest.NON_EXISTENT}").request().put(Entity.json<Poll>(somePoll))
+        val update = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().put(Entity.json<Poll>(somePoll))
 
-        assertEquals(Response.Status.NOT_FOUND.getStatusCode(), update.getStatus())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, update.getMediaType())
+        assertEquals(Response.Status.NOT_FOUND.statusCode, update.status)
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, update.mediaType)
     }
 
     companion object {
@@ -126,8 +125,8 @@ class PollResourceIT : AbstractEndpointTest() {
             val createdPoll = AbstractEndpointTest.prepareGenericRequest(PollResource.RESOURCE_PATH)
                     .path(id).request()
                     .post(Entity.json<Poll>(poll))
-            assertEquals(Response.Status.CREATED.getStatusCode(), createdPoll.getStatus())
-            assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.getMediaType())
+            assertEquals(Response.Status.CREATED.statusCode, createdPoll.status)
+            assertEquals(MediaType.APPLICATION_JSON_TYPE, createdPoll.mediaType)
 
             return createdPoll
         }

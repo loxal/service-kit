@@ -19,39 +19,39 @@ class DilbertQuoteServiceIT : AbstractEndpointTest() {
     private val RESOURCE_PATH_MANAGER = "${DilbertQuoteService.RESOURCE_PATH}/${DilbertQuoteService.RESOURCE_PATH_MANAGER}"
     private val RESOURCE_PATH_ENTERPRISE = "${DilbertQuoteService.RESOURCE_PATH}/${DilbertQuoteService.RESOURCE_PATH_ENTERPRISE}"
 
-    Before
+    @Before
     public fun setUp() {
         AbstractEndpointTest.resourcePath = RESOURCE_PATH_PROGRAMMER
     }
 
-    Test
+    @Test
     public fun getEnterpriseQuote(): Unit = retrieveSingleQuote(RESOURCE_PATH_ENTERPRISE)
 
-    Test
+    @Test
     public fun getEnterpriseQuoteViaId(): Unit =
             retrieveSpecificQuote(resource = RESOURCE_PATH_ENTERPRISE, quotes = DilbertQuoteService.quotesEnterprise)
 
-    Test
+    @Test
     public fun getProgrammerQuote(): Unit = retrieveSingleQuote(RESOURCE_PATH_PROGRAMMER)
 
-    Test
+    @Test
     public fun getProgrammerQuoteViaId(): Unit =
             retrieveSpecificQuote(resource = RESOURCE_PATH_PROGRAMMER, quotes = DilbertQuoteService.quotesProgrammer)
 
-    Test
+    @Test
     public fun getManagerQuote(): Unit = retrieveSingleQuote(RESOURCE_PATH_MANAGER)
 
 
-    Test
+    @Test
     public fun getManagerQuoteViaId(): Unit =
             retrieveSpecificQuote(resource = RESOURCE_PATH_MANAGER, quotes = DilbertQuoteService.quotesManager)
 
     private fun retrieveSingleQuote(resource: String) {
         val response = AbstractEndpointTest.prepareGenericRequest(resource).request().get()
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
-        assertEquals(DilbertQuoteService.mediaType, response.getMediaType().toString())
+        assertEquals(Response.Status.OK.statusCode, response.status)
+        assertEquals(DilbertQuoteService.mediaType, response.mediaType.toString())
 
-        val quote = response.readEntity(javaClass<Quote>())
+        val quote = response.readEntity(Quote::class.java)
         assertNotNull(quote.id)
         assertTrue(quote.id is Int)
         assertNotNull(quote.quote)
@@ -62,10 +62,10 @@ class DilbertQuoteServiceIT : AbstractEndpointTest() {
         val quoteId = 5
         val response = AbstractEndpointTest.prepareGenericRequest(resource)
                 .path(quoteId.toString()).request().get()
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
-        assertEquals(DilbertQuoteService.mediaType, response.getMediaType().toString())
+        assertEquals(Response.Status.OK.statusCode, response.status)
+        assertEquals(DilbertQuoteService.mediaType, response.mediaType.toString())
 
-        val quote = response.readEntity(javaClass<Quote>())
+        val quote = response.readEntity(Quote::class.java)
         val quoteIndex = quoteId - 1
         assertEquals(quotes[quoteIndex], quote)
     }

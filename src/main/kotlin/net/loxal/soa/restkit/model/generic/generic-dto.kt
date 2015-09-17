@@ -10,9 +10,9 @@ import javax.validation.constraints.NotNull
  * A group of entity references with a name as their description.
  */
 class Group(
-        NotNull var name: String = "",
+        @NotNull var name: String = "",
         /**
          * URI list
          */
-        NotNull var entityReferences: List<String> = arrayListOf()
+        @NotNull var entityReferences: List<String> = arrayListOf()
 )

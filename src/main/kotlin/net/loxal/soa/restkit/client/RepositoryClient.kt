@@ -6,7 +6,7 @@ package net.loxal.soa.restkit.client
 
 import net.loxal.soa.restkit.model.common.Authorization
 import java.net.URI
-import java.util.Properties
+import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
@@ -34,9 +34,9 @@ class RepositoryClient<T> : RestClient<T>() {
         return RestClient.CLIENT.target(repositoryServiceProxyUrl).path(tenant).path(appId).path(INFIX_PATH).path(entityType)
     }
 
-    private fun explicitType(entity: Entity<in T>) = entity.getEntity()!!.javaClass.getSimpleName().toLowerCase()
+    private fun explicitType(entity: Entity<in T>) = entity.entity!!.javaClass.simpleName.toLowerCase()
 
-    private fun explicitType(entity: Class<in T>) = entity.getSimpleName().toLowerCase()
+    private fun explicitType(entity: Class<in T>) = entity.simpleName.toLowerCase()
 
     companion object {
         public val appId: String
@@ -49,7 +49,7 @@ class RepositoryClient<T> : RestClient<T>() {
         val tenant: String
 
         init {
-            properties.load(javaClass<RepositoryClient<Any>>().getResourceAsStream("/local.properties"))
+            properties.load(RepositoryClient::class.java.getResourceAsStream("/local.properties"))
             clientId = properties.getProperty("app.clientId")
             appId = properties.getProperty("appId")
             tenant = properties.getProperty("tenant")
@@ -79,7 +79,7 @@ class RepositoryClient<T> : RestClient<T>() {
                     .request()
                     .post(Entity.form(tokenRequestForm))
 
-            return accessToken.readEntity(javaClass<Authorization>())
+            return accessToken.readEntity(Authorization::class.java)
         }
     }
 }

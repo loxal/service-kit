@@ -10,7 +10,7 @@ import net.loxal.soa.restkit.endpoint.Endpoint
 import net.loxal.soa.restkit.model.dilbert.Quote
 import org.slf4j.LoggerFactory
 import java.io.InputStreamReader
-import java.util.Random
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.servlet.http.HttpServletRequest
 import javax.ws.rs.GET
@@ -24,13 +24,13 @@ import javax.ws.rs.core.Context
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
-Produces(DilbertQuoteService.mediaType)
-Path(DilbertQuoteService.RESOURCE_PATH)
+@Produces(DilbertQuoteService.mediaType)
+@Path(DilbertQuoteService.RESOURCE_PATH)
 class DilbertQuoteService : Endpoint() {
 
-    Path(RESOURCE_PATH_ENTERPRISE)
-    GET
-    fun quoteEnterprise(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    @Path(RESOURCE_PATH_ENTERPRISE)
+    @GET
+    fun quoteEnterprise(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
         fetchRandomQuote(asyncResponse, request, requestContext, quotes = quotesEnterprise)
     }
 
@@ -40,26 +40,26 @@ class DilbertQuoteService : Endpoint() {
         val randomQuoteIndex = random.nextInt(quotes.size())
         asyncResponse.resume(Response.ok(quotes[randomQuoteIndex]).build())
 
-        LOG.info("${requestContext.getMethod()} for $randomQuoteIndex ${request.getContextPath()}")
+        LOG.info("${requestContext.method} for $randomQuoteIndex ${request.contextPath}")
     }
 
-    Path(RESOURCE_PATH_MANAGER)
-    GET
-    fun quoteManager(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    @Path(RESOURCE_PATH_MANAGER)
+    @GET
+    fun quoteManager(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
         fetchRandomQuote(asyncResponse, request, requestContext, quotes = quotesManager)
     }
 
-    Path(RESOURCE_PATH_PROGRAMMER)
-    GET
-    fun quoteProgrammer(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    @Path(RESOURCE_PATH_PROGRAMMER)
+    @GET
+    fun quoteProgrammer(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
         fetchRandomQuote(asyncResponse, request, requestContext, quotes = quotesProgrammer)
     }
 
-    Path("$RESOURCE_PATH_ENTERPRISE/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
-    GET
-    fun quoteEnterprise(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
-                        PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
-                        Suspended asyncResponse: AsyncResponse) {
+    @Path("$RESOURCE_PATH_ENTERPRISE/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
+    @GET
+    fun quoteEnterprise(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
+                        @PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
+                        @Suspended asyncResponse: AsyncResponse) {
         fetchQuoteById(asyncResponse, quoteId, request, requestContext, quotes = quotesEnterprise)
     }
 
@@ -69,22 +69,22 @@ class DilbertQuoteService : Endpoint() {
         val quoteIndex = quoteId - 1
         asyncResponse.resume(Response.ok(quotes[quoteIndex]).build())
 
-        LOG.info("${requestContext.getMethod()} for $quoteId ${request.getContextPath()}")
+        LOG.info("${requestContext.method} for $quoteId ${request.contextPath}")
     }
 
-    Path("$RESOURCE_PATH_MANAGER/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
-    GET
-    fun quoteManager(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
-                     PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
-                     Suspended asyncResponse: AsyncResponse) {
+    @Path("$RESOURCE_PATH_MANAGER/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
+    @GET
+    fun quoteManager(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
+                     @PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
+                     @Suspended asyncResponse: AsyncResponse) {
         fetchQuoteById(asyncResponse, quoteId, request, requestContext, quotes = quotesManager)
     }
 
-    Path("$RESOURCE_PATH_PROGRAMMER/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
-    GET
-    fun quoteProgrammer(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext,
-                        PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
-                        Suspended asyncResponse: AsyncResponse) {
+    @Path("$RESOURCE_PATH_PROGRAMMER/${Endpoint.ID_PATH_PARAM_PLACEHOLDER}")
+    @GET
+    fun quoteProgrammer(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
+                        @PathParam(Endpoint.ID_PATH_PARAM) quoteId: Int,
+                        @Suspended asyncResponse: AsyncResponse) {
         fetchQuoteById(asyncResponse, quoteId, request, requestContext, quotes = quotesProgrammer)
     }
 
@@ -95,7 +95,7 @@ class DilbertQuoteService : Endpoint() {
     }
 
     companion object {
-        private val LOG = LoggerFactory.getLogger(javaClass<DilbertQuoteService>())
+        private val LOG = LoggerFactory.getLogger(DilbertQuoteService::class.java)
 
         private data class Quotes : TypeReference<List<Quote>>()
 

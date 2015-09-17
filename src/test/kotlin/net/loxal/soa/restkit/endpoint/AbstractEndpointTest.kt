@@ -9,7 +9,7 @@ import org.junit.Test
 import org.slf4j.LoggerFactory
 import java.io.IOException
 import java.net.URI
-import java.util.Properties
+import java.util.*
 import javax.ws.rs.client.ClientBuilder
 import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.MediaType
@@ -18,18 +18,18 @@ import kotlin.test.assertEquals
 
 abstract class AbstractEndpointTest {
 
-    Test
+    @Test
     fun nonExistentPathNotFound() {
         val response = prepareGenericRequest(resourcePath).path(NON_EXISTENT).request().get()
         LOG.info("resourcePath: $resourcePath")
 
-        assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
+        assertEquals(Response.Status.NOT_FOUND.statusCode, response.status)
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.mediaType)
         assureCorsHeaders(response)
     }
 
     companion object {
-        val LOG = LoggerFactory.getLogger(javaClass<AbstractEndpointTest>())
+        val LOG = LoggerFactory.getLogger(AbstractEndpointTest::class.java)
         val NON_EXISTENT: String = "non-existent"
         val SERVICE_TARGET: String
         private val client = ClientBuilder.newClient()
@@ -49,7 +49,7 @@ abstract class AbstractEndpointTest {
         }
 
         init {
-            val classLoader = Thread.currentThread().getContextClassLoader()
+            val classLoader = Thread.currentThread().contextClassLoader
             properties = Properties()
             try {
                 properties.load(classLoader.getResourceAsStream("local.properties"))

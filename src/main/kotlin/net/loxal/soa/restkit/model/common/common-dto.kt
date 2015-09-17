@@ -13,11 +13,11 @@ import javax.ws.rs.core.Response
  * Detailed error message used in response to provide all errors triggered by a request.
  */
 data class ErrorMessage private constructor() {
-    NotNull
-    var type: String? = Response.Status.BAD_REQUEST.getReasonPhrase()
-    NotNull
-    Min(value = 100)
-    Max(value = 599)
+    @NotNull
+    var type: String? = Response.Status.BAD_REQUEST.reasonPhrase
+    @NotNull
+    @Min(value = 100)
+    @Max(value = 599)
     var status: Int = 0
     var message: String? = ""
     var moreInfo: String = ""
@@ -35,7 +35,7 @@ data class ErrorMessage private constructor() {
 
 data class ErrorDetail private constructor() {
     var field: String = ""
-    NotNull
+    @NotNull
     var type: String = ""
     var message: String = ""
 }

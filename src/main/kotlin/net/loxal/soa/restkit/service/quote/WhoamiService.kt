@@ -17,21 +17,21 @@ import javax.ws.rs.container.Suspended
 import javax.ws.rs.core.Context
 import javax.ws.rs.core.Response
 
-Path(WhoamiService.RESOURCE_PATH)
+@Path(WhoamiService.RESOURCE_PATH)
 class WhoamiService : Endpoint() {
 
-    GET
-    fun whoAmI(Context request: HttpServletRequest, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    @GET
+    fun whoAmI(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val host = Host(request.getRemoteHost(), request.getRemoteAddr())
+        val host = Host(request.remoteHost, request.remoteAddr)
         asyncResponse.resume(Response.ok(host).build())
 
-        LOG.info(requestContext.getMethod())
+        LOG.info(requestContext.method)
     }
 
     companion object {
-        private val LOG = LoggerFactory.getLogger(javaClass<WhoamiService>())
+        private val LOG = LoggerFactory.getLogger(WhoamiService::class.java)
         val RESOURCE_PATH = "who-am-i"
     }
 }

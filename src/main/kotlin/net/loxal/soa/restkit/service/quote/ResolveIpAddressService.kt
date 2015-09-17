@@ -21,20 +21,20 @@ import javax.ws.rs.container.Suspended
 import javax.ws.rs.core.Context
 import javax.ws.rs.core.Response
 
-Path(ResolveIpAddressService.RESOURCE_PATH)
+@Path(ResolveIpAddressService.RESOURCE_PATH)
 class ResolveIpAddressService : Endpoint() {
 
-    GET
-    fun resolveIpAddress(QueryParam(HOST_NAME_PARAM) hostName: String, Context requestContext: ContainerRequestContext, Suspended asyncResponse: AsyncResponse) {
+    @GET
+    fun resolveIpAddress(@QueryParam(HOST_NAME_PARAM) hostName: String, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         try {
             val localHost = InetAddress.getByName(hostName)
 
-            val host = Host(localHost.getHostName(), localHost.getHostAddress())
+            val host = Host(localHost.hostName, localHost.hostAddress)
             asyncResponse.resume(Response.ok(host).build())
 
-            LOG.info(requestContext.getMethod())
+            LOG.info(requestContext.method)
         } catch (e: UnknownHostException) {
             val errorMsg = e.getMessage()
             val errorMessage = ErrorMessage.create(errorMsg)
@@ -46,7 +46,7 @@ class ResolveIpAddressService : Endpoint() {
 
     companion object {
         val HOST_NAME_PARAM: String = "hostName"
-        protected val LOG: Logger = LoggerFactory.getLogger(javaClass<ResolveIpAddressService>())
+        protected val LOG: Logger = LoggerFactory.getLogger(ResolveIpAddressService::class.java)
         val RESOURCE_PATH = "resolve-ip-address"
     }
 }

@@ -15,21 +15,21 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class ResolveIpAddressServiceIT : AbstractEndpointTest() {
-    Before
+    @Before
     public fun setUp() {
         AbstractEndpointTest.resourcePath = ResolveIpAddressService.RESOURCE_PATH
     }
 
-    Test
+    @Test
     public fun assureHostAddress() {
         val hostName = "localhost"
 
         val response = AbstractEndpointTest.prepareGenericRequest(ResolveIpAddressService.RESOURCE_PATH).queryParam(ResolveIpAddressService.HOST_NAME_PARAM, hostName).request().get()
 
-        assertEquals(Response.Status.OK.getStatusCode().toLong(), response.getStatus().toLong())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.getMediaType())
+        assertEquals(Response.Status.OK.statusCode.toLong(), response.status.toLong())
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.mediaType)
 
-        val host = response.readEntity<Host>(javaClass<Host>())
+        val host = response.readEntity<Host>(Host::class.java)
         assertNotNull(host.address)
         assertTrue(host.address.length() > 6 && host.address.length() < 20)
         assertEquals(hostName, host.name)
