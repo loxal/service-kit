@@ -31,10 +31,10 @@
         <cloudFoundry.target>.us-east.stage.cf${proxy.domain.suffix}</cloudFoundry.target>
         <cf.space>sevenup</cf.space>
         <cf.domain.suffix>${proxy.domain.suffix}</cf.domain.suffix>
-        <proxy.domain.suffix>.yaas.io</proxy.domain.suffix>
+        <proxy.domain.suffix>.stage.yaas.io</proxy.domain.suffix>
         <build.number>0</build.number>
 
-        <tenant>default</tenant>
+        <tenant>muctool</tenant>
         <appId>loxal.rest-kit</appId>
         <repositoryServiceProxyUrl>https://api${proxy.domain.suffix}/hybris/document/b2</repositoryServiceProxyUrl>
         <app.clientId>${yaas.app.loxal.rest-kit.clientId}</app.clientId>
