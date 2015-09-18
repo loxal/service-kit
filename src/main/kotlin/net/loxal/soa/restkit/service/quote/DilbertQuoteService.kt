@@ -101,9 +101,11 @@ class DilbertQuoteService : Endpoint() {
 
         private val quotesType = Quotes()
         private val objectMapper = ObjectMapper()
-        private val quotesEnterpriseReader = InputStreamReader(javaClass.getResourceAsStream("quotes-dilbert-enterprise.json"))
-        private val quotesManagerReader = InputStreamReader(javaClass.getResourceAsStream("quotes-dilbert-manager.json"))
-        private val quotesProgrammerReader = InputStreamReader(javaClass.getResourceAsStream("quotes-dilbert-programmer.json"))
+
+        private val quotesEnterpriseReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("quotes-dilbert-enterprise.json"))
+        private val quotesManagerReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("quotes-dilbert-manager.json"))
+        private val quotesProgrammerReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("quotes-dilbert-programmer.json"))
+
         private val quoteEnterpriseData = quotesEnterpriseReader.readText()
         private val quoteManagerData = quotesManagerReader.readText()
         private val quoteProgrammerData = quotesProgrammerReader.readText()
