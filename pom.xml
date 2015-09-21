@@ -25,12 +25,13 @@
         <jetty-maven-plugin.version>9.2.3.v20140905</jetty-maven-plugin.version>
         <jersey.version>2.21</jersey.version>
 
-        <cf.env.class>prod</cf.env.class>
-        <cloudFoundry.stage>v${parsedVersion.majorVersion}</cloudFoundry.stage>
-        <cloudFoundry.org>core-${cf.env.class}</cloudFoundry.org>
-        <cloudFoundry.target>.us-east.stage.cf${proxy.domain.suffix}</cloudFoundry.target>
+        <cf.env.class>stage</cf.env.class>
+        <cf.stage>v${parsedVersion.majorVersion}</cf.stage>
+        <cf.org>core-${cf.env.class}</cf.org>
+        <cf.target>api.us-east.stage.cf.yaas.io</cf.target>
         <cf.space>sevenup</cf.space>
-        <cf.domain.suffix>${proxy.domain.suffix}</cf.domain.suffix>
+        <cf.subdomain>us-east.stage.internal</cf.subdomain>
+        <cf.domain.suffix>.yaas.io</cf.domain.suffix>
         <proxy.domain.suffix>.stage.yaas.io</proxy.domain.suffix>
         <build.number>0</build.number>
 
@@ -46,7 +47,6 @@
         <!--<deployment.cargo.tomcat.ajp.port>8009</deployment.cargo.tomcat.ajp.port>-->
         <local.jetty.port>8200</local.jetty.port>
         <deployment.host.name>localhost</deployment.host.name>
-        <maven-compiler-plugin.optimize>false</maven-compiler-plugin.optimize>
         <maven-compiler-plugin.compilerArgument>-g:none</maven-compiler-plugin.compilerArgument>
     </properties>
 
@@ -328,20 +328,20 @@
                 <version>1.4.1.KIWI-RELEASE</version>
                 <configuration>
                     <server>hybris.CloudFoundry</server>
-                    <target>https://api${cloudFoundry.target}</target>
+                    <target>https://${cf.target}</target>
                     <buildpack>https://github.com/cloudfoundry/java-buildpack.git</buildpack>
                     <appname>
-                        ${project.artifactId}-${cloudFoundry.stage}-v${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-b${build.number}
+                        ${project.artifactId}-${cf.stage}-v${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-b${build.number}
                     </appname>
                     <urls>
                         <url>
-                            ${project.artifactId}-${cloudFoundry.stage}.${cloudFoundry.subdomain}${cf.domain.suffix}
+                            ${project.artifactId}-${cf.stage}.${cf.subdomain}${cf.domain.suffix}
                         </url>
                         <url>
-                            ${project.artifactId}-v${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-b${build.number}.${cloudFoundry.subdomain}${cf.domain.suffix}
+                            ${project.artifactId}-v${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-b${build.number}.${cf.subdomain}${cf.domain.suffix}
                         </url>
                     </urls>
-                    <org>${cloudFoundry.org}</org>
+                    <org>${cf.org}</org>
                     <space>${cf.space}</space>
                     <path>${project.build.directory}/${project.build.finalName}.war</path>
                     <instances>2</instances>
@@ -383,19 +383,14 @@
         <profile>
             <id>cf-aws-prod</id>
             <properties>
-                <api.domain>api.yaas.io</api.domain>
+                <cf.target>api.us-east.cf.yaas.io</cf.target>
                 <cf.env.class>prod</cf.env.class>
-                <cloudFoundry.target>.us-east.cf${proxy.domain.suffix}</cloudFoundry.target>
-                <cloudFoundry.subdomain>us-east.internal</cloudFoundry.subdomain>
+                <cf.subdomain>us-east.internal</cf.subdomain>
             </properties>
         </profile>
         <profile>
             <id>cf-aws-stage</id>
             <properties>
-                <api.domain>api.stage.yaas.io</api.domain>
-                <cf.env.class>stage</cf.env.class>
-                <cloudFoundry.target>.us-east.stage.cf${proxy.domain.suffix}</cloudFoundry.target>
-                <cloudFoundry.subdomain>us-east.stage.internal</cloudFoundry.subdomain>
             </properties>
         </profile>
     </profiles>
