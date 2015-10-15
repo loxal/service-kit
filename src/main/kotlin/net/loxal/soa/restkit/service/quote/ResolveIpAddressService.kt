@@ -25,7 +25,11 @@ import javax.ws.rs.core.Response
 class ResolveIpAddressService : Endpoint() {
 
     @GET
-    fun resolveIpAddress(@QueryParam(HOST_NAME_PARAM) hostName: String, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
+    fun resolveIpAddress(
+            @QueryParam(HOST_NAME_PARAM) hostName: String?,
+            @Context requestContext: ContainerRequestContext,
+            @Suspended asyncResponse: AsyncResponse
+    ) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         try {
@@ -37,7 +41,8 @@ class ResolveIpAddressService : Endpoint() {
             LOG.info(requestContext.method)
         } catch (e: UnknownHostException) {
             val errorMsg = e.getMessage()
-            val errorMessage = ErrorMessage.create(errorMsg)
+            val errorMessage = ErrorMessage(Response.Status.INTERNAL_SERVER_ERROR)
+            errorMessage.message = errorMsg
 
             asyncResponse.resume(Response.serverError().entity(errorMessage).build())
             LOG.error(errorMsg)
@@ -45,8 +50,8 @@ class ResolveIpAddressService : Endpoint() {
     }
 
     companion object {
-        val HOST_NAME_PARAM: String = "hostName"
+        const val HOST_NAME_PARAM: String = "hostName"
         protected val LOG: Logger = LoggerFactory.getLogger(ResolveIpAddressService::class.java)
-        val RESOURCE_PATH = "resolve-ip-address"
+        const val RESOURCE_PATH = "resolve-ip-address"
     }
 }

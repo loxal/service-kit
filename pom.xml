@@ -10,21 +10,23 @@
     <parent>
         <groupId>net.loxal</groupId>
         <artifactId>meta</artifactId>
-        <version>1.2.12</version>
+        <version>1.2.14</version>
     </parent>
 
     <groupId>net.loxal.soa</groupId>
     <artifactId>rest-kit</artifactId>
-    <version>1.5.4-SNAPSHOT</version>
+    <version>1.5.5-SNAPSHOT</version>
     <name>RESTkit</name>
     <packaging>war</packaging>
     <description>Microservice Toolkit</description>
 
     <properties>
-        <tomcat.version>8.0.24</tomcat.version>
-        <jetty-maven-plugin.version>9.3.4.RC0</jetty-maven-plugin.version>
-        <jersey.version>2.21.1</jersey.version>
+        <tomcat.version>8.0.28</tomcat.version>
+        <jetty-maven-plugin.version>9.3.4.v20151007</jetty-maven-plugin.version>
+        <jersey.version>2.22.1</jersey.version>
 
+        <cf.vpc>hybris.CloudFoundry</cf.vpc>
+        <cf.memory>1024</cf.memory>
         <cf.env.class>stage</cf.env.class>
         <cf.stage>v${parsedVersion.majorVersion}</cf.stage>
         <cf.org>core-${cf.env.class}</cf.org>
@@ -55,9 +57,21 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-openid</artifactId>
+            <version>4.0.2.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth</artifactId>
+            <version>2.0.7.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>oauth.signpost</groupId>
             <artifactId>signpost-core</artifactId>
-            <version>1.2</version>
+            <version>1.2.1.2</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -120,12 +134,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.9.2</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-grizzly2-http</artifactId>
             <version>${jersey.version}</version>
@@ -180,8 +188,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArguments>
                         <profile>compact1</profile>
                     </compilerArguments>
@@ -193,14 +201,15 @@
                 </configuration>
             </plugin>
             <plugin>
+                <!--compilation source/target 1.7 required-->
                 <groupId>com.google.appengine</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
-                <version>1.9.25</version>
+                <version>1.9.27</version>
             </plugin>
             <plugin>
                 <groupId>com.google.appengine</groupId>
                 <artifactId>gcloud-maven-plugin</artifactId>
-                <version>2.0.9.74.v20150814</version>
+                <version>2.0.9.79.v20150923</version>
                 <configuration>
                     <max_module_instances>default:1</max_module_instances>
                     <version>
@@ -214,7 +223,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.2</version>
                 <configuration>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                 </configuration>
@@ -275,7 +283,7 @@
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.4.14</version>
+                <version>1.4.16</version>
                 <configuration>
                     <container>
                         <containerId>tomcat8x</containerId>
@@ -322,7 +330,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.17</version>
+                <version>2.18.1</version>
                 <configuration>
                     <systemPropertyVariables>
                     </systemPropertyVariables>
@@ -334,9 +342,9 @@
             <plugin>
                 <groupId>org.cloudfoundry</groupId>
                 <artifactId>cf-maven-plugin</artifactId>
-                <version>1.4.1.KIWI-RELEASE</version>
+                <version>1.1.3</version>
                 <configuration>
-                    <server>hybris.CloudFoundry</server>
+                    <server>${cf.vpc}</server>
                     <target>https://${cf.target}</target>
                     <buildpack>https://github.com/cloudfoundry/java-buildpack.git</buildpack>
                     <appname>
@@ -353,10 +361,9 @@
                     <org>${cf.org}</org>
                     <space>${cf.space}</space>
                     <path>${project.build.directory}/${project.build.finalName}.war</path>
-                    <instances>2</instances>
-                    <retainNumberOfBuilds>2</retainNumberOfBuilds>
-                    <memory>512</memory>
-                    <trustSelfSignedCerts>true</trustSelfSignedCerts>
+                    <instances>1</instances>
+                    <memory>${cf.memory}</memory>
+                    <trustSelfSignedCerts>false</trustSelfSignedCerts>
                     <env>
                         <tenant>${tenant}</tenant>
                     </env>
@@ -387,6 +394,19 @@
             <id>local</id>
             <properties>
                 <deployment.host.port>${local.jetty.port}</deployment.host.port>
+            </properties>
+        </profile>
+        <profile>
+            <id>cf-pivotal</id>
+            <properties>
+                <cf.vpc>Cloud Foundry</cf.vpc>
+                <cf.memory>390</cf.memory>
+                <cf.org>loxal</cf.org>
+                <cf.space>production</cf.space>
+                <cf.target>api.run.pivotal.io</cf.target>
+                <cf.env.class>production</cf.env.class>
+                <cf.subdomain/>
+                <cf.domain.suffix>cfapps.io</cf.domain.suffix>
             </properties>
         </profile>
         <profile>

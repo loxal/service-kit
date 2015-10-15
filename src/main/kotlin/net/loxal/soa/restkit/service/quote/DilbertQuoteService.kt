@@ -97,7 +97,7 @@ class DilbertQuoteService : Endpoint() {
     companion object {
         private val LOG = LoggerFactory.getLogger(DilbertQuoteService::class.java)
 
-        private data class Quotes : TypeReference<List<Quote>>()
+        private class Quotes : TypeReference<List<Quote>>()
 
         private val quotesType = Quotes()
         private val objectMapper = ObjectMapper()
@@ -114,10 +114,10 @@ class DilbertQuoteService : Endpoint() {
         val quotesProgrammer: List<Quote> = objectMapper.readValue(quoteProgrammerData, quotesType)
         private val random: Random = Random()
 
-        val RESOURCE_PATH = "dilbert-quote"
-        val RESOURCE_PATH_PROGRAMMER = "programmer"
-        val RESOURCE_PATH_MANAGER = "manager"
-        val RESOURCE_PATH_ENTERPRISE = "enterprise"
-        val mediaType = MediaType.APPLICATION_JSON + ";charset=utf-8"
+        const val RESOURCE_PATH = "dilbert-quote"
+        const val RESOURCE_PATH_PROGRAMMER = "programmer"
+        const val RESOURCE_PATH_MANAGER = "manager"
+        const val RESOURCE_PATH_ENTERPRISE = "enterprise"
+        const val mediaType = MediaType.APPLICATION_JSON + ";charset=utf-8"
     }
 }

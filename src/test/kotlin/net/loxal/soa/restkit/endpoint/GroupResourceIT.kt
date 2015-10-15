@@ -22,7 +22,9 @@ class GroupResourceIT : AbstractEndpointTest() {
         val createdEntity = AbstractEndpointTest.prepareGenericRequest(GroupResource.RESOURCE_PATH)
                 .path(UUID.randomUUID().toString())
                 .request().post(Entity.json<Group>(group))
-        assertEquals(Response.Status.CREATED.statusCode.toLong(), createdEntity.status.toLong())
+
+        AbstractEndpointTest.LOG.error(createdEntity.readEntity(String::class.java))
+        assertEquals(Response.Status.CREATED.statusCode, createdEntity.status)
         assertEquals(MediaType.APPLICATION_JSON_TYPE, createdEntity.mediaType)
 
         return createdEntity
@@ -88,7 +90,7 @@ class GroupResourceIT : AbstractEndpointTest() {
 
     private fun validateError(error: Response) {
         val notFoundError = error.readEntity(ErrorMessage::class.java)
-        assertEquals(Response.Status.BAD_REQUEST.reasonPhrase, notFoundError.type)
+        assertEquals(Response.Status.BAD_REQUEST.reasonPhrase, notFoundError.reasonPhrase)
     }
 
     @Test
