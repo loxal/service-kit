@@ -7,7 +7,7 @@ package net.loxal.soa.restkit.model.ballot
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotNull
 
-data class Poll(@NotNull var question: String = "", @NotNull var answers: List<String> = arrayListOf())
+data class Poll(var question: String = "", var options: List<String> = arrayListOf(), var answers: List<Int> = arrayListOf())
 
 data class Vote(
         @NotNull var referencePoll: String = "",

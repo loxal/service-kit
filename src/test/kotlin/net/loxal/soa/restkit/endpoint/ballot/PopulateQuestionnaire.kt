@@ -37,7 +37,8 @@ class PopulateQuestionnaire : AbstractEndpointTest() {
                             "Springfield-",
                             "Shelbyville",
                             "Seinfeld"
-                    )
+                    ),
+                    listOf(0)
             )
 
             val poll2 = Poll("What is the name of the Simpsons' next door neighbor?",
@@ -45,7 +46,8 @@ class PopulateQuestionnaire : AbstractEndpointTest() {
                             "Barney Gumble",
                             "Ned Flanders-",
                             "Principal Skinner"
-                    )
+                    ),
+                    listOf(1)
             )
 
             val poll3 = Poll("Who founded the Simpsons’ town?",
@@ -53,28 +55,32 @@ class PopulateQuestionnaire : AbstractEndpointTest() {
                             "Jebadiah Springfield-",
                             "Zachariah Springfield",
                             "Springfield Manhattan"
-                    )
+                    ),
+                    listOf(0)
             )
             val poll4 = Poll("How old is Bart?",
                     listOf(
                             "10-",
                             "11",
                             "12"
-                    )
+                    ),
+                    listOf(0)
             )
             val poll5 = Poll("What is the name of the clown on Channel 6?",
                     listOf(
                             "Gabbo",
                             "Krusty-",
                             "Bonko"
-                    )
+                    ),
+                    listOf(1)
             )
             val poll6 = Poll("What is the name of Lisa’s jazz mentor?",
                     listOf(
                             "Billy Jazzman",
                             "Blind Willy Witherspoon",
                             "Bleeding Gums Murphy-"
-                    )
+                    ),
+                    listOf(2)
             )
 
             val poll7 = Poll("Who is Mr Burns’ assistant?",
@@ -82,28 +88,32 @@ class PopulateQuestionnaire : AbstractEndpointTest() {
                             "Seymour Skinner",
                             "Barnard Gumble",
                             "Waylon Smithers-"
-                    )
+                    ),
+                    listOf(2)
             )
             val poll8 = Poll("What is the name of the bar where Homer drinks?",
                     listOf(
                             "Moe’s Tavern-",
                             "Joe’s Cavern",
                             "The Drink Hole"
-                    )
+                    ),
+                    listOf(0)
             )
             val poll9 = Poll(" Which one of these is not a catchphrase Bart uses?",
                     listOf(
                             "Aye Carumba!",
                             "Don't have a cow, man!",
                             "Woohoo!-"
-                    )
+                    ),
+                    listOf(2)
             )
             val poll10 = Poll("What did the Simpsons get for their first Christmas?",
                     listOf(
                             "A dog-",
                             "A cat",
                             "A hamster"
-                    )
+                    ),
+                    listOf(0)
             )
 
             return listOf(poll1, poll2, poll3, poll4, poll5, poll6, poll7, poll8, poll9, poll10)

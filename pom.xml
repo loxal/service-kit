@@ -22,7 +22,7 @@
 
     <properties>
         <tomcat.version>8.0.28</tomcat.version>
-        <jetty-maven-plugin.version>9.3.4.v20151007</jetty-maven-plugin.version>
+        <jetty-maven-plugin.version>9.3.5.v20151012</jetty-maven-plugin.version>
         <jersey.version>2.22.1</jersey.version>
 
         <cf.vpc>hybris.CloudFoundry</cf.vpc>
@@ -49,7 +49,7 @@
 
         <deploymentTarget>http://${deployment.host.name}:${deployment.host.port}</deploymentTarget>
         <deployment.host.port>${local.jetty.port}</deployment.host.port>
-        <!--<deployment.cargo.tomcat.ajp.port>8009</deployment.cargo.tomcat.ajp.port>-->
+        <deployment.cargo.tomcat.ajp.port>8009</deployment.cargo.tomcat.ajp.port>
         <local.jetty.port>8200</local.jetty.port>
         <deployment.host.name>localhost</deployment.host.name>
         <maven-compiler-plugin.compilerArgument>-g:none</maven-compiler-plugin.compilerArgument>

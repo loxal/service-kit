@@ -61,10 +61,10 @@ class PollResourceIT : AbstractEndpointTest() {
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
         val retrievedPoll = retrieval.readEntity<net.loxal.soa.restkit.model.ballot.Poll>(Poll::class.java)
         assertEquals(POLL_QUESTION, retrievedPoll.question)
-        assertEquals(POLL_ANSWERS, retrievedPoll.answers)
-        assertEquals(2, retrievedPoll.answers.size())
-        assertEquals("Yes", retrievedPoll.answers.get(0))
-        assertEquals("No", retrievedPoll.answers.get(1))
+        assertEquals(POLL_OPTIONS, retrievedPoll.options)
+        assertEquals(2, retrievedPoll.options.size())
+        assertEquals("Yes", retrievedPoll.options.get(0))
+        assertEquals("No", retrievedPoll.options.get(1))
     }
 
     @Test
@@ -100,10 +100,10 @@ class PollResourceIT : AbstractEndpointTest() {
         val retrievedUpdatedPoll = AbstractEndpointTest.prepareTarget(existingPoll.location).request().get()
         val updatedPoll = retrievedUpdatedPoll.readEntity<net.loxal.soa.restkit.model.ballot.Poll>(Poll::class.java)
         assertEquals(newQuestion, updatedPoll.question)
-        assertEquals(newAnswerOptions.size().toInt(), updatedPoll.answers.size().toInt())
-        assertEquals(firstAnswerOption, updatedPoll.answers.get(0))
-        assertEquals(secondAnswerOption, updatedPoll.answers.get(1))
-        assertEquals(thirdAnswerOption, updatedPoll.answers.get(2))
+        assertEquals(newAnswerOptions.size().toInt(), updatedPoll.options.size().toInt())
+        assertEquals(firstAnswerOption, updatedPoll.options.get(0))
+        assertEquals(secondAnswerOption, updatedPoll.options.get(1))
+        assertEquals(thirdAnswerOption, updatedPoll.options.get(2))
     }
 
     @Test
@@ -119,9 +119,9 @@ class PollResourceIT : AbstractEndpointTest() {
 
     companion object {
         private val POLL_QUESTION = "What is the meaning of life?"
-        private val POLL_ANSWERS = Arrays.asList<String>("Yes", "No")
+        private val POLL_OPTIONS = Arrays.asList<String>("Yes", "No")
 
-        fun createEntity(id: String = UUID.randomUUID().toString(), poll: Poll = Poll(POLL_QUESTION, POLL_ANSWERS)): Response {
+        fun createEntity(id: String = UUID.randomUUID().toString(), poll: Poll = Poll(POLL_QUESTION, POLL_OPTIONS)): Response {
             val createdPoll = AbstractEndpointTest.prepareGenericRequest(PollResource.RESOURCE_PATH)
                     .path(id).request()
                     .post(Entity.json<Poll>(poll))
