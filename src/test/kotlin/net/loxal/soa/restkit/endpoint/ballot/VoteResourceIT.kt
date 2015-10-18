@@ -62,7 +62,8 @@ class VoteResourceIT : AbstractEndpointTest() {
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
 
         val retrievedVote = retrieval.readEntity(Vote::class.java)
-        assertEquals(ANSWER_OPTION_INDEX.toLong(), retrievedVote.answerOptionIndex.toLong())
+        assertEquals(ANSWERS, retrievedVote.answers)
+        assertEquals(CORRECT_ANSWERS, retrievedVote.correctAnswers)
         assertEquals(false, retrievedVote.referencePoll.isEmpty())
         assertEquals("anonymous", retrievedVote.user)
     }
@@ -78,7 +79,8 @@ class VoteResourceIT : AbstractEndpointTest() {
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
 
         val retrievedVote = retrieval.readEntity(Vote::class.java)
-        assertEquals(ANSWER_OPTION_INDEX.toLong(), retrievedVote.answerOptionIndex.toLong())
+        assertEquals(ANSWERS, retrievedVote.answers)
+        assertEquals(CORRECT_ANSWERS, retrievedVote.correctAnswers)
         assertEquals(false, retrievedVote.referencePoll.isEmpty())
         assertEquals(user, retrievedVote.user)
     }
@@ -100,8 +102,8 @@ class VoteResourceIT : AbstractEndpointTest() {
         val existingVote = createVoteAssignedToPoll()
 
         val updatedReference = "updated reference"
-        val updatedAnswerOptionIndex = 2
-        val modifiedVote = Vote(updatedReference, updatedAnswerOptionIndex)
+        val updatedAnswerOptions = listOf(2)
+        val modifiedVote = Vote(updatedReference, updatedAnswerOptions)
 
         val update = AbstractEndpointTest.prepareTarget(existingVote.location).request().put(Entity.json<Vote>(modifiedVote))
 
@@ -111,14 +113,14 @@ class VoteResourceIT : AbstractEndpointTest() {
         val retrievedUpdatedPoll = AbstractEndpointTest.prepareTarget(existingVote.location).request().get()
         val updatedVote = retrievedUpdatedPoll.readEntity<net.loxal.soa.restkit.model.ballot.Vote>(Vote::class.java)
         assertEquals(updatedReference, updatedVote.referencePoll)
-        assertEquals(updatedAnswerOptionIndex.toLong(), updatedVote.answerOptionIndex.toLong())
+        assertEquals(updatedAnswerOptions, updatedVote.answers)
     }
 
     @Test
     fun updateNonExistentVote() {
         val existingEntity = createVoteAssignedToPoll()
 
-        val someVote = Vote("Irrelevant", Integer.MAX_VALUE)
+        val someVote = Vote("Irrelevant", listOf(Integer.MAX_VALUE))
         val update = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().put(Entity.json<Vote>(someVote))
 
         assertEquals(Response.Status.NOT_FOUND.statusCode, update.status)
@@ -127,7 +129,7 @@ class VoteResourceIT : AbstractEndpointTest() {
 
     private fun createVoteAssignedToPoll(): Response {
         val poll = PollResourceIT.createEntity()
-        val vote = Vote(poll.location.toString(), ANSWER_OPTION_INDEX)
+        val vote = Vote(poll.location.toString(), ANSWERS, CORRECT_ANSWERS)
 
         val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH)
                 .path(UUID.randomUUID().toString())
@@ -140,7 +142,7 @@ class VoteResourceIT : AbstractEndpointTest() {
 
     private fun createUserVoteAssignedToPoll(user: String): Response {
         val poll = PollResourceIT.createEntity()
-        val vote = Vote.asUser(poll.location.toString(), ANSWER_OPTION_INDEX, user)
+        val vote = Vote.asUser(poll.location.toString(), answers = ANSWERS, correctAnswers = CORRECT_ANSWERS, user = user)
 
         val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH)
                 .path(UUID.randomUUID().toString())
@@ -152,6 +154,7 @@ class VoteResourceIT : AbstractEndpointTest() {
     }
 
     companion object {
-        private const val ANSWER_OPTION_INDEX = 1
+        private val ANSWERS = listOf(1, 3)
+        private val CORRECT_ANSWERS = listOf(1)
     }
 }

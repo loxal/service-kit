@@ -5,19 +5,19 @@
 package net.loxal.soa.restkit.model.ballot
 
 import javax.validation.constraints.Min
-import javax.validation.constraints.NotNull
 
-data class Poll(var question: String = "", var options: List<String> = arrayListOf(), var answers: List<Int> = arrayListOf())
+data class Poll(var question: String = "", var options: List<String> = arrayListOf(), var correctAnswers: List<Int> = arrayListOf())
 
 data class Vote(
-        @NotNull var referencePoll: String = "",
-        @NotNull @Min(value = 0) var answerOptionIndex: Int = 0
+        var referencePoll: String = "",
+        @Min(value = 0) var answers: List<Int> = arrayListOf(),
+        @Min(value = 0) var correctAnswers: List<Int> = arrayListOf()
 ) {
     var user: String = "anonymous"
 
     companion object {
-        fun asUser(referencePoll: String, answerOptionIndex: Int, user: String): Vote {
-            val vote = Vote(referencePoll = referencePoll, answerOptionIndex = answerOptionIndex)
+        fun asUser(referencePoll: String, answers: List<Int>, correctAnswers: List<Int>, user: String): Vote {
+            val vote = Vote(referencePoll = referencePoll, answers = answers, correctAnswers = correctAnswers)
             vote.user = user
 
             return vote
