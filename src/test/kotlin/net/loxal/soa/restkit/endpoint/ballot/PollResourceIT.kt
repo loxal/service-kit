@@ -62,6 +62,7 @@ class PollResourceIT : AbstractEndpointTest() {
         val retrievedPoll = retrieval.readEntity<net.loxal.soa.restkit.model.ballot.Poll>(Poll::class.java)
         assertEquals(POLL_QUESTION, retrievedPoll.question)
         assertEquals(POLL_OPTIONS, retrievedPoll.options)
+        assertEquals(true, retrievedPoll.multipleAnswers)
         assertEquals(CORRECT_ANSWERS, retrievedPoll.correctAnswers)
         assertEquals(2, retrievedPoll.options.size())
         assertEquals("Yes", retrievedPoll.options.get(0))
@@ -123,7 +124,10 @@ class PollResourceIT : AbstractEndpointTest() {
         private val POLL_OPTIONS = listOf("Yes", "No")
         private val CORRECT_ANSWERS = listOf(1)
 
-        fun createEntity(id: String = UUID.randomUUID().toString(), poll: Poll = Poll(POLL_QUESTION, options = POLL_OPTIONS, correctAnswers = CORRECT_ANSWERS)): Response {
+        fun createEntity(
+                id: String = UUID.randomUUID().toString(),
+                poll: Poll = Poll(POLL_QUESTION, options = POLL_OPTIONS, correctAnswers = CORRECT_ANSWERS, multipleAnswers = true)
+        ): Response {
             val createdPoll = AbstractEndpointTest.prepareGenericRequest(PollResource.RESOURCE_PATH)
                     .path(id).request()
                     .post(Entity.json<Poll>(poll))

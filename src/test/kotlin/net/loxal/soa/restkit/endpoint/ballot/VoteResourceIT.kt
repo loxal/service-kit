@@ -64,6 +64,7 @@ class VoteResourceIT : AbstractEndpointTest() {
         val retrievedVote = retrieval.readEntity(Vote::class.java)
         assertEquals(ANSWERS, retrievedVote.answers)
         assertEquals(CORRECT_ANSWERS, retrievedVote.correctAnswers)
+        assertEquals(false, retrievedVote.correct)
         assertEquals(false, retrievedVote.referencePoll.isEmpty())
         assertEquals("anonymous", retrievedVote.user)
     }
@@ -81,6 +82,7 @@ class VoteResourceIT : AbstractEndpointTest() {
         val retrievedVote = retrieval.readEntity(Vote::class.java)
         assertEquals(ANSWERS, retrievedVote.answers)
         assertEquals(CORRECT_ANSWERS, retrievedVote.correctAnswers)
+        assertEquals(false, retrievedVote.correct)
         assertEquals(false, retrievedVote.referencePoll.isEmpty())
         assertEquals(user, retrievedVote.user)
     }

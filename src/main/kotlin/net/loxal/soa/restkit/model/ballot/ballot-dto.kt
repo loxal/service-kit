@@ -6,12 +6,21 @@ package net.loxal.soa.restkit.model.ballot
 
 import javax.validation.constraints.Min
 
-data class Poll(var question: String = "", var options: List<String> = arrayListOf(), var correctAnswers: List<Int> = arrayListOf())
+data class Poll(
+        var question: String = "",
+        var options: List<String> = arrayListOf(),
+        var correctAnswers: List<Int>? = arrayListOf(),
+        /**
+         * Provide a hint for the user & UI.
+         */
+        var multipleAnswers: Boolean = false
+)
 
 data class Vote(
         var referencePoll: String = "",
         @Min(value = 0) var answers: List<Int> = arrayListOf(),
-        @Min(value = 0) var correctAnswers: List<Int> = arrayListOf()
+        @Min(value = 0) var correctAnswers: List<Int>? = arrayListOf(),
+        var correct: Boolean? = false
 ) {
     var user: String = "anonymous"
 

@@ -361,7 +361,7 @@
                     <org>${cf.org}</org>
                     <space>${cf.space}</space>
                     <path>${project.build.directory}/${project.build.finalName}.war</path>
-                    <instances>1</instances>
+                    <instances>2</instances>
                     <memory>${cf.memory}</memory>
                     <trustSelfSignedCerts>false</trustSelfSignedCerts>
                     <env>
