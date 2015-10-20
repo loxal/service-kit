@@ -18,6 +18,41 @@ import kotlin.test.assertEquals
 class VoteResourceIT : AbstractEndpointTest() {
 
     @Test
+    fun createCorrectVoteWithoutReview() {
+        val vote = Vote(UUID.randomUUID().toString(), ANSWERS)
+
+        val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH)
+                .request()
+                .post(Entity.json<Vote>(vote))
+        assertEquals(Response.Status.CREATED.statusCode, createdVote.status)
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, createdVote.mediaType)
+
+        val retrieval = AbstractEndpointTest.Companion.prepareTarget(createdVote.location).request().get()
+
+        validateVote(retrieval)
+    }
+
+    @Test
+    fun createVoteWithAutoId() {
+        val vote = Vote(UUID.randomUUID().toString(), ANSWERS)
+
+        val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH)
+                .request()
+                .post(Entity.json<Vote>(vote))
+        assertEquals(Response.Status.CREATED.statusCode, createdVote.status)
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, createdVote.mediaType)
+    }
+
+    @Test
+    fun createNullVote() {
+        val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH)
+                .request()
+                .post(Entity.json(null))
+        assertEquals(Response.Status.BAD_REQUEST.statusCode, createdVote.status)
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, createdVote.mediaType)
+    }
+
+    @Test
     fun createVote() {
         val response = createVoteAssignedToPoll()
 
@@ -49,7 +84,7 @@ class VoteResourceIT : AbstractEndpointTest() {
         val deletion = AbstractEndpointTest.prepareTarget(existingVote.location).request().delete()
 
         assertEquals(Response.Status.NO_CONTENT.statusCode, deletion.status)
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.mediaType)
+        assertEquals(null, deletion.mediaType)
     }
 
     @Test
@@ -61,10 +96,12 @@ class VoteResourceIT : AbstractEndpointTest() {
         assertEquals(Response.Status.OK.statusCode, retrieval.status)
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
 
+        validateVote(retrieval)
+    }
+
+    private fun validateVote(retrieval: Response) {
         val retrievedVote = retrieval.readEntity(Vote::class.java)
         assertEquals(ANSWERS, retrievedVote.answers)
-        assertEquals(CORRECT_ANSWERS, retrievedVote.correctAnswers)
-        assertEquals(false, retrievedVote.correct)
         assertEquals(false, retrievedVote.referencePoll.isEmpty())
         assertEquals("anonymous", retrievedVote.user)
     }
@@ -81,8 +118,6 @@ class VoteResourceIT : AbstractEndpointTest() {
 
         val retrievedVote = retrieval.readEntity(Vote::class.java)
         assertEquals(ANSWERS, retrievedVote.answers)
-        assertEquals(CORRECT_ANSWERS, retrievedVote.correctAnswers)
-        assertEquals(false, retrievedVote.correct)
         assertEquals(false, retrievedVote.referencePoll.isEmpty())
         assertEquals(user, retrievedVote.user)
     }
@@ -131,11 +166,12 @@ class VoteResourceIT : AbstractEndpointTest() {
 
     private fun createVoteAssignedToPoll(): Response {
         val poll = PollResourceIT.createEntity()
-        val vote = Vote(poll.location.toString(), ANSWERS, CORRECT_ANSWERS)
+        val vote = Vote(poll.location.toString(), ANSWERS)
 
         val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH)
                 .path(UUID.randomUUID().toString())
-                .request().post(Entity.json<Vote>(vote))
+                .request()
+                .post(Entity.json<Vote>(vote))
         assertEquals(Response.Status.CREATED.statusCode, createdVote.status)
         assertEquals(MediaType.APPLICATION_JSON_TYPE, createdVote.mediaType)
 
@@ -144,7 +180,7 @@ class VoteResourceIT : AbstractEndpointTest() {
 
     private fun createUserVoteAssignedToPoll(user: String): Response {
         val poll = PollResourceIT.createEntity()
-        val vote = Vote.asUser(poll.location.toString(), answers = ANSWERS, correctAnswers = CORRECT_ANSWERS, user = user)
+        val vote = Vote.asUser(poll.location.toString(), answers = ANSWERS, user = user)
 
         val createdVote = AbstractEndpointTest.prepareGenericRequest(VoteResource.RESOURCE_PATH)
                 .path(UUID.randomUUID().toString())
@@ -157,6 +193,5 @@ class VoteResourceIT : AbstractEndpointTest() {
 
     companion object {
         private val ANSWERS = listOf(1, 3)
-        private val CORRECT_ANSWERS = listOf(1)
     }
 }

@@ -16,17 +16,32 @@ data class Poll(
         var multipleAnswers: Boolean = false
 )
 
+data class ReviewedVote(
+        var referencePoll: String = "",
+        @Min(value = 0) var answers: List<Int> = arrayListOf()
+) {
+    var user: String = "anonymous"
+    var correct: Boolean? = false
+
+    companion object {
+        fun asUser(referencePoll: String, answers: List<Int>, user: String): Vote {
+            val vote = Vote(referencePoll = referencePoll, answers = answers)
+            vote.user = user
+
+            return vote
+        }
+    }
+}
+
 data class Vote(
         var referencePoll: String = "",
-        @Min(value = 0) var answers: List<Int> = arrayListOf(),
-        @Min(value = 0) var correctAnswers: List<Int>? = arrayListOf(),
-        var correct: Boolean? = false
+        @Min(value = 0) var answers: List<Int> = arrayListOf()
 ) {
     var user: String = "anonymous"
 
     companion object {
-        fun asUser(referencePoll: String, answers: List<Int>, correctAnswers: List<Int>, user: String): Vote {
-            val vote = Vote(referencePoll = referencePoll, answers = answers, correctAnswers = correctAnswers)
+        fun asUser(referencePoll: String, answers: List<Int>, user: String): Vote {
+            val vote = Vote(referencePoll = referencePoll, answers = answers)
             vote.user = user
 
             return vote
