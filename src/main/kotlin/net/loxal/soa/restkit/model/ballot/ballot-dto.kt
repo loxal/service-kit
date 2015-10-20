@@ -22,15 +22,6 @@ data class ReviewedVote(
 ) {
     var user: String = "anonymous"
     var correct: Boolean? = false
-
-    companion object {
-        fun asUser(referencePoll: String, answers: List<Int>, user: String): Vote {
-            val vote = Vote(referencePoll = referencePoll, answers = answers)
-            vote.user = user
-
-            return vote
-        }
-    }
 }
 
 data class Vote(
@@ -38,6 +29,7 @@ data class Vote(
         @Min(value = 0) var answers: List<Int> = arrayListOf()
 ) {
     var user: String = "anonymous"
+    var correct: Boolean? = false
 
     companion object {
         fun asUser(referencePoll: String, answers: List<Int>, user: String): Vote {

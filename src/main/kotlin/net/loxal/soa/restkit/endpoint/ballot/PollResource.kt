@@ -56,17 +56,22 @@ class PollResource : Endpoint() {
 
     @Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
     @GET
-    fun retrieve(@NotNull @PathParam(Endpoint.ID_PATH_PARAM) id: String, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
+    fun retrieve(
+            @PathParam(Endpoint.ID_PATH_PARAM) id: String,
+            @Context req: ContainerRequestContext,
+            @Suspended asyncResponse: AsyncResponse
+    ) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val response = client.get(Poll::class.java, id)
 
         asyncResponse.resume(Response
-                .status(response.status)
-                .type(response.mediaType)
-                .entity(response.readEntity(String::class.java))
+                .fromResponse(response)
+                //                .status(response.status)
+                //                .type(response.mediaType)
+                //                .entity(response.readEntity(String::class.java))
                 .build())
-        Endpoint.LOG.info(requestContext.method)
+        Endpoint.LOG.info(req.method)
     }
 
     @Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)

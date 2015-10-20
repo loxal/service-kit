@@ -6,6 +6,7 @@ package net.loxal.soa.restkit.endpoint.ballot
 
 import net.loxal.soa.restkit.client.KitClient
 import net.loxal.soa.restkit.endpoint.Endpoint
+import net.loxal.soa.restkit.model.ballot.Poll
 import net.loxal.soa.restkit.model.ballot.Vote
 import java.net.URI
 import java.util.*
@@ -24,6 +25,7 @@ import javax.ws.rs.core.Response
 class VoteResource : Endpoint() {
 
     private var client: KitClient<Vote> = KitClient()
+    private var pollClient: KitClient<Poll> = KitClient()
 
     @Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
     @POST
@@ -35,6 +37,8 @@ class VoteResource : Endpoint() {
     ) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
+        reviewVote(vote)
+
         val createdVote = client.post(Entity.json<Vote>(vote), id = id)
         val entityLocation =
                 if (req.uriInfo.requestUri.toString().endsWith(id))
@@ -44,6 +48,14 @@ class VoteResource : Endpoint() {
 
         asyncResponse.resume(Response.fromResponse(createdVote).location(entityLocation).build())
         Endpoint.LOG.info(req.method)
+    }
+
+    private fun reviewVote(vote: Vote): Unit {
+        val response = pollClient.get(Poll::class.java, vote.referencePoll)
+        val poll = response.readEntity(Poll::class.java)
+        val hasCorrectAnswers = poll.correctAnswers?.equals(vote.answers)
+
+        vote.correct = hasCorrectAnswers
     }
 
     @POST

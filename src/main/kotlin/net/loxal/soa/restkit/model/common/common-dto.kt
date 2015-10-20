@@ -36,3 +36,5 @@ data class Authorization(@NotNull var access_token: String = "") {
     var token_type: String = ""
     var scope: String = ""
 }
+
+data class Creation(var id: String = "", var link: String = "")
