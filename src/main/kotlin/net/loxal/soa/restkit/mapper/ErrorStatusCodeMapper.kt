@@ -18,15 +18,15 @@ import javax.ws.rs.ext.Provider
 @Provider
 class ErrorStatusCodeMapper : ExceptionMapper<WebApplicationException> {
     override fun toResponse(exception: WebApplicationException): Response {
-        var status: Response.Status? = EXCEPTION_TO_ERROR_MAPPING.get(exception.javaClass)
+        var status: Response.Status? = EXCEPTION_TO_ERROR_MAPPING[exception.javaClass]
         if (status == null) {
             status = Response.Status.BAD_REQUEST
         }
 
         val errorMessage = ErrorMessage(status)
         errorMessage.statusCode = status.statusCode
-        errorMessage.message = exception.getMessage()
-        errorMessage.moreInfo = status.family.name()
+        errorMessage.message = exception.message
+        errorMessage.moreInfo = status.family.name
 
         return Response.status(status.statusCode).entity(errorMessage).type(MediaType.APPLICATION_JSON_TYPE).build()
     }

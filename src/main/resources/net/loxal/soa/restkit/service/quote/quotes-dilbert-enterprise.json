@@ -66,5 +66,13 @@
   {
     "id": 17,
     "quote": "Even Microsoft Office is installed in a custom way, via a corporate installation wrapper."
-  }
+  },
+  {
+    "id": 18,
+    "quote": "You spend one hour to print a document because the printer is not accessible from your network."
+  },
+    {
+      "id": 19,
+      "quote": "You need to start another operating system in a virtual machine to print a document."
+    }
 ]

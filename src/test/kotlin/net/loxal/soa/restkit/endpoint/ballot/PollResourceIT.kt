@@ -64,9 +64,9 @@ class PollResourceIT : AbstractEndpointTest() {
         assertEquals(POLL_OPTIONS, retrievedPoll.options)
         assertEquals(true, retrievedPoll.multipleAnswers)
         assertEquals(CORRECT_ANSWERS, retrievedPoll.correctAnswers)
-        assertEquals(2, retrievedPoll.options.size())
-        assertEquals("Yes", retrievedPoll.options.get(0))
-        assertEquals("No", retrievedPoll.options.get(1))
+        assertEquals(2, retrievedPoll.options.size)
+        assertEquals("Yes", retrievedPoll.options[0])
+        assertEquals("No", retrievedPoll.options[1])
     }
 
     @Test
@@ -102,10 +102,10 @@ class PollResourceIT : AbstractEndpointTest() {
         val retrievedUpdatedPoll = AbstractEndpointTest.prepareTarget(existingPoll.location).request().get()
         val updatedPoll = retrievedUpdatedPoll.readEntity<net.loxal.soa.restkit.model.ballot.Poll>(Poll::class.java)
         assertEquals(newQuestion, updatedPoll.question)
-        assertEquals(newAnswerOptions.size().toInt(), updatedPoll.options.size().toInt())
-        assertEquals(firstAnswerOption, updatedPoll.options.get(0))
-        assertEquals(secondAnswerOption, updatedPoll.options.get(1))
-        assertEquals(thirdAnswerOption, updatedPoll.options.get(2))
+        assertEquals(newAnswerOptions.size.toInt(), updatedPoll.options.size.toInt())
+        assertEquals(firstAnswerOption, updatedPoll.options[0])
+        assertEquals(secondAnswerOption, updatedPoll.options[1])
+        assertEquals(thirdAnswerOption, updatedPoll.options[2])
     }
 
     @Test
