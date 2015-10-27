@@ -9,7 +9,7 @@ import javax.validation.constraints.Min
 data class Poll(
         var question: String = "",
         var options: List<String> = arrayListOf(),
-        var correctAnswers: List<Int>? = arrayListOf(),
+        var correctAnswers: List<Int>? = arrayListOf(), // TODO make them invisible for non-admins
         /**
          * Provide a hint for the user & UI.
          */
