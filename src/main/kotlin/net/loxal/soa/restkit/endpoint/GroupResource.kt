@@ -15,7 +15,6 @@ import javax.ws.rs.container.AsyncResponse
 import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
 import javax.ws.rs.core.Context
-import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
 @Path(GroupResource.RESOURCE_PATH)
@@ -46,9 +45,7 @@ class GroupResource : Endpoint() {
         val response = client.delete(Group::class.java, id)
 
         asyncResponse.resume(Response
-                .status(response.status)
-                .type(MediaType.APPLICATION_JSON_TYPE)
-                .entity(response.readEntity(String::class.java))
+                .fromResponse(response)
                 .build())
         Endpoint.LOG.info(requestContext.method)
     }
@@ -61,9 +58,7 @@ class GroupResource : Endpoint() {
         val response = client.get(Group::class.java, id)
 
         asyncResponse.resume(Response
-                .status(response.status)
-                .type(response.mediaType)
-                .entity(response.readEntity(String::class.java))
+                .fromResponse(response)
                 .build())
         Endpoint.LOG.info(requestContext.method)
     }

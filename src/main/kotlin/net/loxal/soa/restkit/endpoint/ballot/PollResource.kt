@@ -16,7 +16,6 @@ import javax.ws.rs.container.AsyncResponse
 import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
 import javax.ws.rs.core.Context
-import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
 @Path(PollResource.RESOURCE_PATH)
@@ -47,9 +46,7 @@ class PollResource : Endpoint() {
         val response = client.delete(Poll::class.java, id)
 
         asyncResponse.resume(Response
-                .status(response.status)
-                .type(MediaType.APPLICATION_JSON_TYPE)
-                .entity(response.readEntity(String::class.java))
+                .fromResponse(response)
                 .build())
         Endpoint.LOG.info(requestContext.method)
     }
@@ -67,9 +64,6 @@ class PollResource : Endpoint() {
 
         asyncResponse.resume(Response
                 .fromResponse(response)
-                //                .status(response.status)
-                //                .type(response.mediaType)
-                //                .entity(response.readEntity(String::class.java))
                 .build())
         Endpoint.LOG.info(req.method)
     }

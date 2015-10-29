@@ -80,9 +80,6 @@ class VoteResource : Endpoint() {
 
         asyncResponse.resume(Response
                 .fromResponse(response)
-                //                .status(response.status)
-                //                .type(MediaType.APPLICATION_JSON_TYPE)  // TODO adjust all response to return raw response like here
-                //                .entity(response.readEntity(String::class.java))
                 .build())
         Endpoint.LOG.info(req.method)
     }
@@ -100,10 +97,6 @@ class VoteResource : Endpoint() {
 
         asyncResponse.resume(Response
                 .fromResponse(response)
-                //                .status(response.status)
-                //                .type(response.mediaType)
-                //                .entity(response.readEntity(String::class.java))
-                //                .entity(response.readEntity(Vote::class.java)) // TODO adjust all GETs to return raw response like here
                 .build())
         Endpoint.LOG.info(req.method)
     }

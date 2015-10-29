@@ -61,7 +61,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         val deletion = AbstractEndpointTest.prepareTarget(existingEntity.location).request().delete()
 
         assertEquals(Response.Status.NO_CONTENT.statusCode.toLong(), deletion.status.toLong())
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.mediaType)
+        assertEquals(null, deletion.mediaType)
     }
 
     @Test

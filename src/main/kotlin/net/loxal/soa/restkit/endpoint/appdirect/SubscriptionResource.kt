@@ -14,11 +14,6 @@ import javax.ws.rs.QueryParam
 import javax.ws.rs.container.AsyncResponse
 import javax.ws.rs.container.Suspended
 
-// TODO improvement proposals for AppDirect
-//  * IPv6 notation for integration URLs (hostname) is not supported
-//  * Integration event list is not shown in user’s local time zone
-//  * AppDirect returned a 5xx on 3 Oct, at 2:30 pm CEST for hours when navigating to the Integration Report page
-
 @Path(SubscriptionResource.RESOURCE_PATH)
 class SubscriptionResource : Endpoint() {
     @Path("order")

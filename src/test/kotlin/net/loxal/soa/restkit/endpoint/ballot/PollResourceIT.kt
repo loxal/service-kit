@@ -48,7 +48,7 @@ class PollResourceIT : AbstractEndpointTest() {
         val deletion = AbstractEndpointTest.prepareTarget(existingPoll.location).request().delete()
 
         assertEquals(Response.Status.NO_CONTENT.statusCode, deletion.status)
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.mediaType)
+        assertEquals(null, deletion.mediaType)
     }
 
     @Test
