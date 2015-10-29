@@ -74,5 +74,9 @@
     {
       "id": 19,
       "quote": "You need to start another operating system in a virtual machine to print a document."
-    }
+    },
+  {
+    "id": 20,
+    "quote": "You switch between three different networks throughout the day by plugging in and out network cables."
+  }
 ]

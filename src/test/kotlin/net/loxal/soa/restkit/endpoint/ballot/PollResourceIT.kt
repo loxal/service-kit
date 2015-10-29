@@ -75,7 +75,6 @@ class PollResourceIT : AbstractEndpointTest() {
 
         val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().get()
 
-
         assertEquals(Response.Status.NOT_FOUND.statusCode, retrieval.status)
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
         val notFoundError = retrieval.readEntity(ErrorMessage::class.java)
