@@ -49,7 +49,7 @@
 
         <deploymentTarget>http://${deployment.host.name}:${deployment.host.port}</deploymentTarget>
         <deployment.host.port>${local.jetty.port}</deployment.host.port>
-        <deployment.cargo.tomcat.ajp.port>8009</deployment.cargo.tomcat.ajp.port>
+        <deployment.cargo.tomcat.ajp.port>8209</deployment.cargo.tomcat.ajp.port>
         <local.jetty.port>8200</local.jetty.port>
         <deployment.host.name>localhost</deployment.host.name>
         <maven-compiler-plugin.compilerArgument>-g:none</maven-compiler-plugin.compilerArgument>
