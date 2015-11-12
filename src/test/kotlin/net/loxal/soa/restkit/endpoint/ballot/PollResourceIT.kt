@@ -14,6 +14,7 @@ import javax.ws.rs.client.Entity
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class PollResourceIT : AbstractEndpointTest() {
     @Test
@@ -48,7 +49,7 @@ class PollResourceIT : AbstractEndpointTest() {
         val deletion = AbstractEndpointTest.prepareTarget(existingPoll.location).request().delete()
 
         assertEquals(Response.Status.NO_CONTENT.statusCode, deletion.status)
-        assertEquals(null, deletion.mediaType)
+        assertNull(deletion.mediaType)
     }
 
     @Test

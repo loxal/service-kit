@@ -12,6 +12,7 @@ import javax.ws.rs.client.Entity
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class GroupResourceIT : AbstractEndpointTest() {
 
@@ -61,7 +62,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         val deletion = AbstractEndpointTest.prepareTarget(existingEntity.location).request().delete()
 
         assertEquals(Response.Status.NO_CONTENT.statusCode.toLong(), deletion.status.toLong())
-        assertEquals(null, deletion.mediaType)
+        assertNull(deletion.mediaType)
     }
 
     @Test
@@ -98,7 +99,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         val existingEntity = postEntity()
 
         val updatedField = "updated field"
-        val entries = Arrays.asList<String>("first", "second")
+        val entries: List<String> = Arrays.asList<String>("first", "second")
         val modifiedEntity = Group(updatedField, entries)
 
         val update = AbstractEndpointTest.prepareTarget(existingEntity.location).request().put(Entity.json<Group>(modifiedEntity))
