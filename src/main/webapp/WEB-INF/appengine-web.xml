@@ -7,6 +7,15 @@
     <!--https://googleappengine.googlecode.com/svn/trunk/java/src/main/com/google/appengine/tools/development/appengine-web.xsd-->
     <vm>true</vm>
 
+    <!--<beta-settings>-->
+    <!--<setting name="machine_type" value="n1-standard-1"/>-->
+    <!--<setting name="java_quickstart" value="true"/>-->
+    <!--</beta-settings>-->
+
+    <manual-scaling>
+        <instances>1</instances>
+    </manual-scaling>
+
     <application>rest-kit-loxal</application>
     <version>1</version>
     <ssl-enabled>true</ssl-enabled>
@@ -40,8 +49,10 @@
     <system-properties>
         <property name="admin.name" value="Alexander Orlov"/>
         <property name="admin.email" value="alexander.orlov@loxal.net"/>
+        <property name="LANG" value="en_US.UTF-8"/>
     </system-properties>
 
     <env-variables>
+        <env-var name="LANG" value="en_US.UTF-8"/>
     </env-variables>
 </appengine-web-app>

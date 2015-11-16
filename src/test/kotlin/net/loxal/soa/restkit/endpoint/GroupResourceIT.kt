@@ -24,7 +24,7 @@ class GroupResourceIT : AbstractEndpointTest() {
                 .path(UUID.randomUUID().toString())
                 .request().post(Entity.json<Group>(group))
 
-        AbstractEndpointTest.LOG.error(createdEntity.readEntity(String::class.java))
+        AbstractEndpointTest.LOG.info(createdEntity.readEntity(String::class.java))
         assertEquals(Response.Status.CREATED.statusCode, createdEntity.status)
         assertEquals(MediaType.APPLICATION_JSON_TYPE, createdEntity.mediaType)
 
