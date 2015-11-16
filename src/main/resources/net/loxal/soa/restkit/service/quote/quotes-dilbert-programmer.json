@@ -270,5 +270,9 @@
   {
     "id": 69,
     "quote": "The service is not down. The service is just not accessible anymore."
+  },
+  {
+    "id": 200,
+    "quote": "If people can’t build monoliths properly, microservices won’t help"
   }
 ]
