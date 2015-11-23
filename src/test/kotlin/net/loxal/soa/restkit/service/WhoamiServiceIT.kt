@@ -2,7 +2,7 @@
  * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
-package net.loxal.soa.restkit.service.quote
+package net.loxal.soa.restkit.service
 
 import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
 import net.loxal.soa.restkit.model.whoami.Host
@@ -14,7 +14,7 @@ import kotlin.test.assertEquals
 class WhoamiServiceIT : AbstractEndpointTest() {
     @Test
     public fun validateHost() {
-        val response = AbstractEndpointTest.prepareGenericRequest(WhoamiService.RESOURCE_PATH).request().get()
+        val response = prepareGenericRequest(WhoamiService.Companion.RESOURCE_PATH).request().get()
 
         assertEquals(Response.Status.OK.statusCode.toLong(), response.status.toLong())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, response.mediaType)

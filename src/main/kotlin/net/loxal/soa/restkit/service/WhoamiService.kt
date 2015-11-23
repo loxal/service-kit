@@ -2,7 +2,7 @@
  * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
-package net.loxal.soa.restkit.service.quote
+package net.loxal.soa.restkit.service
 
 import net.loxal.soa.restkit.endpoint.Endpoint
 import net.loxal.soa.restkit.model.whoami.Host
@@ -22,7 +22,7 @@ class WhoamiService : Endpoint() {
 
     @GET
     fun whoAmI(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
-        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+        asyncResponse.setTimeout(ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val host = Host(request.remoteHost, request.remoteAddr)
         asyncResponse.resume(Response.ok(host).build())

@@ -2,7 +2,7 @@
  * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
-package net.loxal.soa.restkit.service.quote
+package net.loxal.soa.restkit.service
 
 import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
 import net.loxal.soa.restkit.model.whoami.Host
@@ -19,7 +19,7 @@ class ResolveIpAddressServiceIT : AbstractEndpointTest() {
     public fun assureHostAddress() {
         val hostName = "localhost"
 
-        val response = AbstractEndpointTest.prepareGenericRequest(ResolveIpAddressService.RESOURCE_PATH).queryParam(ResolveIpAddressService.HOST_NAME_PARAM, hostName).request().get()
+        val response = prepareGenericRequest(ResolveIpAddressService.Companion.RESOURCE_PATH).queryParam(ResolveIpAddressService.HOST_NAME_PARAM, hostName).request().get()
 
         assertEquals(Response.Status.OK.statusCode.toLong(), response.status.toLong())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, response.mediaType)

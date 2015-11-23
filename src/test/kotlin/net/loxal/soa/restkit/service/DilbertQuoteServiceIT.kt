@@ -2,7 +2,7 @@
  * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
-package net.loxal.soa.restkit.service.quote
+package net.loxal.soa.restkit.service
 
 import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
 import net.loxal.soa.restkit.model.dilbert.Quote
@@ -41,7 +41,7 @@ class DilbertQuoteServiceIT : AbstractEndpointTest() {
             retrieveSpecificQuote(resource = RESOURCE_PATH_MANAGER, quotes = DilbertQuoteService.quotesManager)
 
     private fun retrieveSingleQuote(resource: String) {
-        val response = AbstractEndpointTest.prepareGenericRequest(resource).request().get()
+        val response = prepareGenericRequest(resource).request().get()
         assertEquals(Response.Status.OK.statusCode, response.status)
         assertEquals(DilbertQuoteService.mediaType, response.mediaType.toString())
 
@@ -54,7 +54,7 @@ class DilbertQuoteServiceIT : AbstractEndpointTest() {
 
     private fun retrieveSpecificQuote(resource: String, quotes: List<Quote>) {
         val quoteId = 5
-        val response = AbstractEndpointTest.prepareGenericRequest(resource)
+        val response = prepareGenericRequest(resource)
                 .path(quoteId.toString()).request().get()
         assertEquals(Response.Status.OK.statusCode, response.status)
         assertEquals(DilbertQuoteService.mediaType, response.mediaType.toString())

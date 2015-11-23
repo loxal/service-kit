@@ -2,7 +2,7 @@
  * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
-package net.loxal.soa.restkit.service.quote
+package net.loxal.soa.restkit.service
 
 import net.loxal.soa.restkit.endpoint.Endpoint
 import net.loxal.soa.restkit.model.common.ErrorMessage
@@ -30,7 +30,7 @@ class ResolveIpAddressService : Endpoint() {
             @Context requestContext: ContainerRequestContext,
             @Suspended asyncResponse: AsyncResponse
     ) {
-        asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+        asyncResponse.setTimeout(ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         try {
             val localHost = InetAddress.getByName(hostName)
