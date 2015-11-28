@@ -47,7 +47,7 @@ class GroupResourceIT : AbstractEndpointTest() {
     public fun deleteNonExistentEntity() {
         val existingEntity = postEntity()
 
-        val deletion = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().delete()
+        val deletion = AbstractEndpointTest.prepareTarget("${existingEntity.location}${AbstractEndpointTest.NON_EXISTENT}").request().delete()
 
         assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.mediaType)
         val notFoundStatus = Response.Status.NOT_FOUND
@@ -82,7 +82,7 @@ class GroupResourceIT : AbstractEndpointTest() {
     public fun retrieveNonExistentEntity() {
         val existingEntity = postEntity()
 
-        val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().get()
+        val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.location}${AbstractEndpointTest.NON_EXISTENT}").request().get()
 
         assertEquals(Response.Status.NOT_FOUND.statusCode.toLong(), retrieval.status.toLong())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
@@ -119,7 +119,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         val existingEntity = postEntity()
 
         val someEntity = Group("Irrelevant", listOf<String>())
-        val update = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().put(Entity.json<Group>(someEntity))
+        val update = AbstractEndpointTest.prepareTarget("${existingEntity.location}${AbstractEndpointTest.NON_EXISTENT}").request().put(Entity.json<Group>(someEntity))
 
         assertEquals(Response.Status.NOT_FOUND.statusCode.toLong(), update.status.toLong())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, update.mediaType)

@@ -116,7 +116,7 @@ class VoteResourceIT : AbstractEndpointTest() {
     fun deleteNonExistentVote() {
         val existingEntity = createVoteAssignedToPoll()
 
-        val response = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().delete()
+        val response = AbstractEndpointTest.prepareTarget("${existingEntity.location}${AbstractEndpointTest.NON_EXISTENT}").request().delete()
 
         assertEquals(MediaType.APPLICATION_JSON_TYPE, response.mediaType)
         val notFoundStatus = Response.Status.NOT_FOUND
@@ -176,7 +176,7 @@ class VoteResourceIT : AbstractEndpointTest() {
     fun retrieveNonExistentVote() {
         val existingEntity = createVoteAssignedToPoll()
 
-        val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().get()
+        val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.location}${AbstractEndpointTest.NON_EXISTENT}").request().get()
 
         assertEquals(Response.Status.NOT_FOUND.statusCode, retrieval.status)
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
@@ -208,7 +208,7 @@ class VoteResourceIT : AbstractEndpointTest() {
         val existingEntity = createVoteAssignedToPoll()
 
         val someVote = Vote("Irrelevant", listOf(Integer.MAX_VALUE))
-        val update = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().put(Entity.json<Vote>(someVote))
+        val update = AbstractEndpointTest.prepareTarget("${existingEntity.location}${AbstractEndpointTest.NON_EXISTENT}").request().put(Entity.json<Vote>(someVote))
 
         assertEquals(Response.Status.NOT_FOUND.statusCode, update.status)
         assertEquals(MediaType.APPLICATION_JSON_TYPE, update.mediaType)

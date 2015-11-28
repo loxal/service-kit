@@ -33,7 +33,7 @@ class PollResourceIT : AbstractEndpointTest() {
     public fun deleteNonExistentPoll() {
         val existingEntity = createEntity()
 
-        val response = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().delete()
+        val response = AbstractEndpointTest.prepareTarget("${existingEntity.location}${AbstractEndpointTest.NON_EXISTENT}").request().delete()
 
         assertEquals(MediaType.APPLICATION_JSON_TYPE, response.mediaType)
         val notFoundStatus = Response.Status.NOT_FOUND
@@ -74,7 +74,7 @@ class PollResourceIT : AbstractEndpointTest() {
     public fun retrieveNonExistentPoll() {
         val existingEntity = createEntity()
 
-        val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().get()
+        val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.location}${AbstractEndpointTest.NON_EXISTENT}").request().get()
 
         assertEquals(Response.Status.NOT_FOUND.statusCode, retrieval.status)
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
@@ -113,7 +113,7 @@ class PollResourceIT : AbstractEndpointTest() {
         val existingEntity = createEntity()
 
         val somePoll = Poll("Irrelevant", listOf<String>())
-        val update = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().put(Entity.json<Poll>(somePoll))
+        val update = AbstractEndpointTest.prepareTarget("${existingEntity.location}${AbstractEndpointTest.NON_EXISTENT}").request().put(Entity.json<Poll>(somePoll))
 
         assertEquals(Response.Status.NOT_FOUND.statusCode, update.status)
         assertEquals(MediaType.APPLICATION_JSON_TYPE, update.mediaType)
