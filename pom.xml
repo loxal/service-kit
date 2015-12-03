@@ -15,7 +15,7 @@
 
     <groupId>net.loxal.soa</groupId>
     <artifactId>rest-kit</artifactId>
-    <version>1.5.5-SNAPSHOT</version>
+    <version>1.5.6-SNAPSHOT</version>
     <name>RESTkit</name>
     <packaging>war</packaging>
     <description>Microservice Toolkit</description>
@@ -210,12 +210,14 @@
                 <artifactId>gcloud-maven-plugin</artifactId>
                 <version>2.0.9.88.v20151125</version>
                 <configuration>
-                    <max_module_instances>default:1</max_module_instances>
+                    <!--<max_module_instances>default:1</max_module_instances>-->
+                    <max_module_instances>coreos:1</max_module_instances>
+                    <!--<max_module_instances>1</max_module_instances>-->
                     <version>
                         ${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}
                     </version>
                     <log_level>info</log_level>
-                    <verbosity>info</verbosity>
+                    <verbosity>warning</verbosity>
                 </configuration>
             </plugin>
             <plugin>
@@ -228,7 +230,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.9.1</version>
+                <version>1.10</version>
                 <executions>
                     <execution>
                         <id>extract-cf-app-version</id>
