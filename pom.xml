@@ -192,8 +192,6 @@
                     <compilerArguments>
                         <profile>compact1</profile>
                     </compilerArguments>
-                    <compilerArguments>
-                    </compilerArguments>
                     <compilerArgument>-Xlint:unchecked</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
