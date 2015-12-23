@@ -20,6 +20,7 @@ import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
 import javax.ws.rs.core.Context
 import javax.ws.rs.core.Response
+import kotlin.text.endsWith
 
 @Path(VoteResource.RESOURCE_PATH)
 class VoteResource : Endpoint() {

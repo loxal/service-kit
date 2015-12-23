@@ -13,8 +13,12 @@ import java.util.*
 import javax.ws.rs.client.Entity
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
+import kotlin.collections.listOf
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
+import kotlin.text.contains
+import kotlin.text.endsWith
+import kotlin.text.startsWith
 
 class PollResourceIT : AbstractEndpointTest() {
     @Test

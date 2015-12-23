@@ -5,6 +5,7 @@
 package net.loxal.soa.restkit.model.generic
 
 import javax.validation.constraints.NotNull
+import kotlin.collections.arrayListOf
 
 /**
  * A group of entity references with a name as their description.

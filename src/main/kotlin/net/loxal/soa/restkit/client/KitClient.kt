@@ -14,6 +14,7 @@ import javax.ws.rs.client.Entity
 import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.Form
 import javax.ws.rs.core.MultivaluedHashMap
+import kotlin.text.toLowerCase
 
 class KitClient<T> : AbstractKitClient<T>() {
 

@@ -10,7 +10,11 @@ import org.junit.Test
 import java.util.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
+import kotlin.collections.forEach
+import kotlin.collections.listOf
 import kotlin.test.assertEquals
+import kotlin.text.contains
+import kotlin.text.endsWith
 
 class PopulateQuestionnaire : AbstractEndpointTest() {
     @Test

@@ -5,6 +5,7 @@
 package net.loxal.soa.restkit.model.ballot
 
 import javax.validation.constraints.Min
+import kotlin.collections.arrayListOf
 
 data class Poll(
         var question: String = "",
