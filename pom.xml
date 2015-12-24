@@ -9,13 +9,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>net.loxal</groupId>
-        <artifactId>meta</artifactId>
-        <version>1.2.23</version>
+        <artifactId>blueprint</artifactId>
+        <version>1.0.0</version>
     </parent>
 
     <groupId>net.loxal.soa</groupId>
-    <artifactId>rest-kit</artifactId>
-    <version>1.5.6</version>
+    <artifactId>rest-kit-loxal</artifactId>
+    <version>1.0.0</version>
     <name>RESTkit</name>
     <packaging>war</packaging>
     <description>Microservice Toolkit</description>
@@ -212,6 +212,7 @@
                 <artifactId>gcloud-maven-plugin</artifactId>
                 <version>2.0.9.88.v20151125</version>
                 <configuration>
+                    <gcloud_project>${project.artifactId}</gcloud_project>
                     <max_module_instances>default:1</max_module_instances>
                     <version>
                         ${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}

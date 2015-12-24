@@ -8,7 +8,6 @@
 
     <vm-settings>
         <setting name="machine_type" value="g1-small"/>
-        <setting name="image" value="coreos"/>
     </vm-settings>
 
     <manual-scaling>
@@ -29,21 +28,6 @@
     <inbound-services>
         <service>warmup</service>
     </inbound-services>
-
-    <static-files>
-        <include path="**/*.json"/>
-        <include path="**/*.txt"/>
-        <include path="**/*.gif"/>
-        <include path="**/*.png"/>
-        <include path="**/*.ico"/>
-        <include path="**/*.html"/>
-        <include path="**/*.css"/>
-        <include path="**/*.js"/>
-        <include path="**/*.jpg"/>
-        <include path="**/*.pdf"/>
-        <include path="**/*"/>
-        <include path="*"/>
-    </static-files>
 
     <system-properties>
         <property name="admin.name" value="Alexander Orlov"/>
