@@ -19,7 +19,7 @@
     <ssl-enabled>true</ssl-enabled>
     <sessions-enabled>false</sessions-enabled>
     <precompilation-enabled>false</precompilation-enabled>
-    <threadsafe>false</threadsafe>
+    <threadsafe>true</threadsafe>
 
     <admin-console>
         <page name="Custom" url="/"/>
