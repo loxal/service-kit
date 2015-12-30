@@ -11,12 +11,12 @@ import kotlin.test.assertEquals
 class RepositoryClientIT : AbstractEndpointTest() {
 
     @Test
-    public fun retrieveToken() {
+    fun retrieveToken() {
         val token = KitClient.authorize()
 
         assertEquals(40, token.access_token.length)
         assertEquals(3600, token.expires_in)
         assertEquals("Bearer", token.token_type)
-        assertEquals("hybris.document_manage hybris.document_view hybris.tenant=muctool", token.scope)
+        assertEquals("hybris.document_manage hybris.document_view hybris.tenant=markettest", token.scope)
     }
 }

@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
 # Switch Java JDK
-#export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
-#gcloud config set project rest-kit-loxal
+gcloud config set project rest-kit-loxal
+mvn clean validate gcloud:stage
+
+eval "$(docker-machine env default)"
 docker build --tag=gcr.io/rest-kit-loxal/default-docker-container .
 gcloud docker push gcr.io/rest-kit-loxal/default-docker-container
 
@@ -26,5 +29,9 @@ https://www.googleapis.com/auth/logging.write\
     --num-nodes 3 \
     --machine-type g1-small
 
-kubectl run default-docker-container --image=gcr.io/rest-kit-loxal/ddc
-kubectl expose rc default-docker-container --type=LoadBalancer --port=80 --target-port=8080
+kubectl run default-docker-container --image=gcr.io/rest-kit-loxal/default-docker-container
+kubectl expose replicationcontrollers default-docker-container --type=LoadBalancer --port=80 --target-port=8080
+
+kubectl get services
+kubectl get replicationcontrollers
+kubectl get pods
