@@ -60,7 +60,7 @@ class PollResource : Endpoint() {
     ) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val response = client.get(Poll::class.java, id)
+        val response = client[Poll::class.java, id]
 
         asyncResponse.resume(Response
                 .fromResponse(response)

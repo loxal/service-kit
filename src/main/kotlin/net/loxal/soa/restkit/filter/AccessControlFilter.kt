@@ -18,16 +18,16 @@ class AccessControlFilter : ContainerResponseFilter {
     override fun filter(requestContext: ContainerRequestContext, responseContext: ContainerResponseContext) {
         val headers = responseContext.headers
 
-        headers.add(allowOriginHeader, allowOriginHeaderValue)
-        headers.put("Server", listOf("RESTkit v1"))
+        headers.putSingle(allowOriginHeader, allowOriginHeaderValue)
+        headers.putSingle(allowHeadersHeader, allowHeadersValue)
 
-        headers.add(allowHeadersHeader, allowHeadersValue)
+        headers.putSingle("Server", "RESTkit v1")
     }
 
     companion object {
         const val allowOriginHeader = "Access-Control-Allow-Origin"
         const val allowOriginHeaderValue = "*"
         const val allowHeadersHeader = "Access-Control-Allow-Headers"
-        val allowHeadersValue = listOf("Origin", "X-Requested-With", "")
+        val allowHeadersValue = listOf("origin", "x-requested-with")
     }
 }
