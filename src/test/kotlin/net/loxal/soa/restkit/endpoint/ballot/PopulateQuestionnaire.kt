@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint.ballot
@@ -10,11 +10,7 @@ import org.junit.Test
 import java.util.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
-import kotlin.collections.forEach
-import kotlin.collections.listOf
 import kotlin.test.assertEquals
-import kotlin.text.contains
-import kotlin.text.endsWith
 
 class PopulateQuestionnaire : AbstractEndpointTest() {
     @Test

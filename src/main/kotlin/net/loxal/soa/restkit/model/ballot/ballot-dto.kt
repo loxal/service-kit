@@ -1,11 +1,10 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.model.ballot
 
 import javax.validation.constraints.Min
-import kotlin.collections.arrayListOf
 
 data class Poll(
         var question: String = "",

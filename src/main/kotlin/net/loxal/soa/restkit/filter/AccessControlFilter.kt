@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.filter
@@ -11,7 +11,6 @@ import javax.ws.rs.container.ContainerResponseContext
 import javax.ws.rs.container.ContainerResponseFilter
 import javax.ws.rs.core.HttpHeaders
 import javax.ws.rs.ext.Provider
-import kotlin.collections.listOf
 
 @Provider
 @Priority(Priorities.HEADER_DECORATOR)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.client
@@ -14,7 +14,6 @@ import javax.ws.rs.client.Entity
 import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.Form
 import javax.ws.rs.core.MultivaluedHashMap
-import kotlin.text.toLowerCase
 
 class KitClient<T> : AbstractKitClient<T>() {
 
@@ -40,8 +39,8 @@ class KitClient<T> : AbstractKitClient<T>() {
     private fun explicitType(entity: Class<in T>) = entity.simpleName.toLowerCase()
 
     companion object {
-        public val appId: String
-        public val clientId: String
+        val appId: String
+        val clientId: String
         const val INFIX_PATH: String = "data"
         var authorization: Authorization
         private val tokenRefresher: ScheduledExecutorService = Executors.newScheduledThreadPool(1)
