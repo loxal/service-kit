@@ -272,7 +272,11 @@
     "quote": "The service is not down. The service is just not accessible anymore."
   },
   {
-    "id": 200,
+    "id": 70,
     "quote": "If people can’t build monoliths properly, microservices won’t help"
+  },
+  {
+    "id": 71,
+    "quote": "The project compiled the last time I’ve opened the project"
   }
 ]

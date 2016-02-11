@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-exec ./release-to-google-container-engine.sh
+exec ./release-to-google-compute-engine.sh

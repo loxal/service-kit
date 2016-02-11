@@ -21,7 +21,7 @@
     <description>Microservice Toolkit</description>
 
     <properties>
-        <tomcat.version>8.0.30</tomcat.version>
+        <tomcat.version>8.0.32</tomcat.version>
         <jetty-maven-plugin.version>9.3.7.v20160115</jetty-maven-plugin.version>
         <jersey.version>2.22.1</jersey.version>
 
@@ -212,7 +212,7 @@
                 <artifactId>gcloud-maven-plugin</artifactId>
                 <version>2.0.9.95.v20160203</version>
                 <configuration>
-                    <gcloud_project>${project.artifactId}</gcloud_project>
+                    <gcloud_project>rkit-loxal</gcloud_project>
                     <version>
                         ${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}
                     </version>
