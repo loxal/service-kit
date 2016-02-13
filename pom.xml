@@ -13,12 +13,12 @@
         <version>1.0.4</version>
     </parent>
 
-    <groupId>net.loxal.soa</groupId>
-    <artifactId>rest-kit-loxal</artifactId>
+    <groupId>net.loxal.service</groupId>
+    <artifactId>service-kit-loxal</artifactId>
     <version>1.0.0</version>
-    <name>RESTkit</name>
+    <name>Service Kit</name>
     <packaging>war</packaging>
-    <description>Microservice Toolkit</description>
+    <description>Service Toolkit</description>
 
     <properties>
         <tomcat.version>8.0.32</tomcat.version>
@@ -212,7 +212,7 @@
                 <artifactId>gcloud-maven-plugin</artifactId>
                 <version>2.0.9.95.v20160203</version>
                 <configuration>
-                    <gcloud_project>rkit-loxal</gcloud_project>
+                    <gcloud_project>${project.artifactId}</gcloud_project>
                     <version>
                         ${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}
                     </version>

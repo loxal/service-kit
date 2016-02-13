@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="RESTkit:war exploded">
-    <output-path>$PROJECT_DIR$/target/rest-kit-loxal-1.0.0</output-path>
+  <artifact type="exploded-war" name="Service Kit:war exploded">
+    <output-path>$PROJECT_DIR$/target/service-kit-loxal-1.0.0</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="RESTkit" />
+          <element id="module-output" name="Service Kit" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-openid:4.0.3.RELEASE" />
@@ -79,9 +79,9 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/rest-kit-loxal-1.0.0/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/service-kit-loxal-1.0.0/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="RESTkit/web/Web" />
+      <element id="javaee-facet-resources" facet="Service Kit/web/Web" />
     </root>
   </artifact>
 </component>

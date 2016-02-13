@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  ~ Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+  ~ Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
   -->
 
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -11,7 +11,7 @@
          metadata-complete="false">
 
     <display-name>µService</display-name>
-    <description>Microservice Toolkit</description>
+    <description>Service Toolkit</description>
 
     <servlet>
         <servlet-name>net.loxal.soa.restkit.App</servlet-name>

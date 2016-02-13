@@ -2,8 +2,8 @@
   <configuration default="false" name="App Engine" type="GoogleAppEngineDevServer" factoryName="Local" APPLICATION_SERVER_NAME="AppEngine Dev 1.9.30" ALTERNATIVE_JRE_ENABLED="false">
     <option name="OPEN_IN_BROWSER" value="false" />
     <server-settings>
-      <option name="artifact" value="RESTkit:war exploded" />
-      <artifact>RESTkit:war exploded</artifact>
+      <option name="artifact" value="Service Kit:war exploded" />
+      <artifact>Service Kit:war exploded</artifact>
     </server-settings>
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <ConfigurationWrapper VM_VAR="" RunnerId="Debug">
@@ -22,9 +22,7 @@
       </SHUTDOWN>
     </ConfigurationWrapper>
     <method>
-      <option name="BuildArtifacts" enabled="true">
-        <artifact name="RESTkit:war exploded" />
-      </option>
+      <option name="BuildArtifacts" enabled="true" />
     </method>
   </configuration>
 </component>
