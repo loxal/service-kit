@@ -14,7 +14,7 @@ class App : ResourceConfig() {
 
     companion object {
         val PROPERTIES = Properties()
-        private const val LOCAL_PROPERTIES = "/application.properties"
+        private const val LOCAL_PROPERTIES = "/local.properties"
 
         init {
             PROPERTIES.load(App::class.java.getResourceAsStream(LOCAL_PROPERTIES))

@@ -56,16 +56,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-openid</artifactId>
             <version>4.0.3.RELEASE</version>
@@ -399,28 +389,6 @@
         </plugins>
     </build>
     <profiles>
-        <!--<profile>-->
-        <!--<id>local</id>-->
-        <!--<properties>-->
-        <!--<deployment.host.port>${local.jetty.port}</deployment.host.port>-->
-        <!--</properties>-->
-        <!--<repositories>-->
-        <!--<repository>-->
-        <!--<id>local-alt</id>-->
-        <!--<url>file:///Users/alex/.m2/repository</url>-->
-        <!--<releases>-->
-        <!--<enabled>true</enabled>-->
-        <!--<updatePolicy>always</updatePolicy>-->
-        <!--<checksumPolicy>fail</checksumPolicy>-->
-        <!--</releases>-->
-        <!--<snapshots>-->
-        <!--<enabled>true</enabled>-->
-        <!--<updatePolicy>always</updatePolicy>-->
-        <!--<checksumPolicy>fail</checksumPolicy>-->
-        <!--</snapshots>-->
-        <!--</repository>-->
-        <!--</repositories>-->
-        <!--</profile>-->
         <profile>
             <id>cf-pivotal</id>
             <properties>
