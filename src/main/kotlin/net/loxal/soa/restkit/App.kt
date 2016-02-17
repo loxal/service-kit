@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit
@@ -14,7 +14,7 @@ class App : ResourceConfig() {
 
     companion object {
         val PROPERTIES = Properties()
-        private const val LOCAL_PROPERTIES = "/local.properties"
+        private const val LOCAL_PROPERTIES = "/application.properties"
 
         init {
             PROPERTIES.load(App::class.java.getResourceAsStream(LOCAL_PROPERTIES))

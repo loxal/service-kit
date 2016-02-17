@@ -21,7 +21,7 @@ class AccessControlFilter : ContainerResponseFilter {
         headers.putSingle(allowOriginHeader, allowOriginHeaderValue)
         headers.putSingle(allowHeadersHeader, allowHeadersValue)
 
-        headers.putSingle("Server", "RESTkit v1")
+        headers.putSingle("Server", "ServiceKit v1")
     }
 
     companion object {

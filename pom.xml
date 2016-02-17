@@ -10,7 +10,7 @@
     <parent>
         <groupId>net.loxal</groupId>
         <artifactId>blueprint</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.6</version>
     </parent>
 
     <groupId>net.loxal.service</groupId>
@@ -23,7 +23,7 @@
     <properties>
         <tomcat.version>8.0.32</tomcat.version>
         <jetty-maven-plugin.version>9.3.7.v20160115</jetty-maven-plugin.version>
-        <jersey.version>2.22.1</jersey.version>
+        <jersey.version>2.22.2</jersey.version>
 
         <cf.vpc>hybris.CloudFoundry</cf.vpc>
         <cf.memory>768</cf.memory>
@@ -55,6 +55,16 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-openid</artifactId>
@@ -189,7 +199,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -390,12 +399,28 @@
         </plugins>
     </build>
     <profiles>
-        <profile>
-            <id>local</id>
-            <properties>
-                <deployment.host.port>${local.jetty.port}</deployment.host.port>
-            </properties>
-        </profile>
+        <!--<profile>-->
+        <!--<id>local</id>-->
+        <!--<properties>-->
+        <!--<deployment.host.port>${local.jetty.port}</deployment.host.port>-->
+        <!--</properties>-->
+        <!--<repositories>-->
+        <!--<repository>-->
+        <!--<id>local-alt</id>-->
+        <!--<url>file:///Users/alex/.m2/repository</url>-->
+        <!--<releases>-->
+        <!--<enabled>true</enabled>-->
+        <!--<updatePolicy>always</updatePolicy>-->
+        <!--<checksumPolicy>fail</checksumPolicy>-->
+        <!--</releases>-->
+        <!--<snapshots>-->
+        <!--<enabled>true</enabled>-->
+        <!--<updatePolicy>always</updatePolicy>-->
+        <!--<checksumPolicy>fail</checksumPolicy>-->
+        <!--</snapshots>-->
+        <!--</repository>-->
+        <!--</repositories>-->
+        <!--</profile>-->
         <profile>
             <id>cf-pivotal</id>
             <properties>
