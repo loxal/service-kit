@@ -134,5 +134,9 @@
   {
     "id": 34,
     "quote": "Let’s spend a day to estimate whether we can finish this by the end of this week."
+  },
+  {
+    "id": 35,
+    "quote": "Just ignore the failure notifications from our CI but do not disable them."
   }
 ]

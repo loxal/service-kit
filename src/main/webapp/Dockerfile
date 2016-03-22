@@ -4,4 +4,4 @@ MAINTAINER Alexander Orlov <alexander.orlov@loxal.net>
 
 ADD . webapps/ROOT
 
-CMD ["java", "-D java.io.tmpdir=/tmp/jetty", "-jar", "-Xmx46m", "/usr/local/jetty/start.jar"]
+CMD ["java", "-jar", "-Xmx46m", "/usr/local/jetty/start.jar"]

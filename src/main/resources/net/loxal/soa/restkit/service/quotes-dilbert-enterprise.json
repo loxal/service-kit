@@ -78,5 +78,9 @@
   {
     "id": 20,
     "quote": "You switch between three different networks throughout the day by plugging in and out network cables."
+  },
+  {
+    "id": 21,
+    "quote": "My bank asks for a fixed 6 digit PIN — Dilbert Inc. asks for a random 8 digit secondary password token."
   }
 ]

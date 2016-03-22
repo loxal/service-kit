@@ -7,14 +7,26 @@
     <vm>true</vm>
 
     <vm-settings>
-        <setting name="machine_type" value="f1-micro"/>
+        <!--<setting name="machine_type" value="f1-micro"/>-->
+        <setting name="machine_type" value="g1-small"/>
+        <!--<setting name="machine_type" value="n1-standard-1"/>-->
+        <!--<setting name="machine_type" value="n1-highcpu-2"/>-->
     </vm-settings>
+
+    <network>
+    </network>
+
+    <health-check>
+    </health-check>
+
+    <resources>
+    </resources>
 
     <manual-scaling>
         <instances>1</instances>
     </manual-scaling>
 
-    <application>rest-kit-loxal</application>
+    <application>service-kit-loxal</application>
     <version>1</version>
     <ssl-enabled>true</ssl-enabled>
     <sessions-enabled>false</sessions-enabled>

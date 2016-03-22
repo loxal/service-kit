@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="Service Kit:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="service-kit-loxal-1.0.0.war">
+    <root id="archive" name="service-kit-1.0.0.war">
       <element id="artifact" artifact-name="Service Kit:war exploded" />
     </root>
   </artifact>

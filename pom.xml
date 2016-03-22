@@ -14,7 +14,7 @@
     </parent>
 
     <groupId>net.loxal.service</groupId>
-    <artifactId>service-kit-loxal</artifactId>
+    <artifactId>service-kit</artifactId>
     <version>1.0.0</version>
     <name>Service Kit</name>
     <packaging>war</packaging>
@@ -211,7 +211,7 @@
                 <artifactId>gcloud-maven-plugin</artifactId>
                 <version>2.0.9.95.v20160203</version>
                 <configuration>
-                    <gcloud_project>${project.artifactId}</gcloud_project>
+                    <gcloud_project>${project.artifactId}-${project.organization.name}</gcloud_project>
                     <version>
                         ${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}
                     </version>
@@ -418,9 +418,9 @@
     </profiles>
 
     <scm>
-        <connection>scm:git:git://github.com:loxal/rest-kit.git</connection>
-        <developerConnection>scm:git:git@github.com:loxal/rest-kit.git</developerConnection>
-        <url>https://github.com/loxal/rest-kit</url>
+        <connection>scm:git:git://github.com:loxal/${project.artifactId}.git</connection>
+        <developerConnection>scm:git:git@github.com:loxal/${project.artifactId}.git</developerConnection>
+        <url>https://github.com/loxal/${project.artifactId}</url>
         <tag>HEAD</tag>
     </scm>
     <inceptionYear>2014</inceptionYear>
