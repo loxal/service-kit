@@ -12,6 +12,9 @@
 
     <display-name>µService</display-name>
     <description>Service Toolkit</description>
+    <welcome-file-list>
+        <welcome-file>/dilbert-quote/index.html</welcome-file>
+    </welcome-file-list>
 
     <servlet>
         <servlet-name>net.loxal.soa.restkit.App</servlet-name>
