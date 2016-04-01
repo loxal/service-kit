@@ -81,6 +81,6 @@
   },
   {
     "id": 21,
-    "quote": "My bank asks for a fixed 6 digit PIN — Dilbert Inc. asks for a random 8 digit secondary password token."
+    "quote": "My bank just asks for a 6 digit PIN — Dilbert Inc. asks for a generated 8 digit secondary password token."
   }
 ]

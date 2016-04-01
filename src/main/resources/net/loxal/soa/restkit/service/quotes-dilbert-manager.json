@@ -138,5 +138,17 @@
   {
     "id": 35,
     "quote": "Just ignore the failure notifications from our CI but do not disable them."
+  },
+  {
+    "id": 36,
+    "quote": "The Chief Security Expert said, my password needs to be secure!"
+  },
+  {
+    "id": 37,
+    "quote": "The Chief Security Expert said, we should treat private data confidential!"
+  },
+  {
+    "id": 38,
+    "quote": "The Chief Security Expert said, we should avoid security issues!"
   }
 ]
