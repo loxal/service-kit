@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint
@@ -15,6 +15,6 @@ import javax.ws.rs.core.Response
 class Common {
     @GET
     fun index(@Suspended asyncResponse: AsyncResponse) {
-        asyncResponse.resume(Response.temporaryRedirect(URI.create("index.html")).build())
+        asyncResponse.resume(Response.temporaryRedirect(URI.create("/dilbert-quote/index.html")).build())
     }
 }
