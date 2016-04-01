@@ -6,6 +6,7 @@
 
 mvn clean package
 
+#docker login
 sudo docker build --tag=loxal/service-kit:v2 .
 sudo docker push loxal/service-kit:v2
 sudo docker rm -f service-kit
