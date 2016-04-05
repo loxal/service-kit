@@ -1,12 +1,7 @@
 # Backlog
 
 ## next
-    retrieve /token from YaaS only when necessary
-    as part of an integration test, populate sample questions | link iOS user app
-	Creating a Ballot/Vote validator essentially introduces questionnaire business logic
-		Interviewer app
-    make it possible to run integration tests in parallel in the IDE and on the CI on the same machine
-        both apps should not run on the same port (one could be random)
+
 ## later
     replace “response.readEntity(javaClass<String>())” with
         asyncResponse.resume(Response.fromResponse(response).build()) for GET resp.
