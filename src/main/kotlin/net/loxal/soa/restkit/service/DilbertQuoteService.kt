@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.service
@@ -7,6 +7,7 @@ package net.loxal.soa.restkit.service
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import net.loxal.soa.restkit.endpoint.Endpoint
+import net.loxal.soa.restkit.model.dilbert.Dict
 import net.loxal.soa.restkit.model.dilbert.Quote
 import org.slf4j.LoggerFactory
 import java.io.InputStreamReader
@@ -28,31 +29,46 @@ import javax.ws.rs.core.Response
 @Path(DilbertQuoteService.RESOURCE_PATH)
 class DilbertQuoteService : Endpoint() {
 
+    private fun fetchRandomDilberty(asyncResponse: AsyncResponse, request: HttpServletRequest, requestContext: ContainerRequestContext, dilbertesque: List<Any>) {
+        asyncResponse.setTimeout(ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+
+        val randomQuoteIndex = random.nextInt(dilbertesque.size)
+        asyncResponse.resume(Response.ok(dilbertesque[randomQuoteIndex]).build())
+
+        LOG.info("${requestContext.method} for $randomQuoteIndex ${request.contextPath}")
+    }
+
+    @Path(RESOURCE_PATH_EXPERT)
+    @GET
+    fun quoteExpert(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
+        fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = quotesExpert)
+    }
+
     @Path(RESOURCE_PATH_ENTERPRISE)
     @GET
     fun quoteEnterprise(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
-        fetchRandomQuote(asyncResponse, request, requestContext, quotes = quotesEnterprise)
-    }
-
-    private fun fetchRandomQuote(asyncResponse: AsyncResponse, request: HttpServletRequest, requestContext: ContainerRequestContext, quotes: List<Quote>) {
-        asyncResponse.setTimeout(ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
-
-        val randomQuoteIndex = random.nextInt(quotes.size)
-        asyncResponse.resume(Response.ok(quotes[randomQuoteIndex]).build())
-
-        LOG.info("${requestContext.method} for $randomQuoteIndex ${request.contextPath}")
+        fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = quotesEnterprise)
     }
 
     @Path(RESOURCE_PATH_MANAGER)
     @GET
     fun quoteManager(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
-        fetchRandomQuote(asyncResponse, request, requestContext, quotes = quotesManager)
+        fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = quotesManager)
     }
 
     @Path(RESOURCE_PATH_PROGRAMMER)
     @GET
     fun quoteProgrammer(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
-        fetchRandomQuote(asyncResponse, request, requestContext, quotes = quotesProgrammer)
+        fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = quotesProgrammer)
+    }
+
+    //The reference guide how to become an IT pro.       / What makes you a “Expert of Stuff” // What an expert says
+    @Path("$RESOURCE_PATH_EXPERT/${ID_PATH_PARAM_PLACEHOLDER}")
+    @GET
+    fun quoteExpert(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
+                    @PathParam(ID_PATH_PARAM) quoteId: Int,
+                    @Suspended asyncResponse: AsyncResponse) {
+        fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = quotesExpert)
     }
 
     @Path("$RESOURCE_PATH_ENTERPRISE/${ID_PATH_PARAM_PLACEHOLDER}")
@@ -60,14 +76,14 @@ class DilbertQuoteService : Endpoint() {
     fun quoteEnterprise(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
                         @PathParam(ID_PATH_PARAM) quoteId: Int,
                         @Suspended asyncResponse: AsyncResponse) {
-        fetchQuoteById(asyncResponse, quoteId, request, requestContext, quotes = quotesEnterprise)
+        fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = quotesEnterprise)
     }
 
-    private fun fetchQuoteById(asyncResponse: AsyncResponse, quoteId: Int, request: HttpServletRequest, requestContext: ContainerRequestContext, quotes: List<Quote>) {
+    private fun fetchDilbertyById(asyncResponse: AsyncResponse, quoteId: Int, request: HttpServletRequest, requestContext: ContainerRequestContext, dilbertesque: List<Any>) {
         asyncResponse.setTimeout(ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         val quoteIndex = quoteId - 1
-        asyncResponse.resume(Response.ok(quotes[quoteIndex]).build())
+        asyncResponse.resume(Response.ok(dilbertesque[quoteIndex]).build())
 
         LOG.info("${requestContext.method} for $quoteId ${request.contextPath}")
     }
@@ -77,7 +93,7 @@ class DilbertQuoteService : Endpoint() {
     fun quoteManager(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
                      @PathParam(ID_PATH_PARAM) quoteId: Int,
                      @Suspended asyncResponse: AsyncResponse) {
-        fetchQuoteById(asyncResponse, quoteId, request, requestContext, quotes = quotesManager)
+        fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = quotesManager)
     }
 
     @Path("$RESOURCE_PATH_PROGRAMMER/${ID_PATH_PARAM_PLACEHOLDER}")
@@ -85,10 +101,11 @@ class DilbertQuoteService : Endpoint() {
     fun quoteProgrammer(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
                         @PathParam(ID_PATH_PARAM) quoteId: Int,
                         @Suspended asyncResponse: AsyncResponse) {
-        fetchQuoteById(asyncResponse, quoteId, request, requestContext, quotes = quotesProgrammer)
+        fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = quotesProgrammer)
     }
 
     init {
+        quotesExpertReader.close()
         quotesEnterpriseReader.close()
         quotesManagerReader.close()
         quotesProgrammerReader.close()
@@ -97,18 +114,23 @@ class DilbertQuoteService : Endpoint() {
     companion object {
         private val LOG = LoggerFactory.getLogger(DilbertQuoteService::class.java)
 
+        private class Dicts : TypeReference<List<Dict>>()
         private class Quotes : TypeReference<List<Quote>>()
 
+        private val dictsType = Dicts()
         private val quotesType = Quotes()
         private val objectMapper = ObjectMapper()
 
+        private val quotesExpertReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("dictionary-dilbert-expert.json"))
         private val quotesEnterpriseReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("quotes-dilbert-enterprise.json"))
         private val quotesManagerReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("quotes-dilbert-manager.json"))
         private val quotesProgrammerReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("quotes-dilbert-programmer.json"))
 
+        private val quoteExpertData = quotesExpertReader.readText()
         private val quoteEnterpriseData = quotesEnterpriseReader.readText()
         private val quoteManagerData = quotesManagerReader.readText()
         private val quoteProgrammerData = quotesProgrammerReader.readText()
+        val quotesExpert: List<Dict> = objectMapper.readValue(quoteExpertData, dictsType)
         val quotesEnterprise: List<Quote> = objectMapper.readValue(quoteEnterpriseData, quotesType)
         val quotesManager: List<Quote> = objectMapper.readValue(quoteManagerData, quotesType)
         val quotesProgrammer: List<Quote> = objectMapper.readValue(quoteProgrammerData, quotesType)
@@ -118,6 +140,7 @@ class DilbertQuoteService : Endpoint() {
         const val RESOURCE_PATH_PROGRAMMER = "programmer"
         const val RESOURCE_PATH_MANAGER = "manager"
         const val RESOURCE_PATH_ENTERPRISE = "enterprise"
+        const val RESOURCE_PATH_EXPERT = "expert"
         const val mediaType = MediaType.APPLICATION_JSON + ";charset=utf-8"
     }
 }

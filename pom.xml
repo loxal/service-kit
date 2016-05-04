@@ -10,7 +10,7 @@
     <parent>
         <groupId>net.loxal</groupId>
         <artifactId>blueprint</artifactId>
-        <version>1.0.6</version>
+        <version>1.1.1</version>
     </parent>
 
     <groupId>net.loxal.service</groupId>
@@ -35,9 +35,6 @@
         <cf.domain.suffix>.yaas.io</cf.domain.suffix>
         <proxy.domain.suffix>.stage.yaas.io</proxy.domain.suffix>
         <build.number>0</build.number>
-
-        <!--<appdirect.oauth.consumer.key>${appdirect.oauth.consumer.key}</appdirect.oauth.consumer.key>-->
-        <!--<appdirect.oauth.consumer.secret>${appdirect.oauth.consumer.secret}</appdirect.oauth.consumer.secret>-->
 
         <tenant>markettest</tenant>
         <appId>hybris.markettest</appId>
