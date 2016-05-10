@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-exec ./release-to-google-compute-engine.sh
+exec ./release-as-docker-container.sh
