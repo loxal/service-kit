@@ -82,5 +82,9 @@
   {
     "id": 21,
     "quote": "My bank just asks for a 6 digit PIN — Dilbert Inc. asks for a generated 8 digit secondary password token."
+  },
+  {
+    "id": 22,
+    "quote": "You get an automated birthday congratulation from the CEO whom you have never met, ending with the company slogan."
   }
 ]
