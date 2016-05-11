@@ -41,34 +41,33 @@ class DilbertQuoteService : Endpoint() {
     @Path(RESOURCE_PATH_EXPERT)
     @GET
     fun quoteExpert(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
-        fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = quotesExpert)
+        fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = initDilbertesqueExpert())
     }
 
     @Path(RESOURCE_PATH_ENTERPRISE)
     @GET
     fun quoteEnterprise(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
-        fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = quotesEnterprise)
+        fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = initDilbertesqueQuote("quotes-dilbert-enterprise.json"))
     }
 
     @Path(RESOURCE_PATH_MANAGER)
     @GET
     fun quoteManager(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
-        fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = quotesManager)
+        fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = initDilbertesqueQuote("quotes-dilbert-manager.json"))
     }
 
     @Path(RESOURCE_PATH_PROGRAMMER)
     @GET
     fun quoteProgrammer(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
-        fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = quotesProgrammer)
+        fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = initDilbertesqueQuote("quotes-dilbert-programmer.json"))
     }
 
-    //The reference guide how to become an IT pro.       / What makes you a “Expert of Stuff” // What an expert says
     @Path("$RESOURCE_PATH_EXPERT/${ID_PATH_PARAM_PLACEHOLDER}")
     @GET
     fun quoteExpert(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
                     @PathParam(ID_PATH_PARAM) quoteId: Int,
                     @Suspended asyncResponse: AsyncResponse) {
-        fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = quotesExpert)
+        fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = initDilbertesqueExpert())
     }
 
     @Path("$RESOURCE_PATH_ENTERPRISE/${ID_PATH_PARAM_PLACEHOLDER}")
@@ -76,7 +75,7 @@ class DilbertQuoteService : Endpoint() {
     fun quoteEnterprise(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
                         @PathParam(ID_PATH_PARAM) quoteId: Int,
                         @Suspended asyncResponse: AsyncResponse) {
-        fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = quotesEnterprise)
+        fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = initDilbertesqueQuote("quotes-dilbert-enterprise.json"))
     }
 
     private fun fetchDilbertyById(asyncResponse: AsyncResponse, quoteId: Int, request: HttpServletRequest, requestContext: ContainerRequestContext, dilbertesque: List<Any>) {
@@ -93,7 +92,7 @@ class DilbertQuoteService : Endpoint() {
     fun quoteManager(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
                      @PathParam(ID_PATH_PARAM) quoteId: Int,
                      @Suspended asyncResponse: AsyncResponse) {
-        fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = quotesManager)
+        fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = initDilbertesqueQuote("quotes-dilbert-manager.json"))
     }
 
     @Path("$RESOURCE_PATH_PROGRAMMER/${ID_PATH_PARAM_PLACEHOLDER}")
@@ -101,40 +100,36 @@ class DilbertQuoteService : Endpoint() {
     fun quoteProgrammer(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
                         @PathParam(ID_PATH_PARAM) quoteId: Int,
                         @Suspended asyncResponse: AsyncResponse) {
-        fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = quotesProgrammer)
-    }
-
-    init {
-        quotesExpertReader.close()
-        quotesEnterpriseReader.close()
-        quotesManagerReader.close()
-        quotesProgrammerReader.close()
+        fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = initDilbertesqueQuote("quotes-dilbert-programmer.json"))
     }
 
     companion object {
         private val LOG = LoggerFactory.getLogger(DilbertQuoteService::class.java)
 
-        private class Dicts : TypeReference<List<Dict>>()
-        private class Quotes : TypeReference<List<Quote>>()
-
-        private val dictsType = Dicts()
-        private val quotesType = Quotes()
         private val objectMapper = ObjectMapper()
 
-        private val quotesExpertReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("dictionary-dilbert-expert.json"))
-        private val quotesEnterpriseReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("quotes-dilbert-enterprise.json"))
-        private val quotesManagerReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("quotes-dilbert-manager.json"))
-        private val quotesProgrammerReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("quotes-dilbert-programmer.json"))
-
-        private val quoteExpertData = quotesExpertReader.readText()
-        private val quoteEnterpriseData = quotesEnterpriseReader.readText()
-        private val quoteManagerData = quotesManagerReader.readText()
-        private val quoteProgrammerData = quotesProgrammerReader.readText()
-        val quotesExpert: List<Dict> = objectMapper.readValue(quoteExpertData, dictsType)
-        val quotesEnterprise: List<Quote> = objectMapper.readValue(quoteEnterpriseData, quotesType)
-        val quotesManager: List<Quote> = objectMapper.readValue(quoteManagerData, quotesType)
-        val quotesProgrammer: List<Quote> = objectMapper.readValue(quoteProgrammerData, quotesType)
         private val random: Random = Random()
+
+        fun initDilbertesqueQuote(dilbertitySource: String): List<Quote> {
+            class Quotes : TypeReference<List<Quote>>()
+
+            val quotesType = Quotes()
+
+            val dilbertityReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream(dilbertitySource))
+            val dilbertityData = dilbertityReader.readText()
+            val dilbertity: List<Quote> = objectMapper.readValue(dilbertityData, quotesType)
+            return dilbertity
+        }
+
+        fun initDilbertesqueExpert(): List<Dict> {
+            class Dicts : TypeReference<List<Dict>>()
+
+            val dictsType = Dicts()
+            val quotesExpertReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("dictionary-dilbert-expert.json"))
+            val quoteExpertData = quotesExpertReader.readText()
+            val quotesExpert: List<Dict> = objectMapper.readValue(quoteExpertData, dictsType)
+            return quotesExpert
+        }
 
         const val RESOURCE_PATH = "dilbert-quote"
         const val RESOURCE_PATH_PROGRAMMER = "programmer"

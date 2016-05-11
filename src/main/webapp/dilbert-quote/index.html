@@ -19,11 +19,15 @@
             var role = config.role;
             var quoteId = config.quoteId;
 
+            var expert = "expert";
             var enterprise = "enterprise";
             var manager = "manager";
             var programmer = "programmer";
             quoteResourcePath = role;
             switch (role) {
+                case expert:
+                    roleContainer.textContent = ", Sr. Expert of Stuff";
+                    break;
                 case enterprise:
                     roleContainer.textContent = " Enterprises, Inc.";
                     break;
@@ -43,11 +47,29 @@
 
         var loadQuote = function () {
             var xhr = new XMLHttpRequest();
+            xhr.showDictionary = function (quotesFrame, quote) {
+                var dictionaryFrame = document.getElementById("dictionary");
+                dictionaryFrame.style.display = "inherit";
+                quotesFrame.style.display = "none";
+
+                var plainContainer = document.getElementById("plain");
+                var euphemisticContainer = document.getElementById("euphemistic");
+                plainContainer.textContent = quote.plain;
+                euphemisticContainer.textContent = quote.euphemistic;
+            };
+            xhr.showQuote = function (quote) {
+                var quoteContainer = document.getElementById("quote");
+                quoteContainer.textContent = quote.quote;
+            };
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var quote = JSON.parse(xhr.response);
-                    var quoteContainer = document.getElementById("quote");
-                    quoteContainer.textContent = quote.quote;
+                    var quotesFrame = document.getElementById("quotes");
+                    if (quote.plain == null) {
+                        this.showQuote(quote);
+                    } else {
+                        this.showDictionary(quotesFrame, quote);
+                    }
                 }
             };
             xhr.open("GET", quoteResourcePath, true);
@@ -64,11 +86,11 @@
 <style type="text/css">
     @import url(https://fonts.googleapis.com/css?family=Courgette|Playball);
 
-    #quoteFrame {
+    #dilbertyFrame {
         font-size: 40px;
         text-align: center;
         font-family: 'Courgette', cursive;
-        margin-top: 25%;
+        margin-top: 20%;
     }
 
     a {
@@ -85,15 +107,34 @@
 <div id="overview">
     <a id="jsonOutput" href="programmer">JSON</a>
     [
+    <a href="index.html?{&quot;role&quot;:&quot;expert&quot;}">
+        What an expert says…
+    </a> |
     <a href="index.html?{&quot;role&quot;:&quot;enterprise&quot;}">Enterprise Environment Working Conditions</a> |
     <a href="index.html?{&quot;role&quot;:&quot;manager&quot;}">Manager Quotes</a> |
     <a href="index.html?{&quot;role&quot;:&quot;programmer&quot;}">Programmer Quotes</a>
     ]
 </div>
-<div id="quoteFrame">
-    <strong>
-        <span class="quotationMarks">“</span><span id="quote"></span><span class="quotationMarks">”</span>
-    </strong>
+
+<div id="dilbertyFrame">
+    <div id="dictionary" style="display: none;">
+        <strong style="float: left;">
+            <span class="quotationMarks">“</span><span id="plain"></span><span class="quotationMarks">”</span>
+        </strong>
+        <br/><br/>
+        <span style="font-size: 20px;">— Dilbert, Jr.</span>
+        <br/><br/>
+
+        <strong style="float: right;">
+            <span class="quotationMarks">“</span><span id="euphemistic"></span><span class="quotationMarks">”</span>
+        </strong>
+    </div>
+
+    <div id="quotes">
+        <strong>
+            <span class="quotationMarks">“</span><span id="quote"></span><span class="quotationMarks">”</span>
+        </strong>
+    </div>
     <br/><br/>
     <span style="font-size: 20px; float: right;">— Dilbert<span id="role">, the Programmer</span></span>
 </div>
