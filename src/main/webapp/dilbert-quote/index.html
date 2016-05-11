@@ -47,7 +47,8 @@
 
         var loadQuote = function () {
             var xhr = new XMLHttpRequest();
-            xhr.showDictionary = function (quotesFrame, quote) {
+
+            function showDictionary(quotesFrame, quote) {
                 var dictionaryFrame = document.getElementById("dictionary");
                 dictionaryFrame.style.display = "inherit";
                 quotesFrame.style.display = "none";
@@ -56,19 +57,24 @@
                 var euphemisticContainer = document.getElementById("euphemistic");
                 plainContainer.textContent = quote.plain;
                 euphemisticContainer.textContent = quote.euphemistic;
-            };
-            xhr.showQuote = function (quote) {
+            }
+
+            function showQuote(quote) {
                 var quoteContainer = document.getElementById("quote");
                 quoteContainer.textContent = quote.quote;
-            };
+            }
+
+            function isQuote(quote) {
+                return quote.plain == null;
+            }
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var quote = JSON.parse(xhr.response);
                     var quotesFrame = document.getElementById("quotes");
-                    if (quote.plain == null) {
-                        this.showQuote(quote);
+                    if (isQuote(quote)) {
+                        showQuote(quote);
                     } else {
-                        this.showDictionary(quotesFrame, quote);
+                        showDictionary(quotesFrame, quote);
                     }
                 }
             };

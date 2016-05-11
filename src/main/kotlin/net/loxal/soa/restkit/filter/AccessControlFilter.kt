@@ -28,6 +28,6 @@ class AccessControlFilter : ContainerResponseFilter {
         const val allowOriginHeader = "Access-Control-Allow-Origin"
         const val allowOriginHeaderValue = "*"
         const val allowHeadersHeader = "Access-Control-Allow-Headers"
-        val allowHeadersValue = listOf("x-requested-with", HttpHeaders.CONTENT_TYPE, HttpHeaders.ACCEPT)
+        val allowHeadersValue = listOf("origin", "x-requested-with", HttpHeaders.CONTENT_TYPE, HttpHeaders.ACCEPT)
     }
 }
