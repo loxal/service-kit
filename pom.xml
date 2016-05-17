@@ -10,7 +10,7 @@
     <parent>
         <groupId>net.loxal</groupId>
         <artifactId>blueprint</artifactId>
-        <version>1.1.2</version>
+        <version>1.1.3</version>
     </parent>
 
     <groupId>net.loxal.service</groupId>
@@ -30,7 +30,7 @@
         <cf.env.class>stage</cf.env.class>
         <cf.org>core-${cf.env.class}</cf.org>
         <cf.target>api.us-east.stage.cf.yaas.io</cf.target>
-        <cf.space>sevenup</cf.space>
+        <cf.space>argonauts</cf.space>
         <cf.subdomain>us-east.stage.internal</cf.subdomain>
         <cf.domain.suffix>.yaas.io</cf.domain.suffix>
         <proxy.domain.suffix>.stage.yaas.io</proxy.domain.suffix>
