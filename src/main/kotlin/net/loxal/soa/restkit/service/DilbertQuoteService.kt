@@ -62,7 +62,7 @@ class DilbertQuoteService : Endpoint() {
         fetchRandomDilberty(asyncResponse, request, requestContext, dilbertesque = initDilbertesqueQuote("quotes-dilbert-programmer.json"))
     }
 
-    @Path("$RESOURCE_PATH_EXPERT/${ID_PATH_PARAM_PLACEHOLDER}")
+    @Path("$RESOURCE_PATH_EXPERT/$ID_PATH_PARAM_PLACEHOLDER")
     @GET
     fun quoteExpert(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
                     @PathParam(ID_PATH_PARAM) quoteId: Int,
@@ -70,7 +70,7 @@ class DilbertQuoteService : Endpoint() {
         fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = initDilbertesqueExpert())
     }
 
-    @Path("$RESOURCE_PATH_ENTERPRISE/${ID_PATH_PARAM_PLACEHOLDER}")
+    @Path("$RESOURCE_PATH_ENTERPRISE/$ID_PATH_PARAM_PLACEHOLDER")
     @GET
     fun quoteEnterprise(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
                         @PathParam(ID_PATH_PARAM) quoteId: Int,
@@ -87,7 +87,7 @@ class DilbertQuoteService : Endpoint() {
         LOG.info("${requestContext.method} for $quoteId ${request.contextPath}")
     }
 
-    @Path("$RESOURCE_PATH_MANAGER/${ID_PATH_PARAM_PLACEHOLDER}")
+    @Path("$RESOURCE_PATH_MANAGER/$ID_PATH_PARAM_PLACEHOLDER")
     @GET
     fun quoteManager(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
                      @PathParam(ID_PATH_PARAM) quoteId: Int,
@@ -95,7 +95,7 @@ class DilbertQuoteService : Endpoint() {
         fetchDilbertyById(asyncResponse, quoteId, request, requestContext, dilbertesque = initDilbertesqueQuote("quotes-dilbert-manager.json"))
     }
 
-    @Path("$RESOURCE_PATH_PROGRAMMER/${ID_PATH_PARAM_PLACEHOLDER}")
+    @Path("$RESOURCE_PATH_PROGRAMMER/$ID_PATH_PARAM_PLACEHOLDER")
     @GET
     fun quoteProgrammer(@Context request: HttpServletRequest, @Context requestContext: ContainerRequestContext,
                         @PathParam(ID_PATH_PARAM) quoteId: Int,

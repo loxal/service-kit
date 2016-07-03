@@ -55,7 +55,7 @@ class GroupResource : Endpoint() {
     fun retrieve(@NotNull @PathParam(Endpoint.ID_PATH_PARAM) id: String, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val response = client.get(Group::class.java, id)
+        val response = client[Group::class.java, id]
 
         asyncResponse.resume(Response
                 .fromResponse(response)

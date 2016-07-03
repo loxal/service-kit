@@ -51,7 +51,7 @@ class VoteResource : Endpoint() {
     }
 
     private fun reviewVote(vote: Vote): Unit {
-        val response = pollClient.get(Poll::class.java, vote.referencePoll)
+        val response = pollClient[Poll::class.java, vote.referencePoll]
         val poll = response.readEntity(Poll::class.java)
         val hasCorrectAnswers = poll.correctAnswers?.equals(vote.answers)
 
@@ -93,7 +93,7 @@ class VoteResource : Endpoint() {
     ) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val response = client.get(Vote::class.java, id)
+        val response = client[Vote::class.java, id]
 
         asyncResponse.resume(Response
                 .fromResponse(response)
