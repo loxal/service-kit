@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.client
@@ -42,7 +42,7 @@ class ADClient() {
         val fetchedEvent: Response = fetchEvent(eventUrl?.toURI())
 
         if (Response.Status.Family.SUCCESSFUL.equals(fetchedEvent.statusInfo.family)) {
-            val appDirectEvent = fetchedEvent.readEntity(Event::class.java);
+            val appDirectEvent = fetchedEvent.readEntity(Event::class.java)
             val accountIdentifier: String? = appDirectEvent.creator?.uuid
 
             LOG.info("$appDirectEvent")

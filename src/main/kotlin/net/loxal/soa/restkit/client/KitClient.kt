@@ -14,19 +14,20 @@ import javax.ws.rs.client.Entity
 import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.Form
 import javax.ws.rs.core.MultivaluedHashMap
+import javax.ws.rs.core.Response
 
-class KitClient<T> : AbstractKitClient<T>() {
+class KitClient<out T> : AbstractKitClient<T>() {
 
-    override fun post(entity: Entity<in T>, id: String) =
+    override fun post(entity: Entity<in T>, id: String): Response =
             authorizeRequest(targetProxy(explicitType(entity)).path(id)).post(entity)
 
-    override fun put(json: Entity<in T>, id: String) =
+    override fun put(json: Entity<in T>, id: String): Response =
             authorizeRequest(targetProxy(explicitType(json)).path(id)).put(json)
 
-    override fun delete(entityType: Class<in T>, id: String) =
+    override fun delete(entityType: Class<in T>, id: String): Response =
             authorizeRequest(targetProxy(explicitType(entityType)).path(id)).delete()
 
-    override fun get(entityType: Class<in T>, id: String) =
+    override fun get(entityType: Class<in T>, id: String): Response =
             authorizeRequest(targetProxy(explicitType(entityType)).path(id)).get()
 
     private fun targetProxy(entityType: String): WebTarget {
@@ -57,7 +58,7 @@ class KitClient<T> : AbstractKitClient<T>() {
             authorization = authorize()
         }
 
-        private final fun refreshToken() = Runnable {
+        private fun refreshToken() = Runnable {
             val newAuthorization: Authorization
             newAuthorization = authorize()
             authorization = newAuthorization
@@ -65,7 +66,7 @@ class KitClient<T> : AbstractKitClient<T>() {
             AbstractKitClient.LOG.info("A new bearer token ${authorization.access_token} has been fetched.")
         }
 
-        final fun authorize(): Authorization {
+        fun authorize(): Authorization {
             val tokenRequestBody = MultivaluedHashMap<String, String>()
             tokenRequestBody.putSingle("grant_type", "client_credentials")
             tokenRequestBody.putSingle("scope", "hybris.document_manage hybris.document_view")
