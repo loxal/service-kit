@@ -15,7 +15,7 @@
 </a></span>
 <!-- /BADGES -->
 
-[Support this work with cryptocurrencies like BitCoin!](http://me.loxal.net/coin-support.html)
+[Support this work with cryptocurrencies like BitCoin, Ethereum, Ardor, and Komodo!](http://me.loxal.net/coin-support.html)
 
 ## Quotation Endpoint
 * Browser client: `/dilbert-quote/index.html`
