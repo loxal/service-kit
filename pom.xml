@@ -36,11 +36,11 @@
         <proxy.domain.suffix>.stage.yaas.io</proxy.domain.suffix>
         <build.number>0</build.number>
 
-        <tenant>markettest</tenant>
-        <appId>hybris.markettest</appId>
+        <tenant>alexproject</tenant>
+        <appId>hybris.${tenant}</appId>
         <repositoryServiceProxyUrl>https://api${proxy.domain.suffix}/hybris/document/v1</repositoryServiceProxyUrl>
-        <app.clientId>${yaas.app.sap.markettest.clientId}</app.clientId>
-        <app.clientSecret>${yaas.app.sap.markettest.clientSecret}</app.clientSecret>
+        <app.clientId>${yaas.app.sap.alexproject.clientId}</app.clientId>
+        <app.clientSecret>${yaas.app.sap.alexproject.clientSecret}</app.clientSecret>
         <oAuth2ServiceUrl>https://api${proxy.domain.suffix}/hybris/oauth2/v1/token</oAuth2ServiceUrl>
 
         <deploymentTarget>http://${deployment.host.name}:${deployment.host.port}</deploymentTarget>
