@@ -17,6 +17,6 @@ class RepositoryClientIT : AbstractEndpointTest() {
         assertEquals(40, token.access_token.length)
         assertEquals(3600, token.expires_in)
         assertEquals("Bearer", token.token_type)
-        assertEquals("hybris.document_manage hybris.document_view hybris.tenant=alexproject", token.scope)
+        assertEquals("hybris.document_manage hybris.document_view hybris.tenant=muctool", token.scope)
     }
 }
