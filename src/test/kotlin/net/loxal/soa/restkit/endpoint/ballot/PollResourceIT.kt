@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint.ballot
@@ -97,7 +97,7 @@ class PollResourceIT : AbstractEndpointTest() {
         val retrievedUpdatedPoll = AbstractEndpointTest.prepareTarget(existingPoll.location).request().get()
         val updatedPoll = retrievedUpdatedPoll.readEntity<net.loxal.soa.restkit.model.ballot.Poll>(Poll::class.java)
         assertEquals(newQuestion, updatedPoll.question)
-        assertEquals(newAnswerOptions.size.toInt(), updatedPoll.options.size.toInt())
+        assertEquals(newAnswerOptions.size, updatedPoll.options.size)
         assertEquals(firstAnswerOption, updatedPoll.options[0])
         assertEquals(secondAnswerOption, updatedPoll.options[1])
         assertEquals(thirdAnswerOption, updatedPoll.options[2])
