@@ -21,7 +21,7 @@
     <description>Service Toolkit</description>
 
     <properties>
-        <tomcat.version>9.0.0.M13</tomcat.version>
+        <tomcat.version>9.0.0.M15</tomcat.version>
         <jetty-maven-plugin.version>9.4.0.v20161208</jetty-maven-plugin.version>
         <jersey.version>2.25</jersey.version>
 
@@ -279,7 +279,7 @@
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.6.0</version>
+                <version>1.6.1</version>
                 <configuration>
                     <container>
                         <containerId>tomcat8x</containerId>
