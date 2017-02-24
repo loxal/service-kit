@@ -1,5 +1,3 @@
-# Services & Endpoints
-
 **Support this project**
 <!-- BADGES/ -->
 <span class="badge-paypal">
@@ -16,6 +14,8 @@
 <!-- /BADGES -->
 
 [Support this work with cryptocurrencies like BitCoin, Ethereum, Ardor, and Komodo!](http://me.loxal.net/coin-support.html)
+
+# Services & Endpoints
 
 ## Quotation Endpoint
 * Browser client: `/dilbert-quote/index.html`
