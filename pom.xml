@@ -22,8 +22,8 @@
 
     <properties>
         <tomcat.version>9.0.0.M17</tomcat.version>
-        <jetty-maven-plugin.version>9.4.0.v20161208</jetty-maven-plugin.version>
-        <jersey.version>2.25.1</jersey.version>
+        <jetty-maven-plugin.version>9.4.2.v20170220</jetty-maven-plugin.version>
+        <jersey.version>2.26-b02</jersey.version>
 
         <cf.vpc>hybris.CloudFoundry</cf.vpc>
         <cf.memory>768</cf.memory>
