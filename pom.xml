@@ -25,28 +25,25 @@
         <jetty-maven-plugin.version>9.4.2.v20170220</jetty-maven-plugin.version>
         <jersey.version>2.26-b02</jersey.version>
 
-        <cf.vpc>hybris.CloudFoundry</cf.vpc>
+        <cf.vpc>Cloud Foundry</cf.vpc>
         <cf.memory>768</cf.memory>
-        <cf.env.class>stage</cf.env.class>
-        <cf.org>core-${cf.env.class}</cf.org>
-        <cf.target>api.us-east.stage.cf.yaas.io</cf.target>
-        <cf.space>argonauts</cf.space>
-        <cf.subdomain>us-east.stage.internal</cf.subdomain>
+        <cf.org>loxal</cf.org>
+        <cf.space>production</cf.space>
+        <cf.target>api.run.pivotal.io</cf.target>
         <cf.domain.suffix>.yaas.io</cf.domain.suffix>
-        <proxy.domain.suffix>.yaas.io</proxy.domain.suffix>
         <build.number>0</build.number>
 
         <tenant>muctool</tenant>
         <appId>${tenant}.main</appId>
-        <repositoryServiceProxyUrl>https://api${proxy.domain.suffix}/hybris/document/v1</repositoryServiceProxyUrl>
+        <repositoryServiceProxyUrl>https://api.yaas.io/hybris/document/v1</repositoryServiceProxyUrl>
         <app.clientId>${yaas.app.sap.muctool.clientId}</app.clientId>
         <app.clientSecret>${yaas.app.sap.muctool.clientSecret}</app.clientSecret>
-        <oAuth2ServiceUrl>https://api${proxy.domain.suffix}/hybris/oauth2/v1/token</oAuth2ServiceUrl>
+        <oAuth2ServiceUrl>https://api.yaas.io/hybris/oauth2/v1/token</oAuth2ServiceUrl>
 
         <deploymentTarget>http://${deployment.host.name}:${deployment.host.port}</deploymentTarget>
         <deployment.host.port>${local.jetty.port}</deployment.host.port>
-        <deployment.cargo.tomcat.ajp.port>8209</deployment.cargo.tomcat.ajp.port>
-        <local.jetty.port>8200</local.jetty.port>
+        <deployment.cargo.tomcat.ajp.port>8309</deployment.cargo.tomcat.ajp.port>
+        <local.jetty.port>8300</local.jetty.port>
         <deployment.host.name>localhost</deployment.host.name>
         <maven-compiler-plugin.compilerArgument>-g:none</maven-compiler-plugin.compilerArgument>
     </properties>
@@ -348,10 +345,10 @@
                     </appname>
                     <urls>
                         <url>
-                            ${project.artifactId}-v${parsedVersion.majorVersion}.${cf.subdomain}${cf.domain.suffix}
+                            ${project.artifactId}-v${parsedVersion.majorVersion}.${cf.domain.suffix}
                         </url>
                         <url>
-                            ${project.artifactId}-v${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-b${build.number}.${cf.subdomain}${cf.domain.suffix}
+                            ${project.artifactId}-v${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-b${build.number}.${cf.domain.suffix}
                         </url>
                     </urls>
                     <org>${cf.org}</org>
@@ -389,27 +386,8 @@
         <profile>
             <id>cf-pivotal</id>
             <properties>
-                <cf.vpc>Cloud Foundry</cf.vpc>
                 <cf.memory>390</cf.memory>
-                <cf.org>loxal</cf.org>
-                <cf.space>production</cf.space>
-                <cf.target>api.run.pivotal.io</cf.target>
-                <cf.env.class>production</cf.env.class>
-                <cf.subdomain/>
                 <cf.domain.suffix>cfapps.io</cf.domain.suffix>
-            </properties>
-        </profile>
-        <profile>
-            <id>cf-aws-prod</id>
-            <properties>
-                <cf.target>api.us-east.cf.yaas.io</cf.target>
-                <cf.env.class>prod</cf.env.class>
-                <cf.subdomain>us-east.internal</cf.subdomain>
-            </properties>
-        </profile>
-        <profile>
-            <id>cf-aws-stage</id>
-            <properties>
             </properties>
         </profile>
     </profiles>
