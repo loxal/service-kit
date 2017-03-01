@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.model.common
@@ -23,12 +23,6 @@ data class ErrorMessage(
     var statusCode: Int = status.statusCode
     var message: String? = ""
     var moreInfo: String = "http://dilbert.com/assets/error-strip-dbb63fd118a5a7be2236f3474e7e65b8.jpg"
-    var details: Set<ErrorDetail> = emptySet()
-}
-
-data class ErrorDetail(@NotNull var type: String = "") {
-    var field: String = ""
-    var message: String = ""
 }
 
 data class Authorization(@NotNull var access_token: String = "") {

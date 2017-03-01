@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.model.ballot
@@ -15,14 +15,6 @@ data class Poll(
          */
         var multipleAnswers: Boolean = false
 )
-
-data class ReviewedVote(
-        var referencePoll: String = "",
-        @Min(value = 0) var answers: List<Int> = arrayListOf()
-) {
-    var user: String = "anonymous"
-    var correct: Boolean? = false
-}
 
 data class Vote(
         var referencePoll: String = "",
