@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run Tests" type="MavenRunConfiguration" factoryName="Maven" singleton="true">
+  <configuration default="false" name="Run Integration Tests" type="MavenRunConfiguration" factoryName="Maven" singleton="true">
     <MavenSettings>
       <option name="myGeneralSettings" />
       <option name="myRunnerSettings">
@@ -24,7 +24,7 @@
           </option>
           <option name="goals">
             <list>
-              <option value="test" />
+              <option value="integration-test" />
             </list>
           </option>
           <option name="profilesMap">
