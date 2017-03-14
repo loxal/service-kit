@@ -21,9 +21,9 @@
     <description>Service Toolkit</description>
 
     <properties>
-        <tomcat.version>9.0.0.M17</tomcat.version>
+        <tomcat.version>9.0.0.M18</tomcat.version>
         <jetty-maven-plugin.version>9.4.2.v20170220</jetty-maven-plugin.version>
-        <jersey.version>2.26-b02</jersey.version>
+        <jersey.version>2.26-b03</jersey.version>
 
         <cf.vpc>Cloud Foundry</cf.vpc>
         <cf.memory>768</cf.memory>
