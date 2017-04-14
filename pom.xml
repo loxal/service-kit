@@ -10,7 +10,7 @@
     <parent>
         <groupId>net.loxal</groupId>
         <artifactId>blueprint</artifactId>
-        <version>1.1.10</version>
+        <version>1.1.11</version>
     </parent>
 
     <groupId>net.loxal.service</groupId>
@@ -21,7 +21,7 @@
     <description>Service Toolkit</description>
 
     <properties>
-        <tomcat.version>9.0.0.M18</tomcat.version>
+        <tomcat.version>9.0.0.M19</tomcat.version>
         <jetty-maven-plugin.version>9.4.2.v20170220</jetty-maven-plugin.version>
         <jersey.version>2.26-b03</jersey.version>
 
@@ -75,7 +75,7 @@
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib</artifactId>
+            <artifactId>kotlin-stdlib-jre8</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>

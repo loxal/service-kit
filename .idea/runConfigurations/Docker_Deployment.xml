@@ -1,14 +1,14 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Docker Deployment" type="docker-deploy" factoryName="Docker Deployment" singleton="true" server-name="Docker">
-    <deployment type="dockerfile" path="$PROJECT_DIR$/src/main/webapp/Dockerfile">
+    <deployment type="dockerfile" path="$PROJECT_DIR$/Dockerfile">
       <settings>
         <option name="JSONFilePath" value="" />
         <option name="command" value="" />
-        <option name="containerName" value="default" />
+        <option name="containerName" value="" />
         <option name="entrypoint" value="" />
-        <option name="imageTag" value="jetty:9" />
+        <option name="imageTag" value="" />
         <option name="startBrowserSettings">
-          <browser start="true" />
+          <browser />
         </option>
       </settings>
     </deployment>
