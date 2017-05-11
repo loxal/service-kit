@@ -4,7 +4,7 @@
 #export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 #eval "$(docker-machine env default)"
 
-mvn clean package
+./mvnw clean package
 
 DOCKER_TAG=latest
 

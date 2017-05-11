@@ -4,7 +4,7 @@
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 gcloud config set project service-kit-loxal
-mvn clean validate gcloud:stage
+./mvnw clean validate gcloud:stage
 
 eval "$(docker-machine env default)"
 docker build --tag=gcr.io/service-kit-loxal/default-docker-container .

@@ -3,5 +3,5 @@
 # Switch Java JDK
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
-mvn clean package cf:push -P cf-aws-stage
+./mvnw clean package cf:push -P cf-aws-stage
 

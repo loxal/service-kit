@@ -1,4 +1,4 @@
-FROM jetty:alpine
+FROM jetty:9-jre8-alpine
 
 MAINTAINER Alexander Orlov <alexander.orlov@loxal.net>
 
