@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.service
@@ -25,7 +25,7 @@ class ResolveIpAddressServiceIT : AbstractEndpointTest() {
 
         val host = response.readEntity<Host>(Host::class.java)
         assertNotNull(host.address)
-        assertTrue(host.address.length > 6 && host.address.length < 20)
+        assertTrue(host.address.length in 7..19)
         assertEquals(hostName, host.name)
     }
 }
