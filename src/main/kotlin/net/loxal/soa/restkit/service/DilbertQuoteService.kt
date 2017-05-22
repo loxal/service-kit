@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.service
@@ -136,6 +136,6 @@ class DilbertQuoteService : Endpoint() {
         const val RESOURCE_PATH_MANAGER = "manager"
         const val RESOURCE_PATH_ENTERPRISE = "enterprise"
         const val RESOURCE_PATH_EXPERT = "expert"
-        const val mediaType = MediaType.APPLICATION_JSON + ";charset=utf-8"
+        const val mediaType = MediaType.APPLICATION_JSON + ";charset=UTF-8"
     }
 }
