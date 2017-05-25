@@ -24,7 +24,7 @@
           </option>
           <option name="goals">
             <list>
-              <option value="jetty:run" />
+              <option value="jetty:run-forked" />
             </list>
           </option>
           <option name="profilesMap">

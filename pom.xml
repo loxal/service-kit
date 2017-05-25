@@ -18,7 +18,7 @@
     <properties>
         <kotlin.version>1.1.2-4</kotlin.version>
         <tomcat.version>9.0.0.M21</tomcat.version> <!--works-->
-        <jetty-maven-plugin.version>9.4.2.v20170220</jetty-maven-plugin.version>
+        <jetty-maven-plugin.version>9.4.5.v20170502</jetty-maven-plugin.version>
         <jersey.version>2.26-b03</jersey.version>
 
         <cf.vpc>Cloud Foundry</cf.vpc>
@@ -164,7 +164,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>2.20</version>
                 <configuration>
                     <includes>
                         <include>**/*IT.java</include>
