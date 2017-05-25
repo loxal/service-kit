@@ -94,5 +94,13 @@
   {
     "id": 24,
     "quote": "Navigating through the corporate page, you need to acknowledge a certificate pop-up window on every click."
+  },
+  {
+    "id": 25,
+    "quote": "You leverage MDD — Meeting Driven Development."
+  },
+  {
+    "id": 26,
+    "quote": "Software that takes 2 minutes to install from the Internet, takes 2 hours to install from the Corporate Intranet."
   }
 ]
