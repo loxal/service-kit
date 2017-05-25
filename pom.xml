@@ -16,6 +16,9 @@
     <description>Service Toolkit</description>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+
         <kotlin.version>1.1.2-4</kotlin.version>
         <tomcat.version>9.0.0.M21</tomcat.version> <!--works-->
         <jetty-maven-plugin.version>9.4.5.v20170502</jetty-maven-plugin.version>
@@ -408,11 +411,6 @@
                     <stopKey>someStopKey</stopKey>
                     <stopPort>8101</stopPort>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
             </plugin>
         </plugins>
     </build>
