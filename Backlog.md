@@ -1,6 +1,7 @@
 # Backlog
 
 ## next
+    convert to Gradle
 
 ## later
     replace “response.readEntity(javaClass<String>())” with
