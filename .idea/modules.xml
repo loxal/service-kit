@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Service Kit.iml" filepath="$PROJECT_DIR$/Service Kit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-kit.iml" filepath="$PROJECT_DIR$/service-kit.iml" />
     </modules>
   </component>
 </project>
