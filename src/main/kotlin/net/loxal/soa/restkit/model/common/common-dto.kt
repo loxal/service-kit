@@ -16,13 +16,9 @@ data class ErrorMessage(
         @NotNull var status: Response.Status = Response.Status.BAD_REQUEST
 ) {
     @NotNull
-    val reasonPhrase: String = status.reasonPhrase
-    @NotNull
     @Min(value = 100)
     @Max(value = 599)
     var statusCode: Int = status.statusCode
     var message: String? = ""
     var moreInfo: String = "http://dilbert.com/assets/error-strip-dbb63fd118a5a7be2236f3474e7e65b8.jpg"
 }
-
-data class Creation(var id: String = "", var link: String = "")

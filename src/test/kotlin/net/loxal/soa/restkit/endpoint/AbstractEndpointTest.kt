@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import net.loxal.soa.restkit.App
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.net.URI
 import javax.ws.rs.client.ClientBuilder
 import javax.ws.rs.client.WebTarget
 
@@ -28,10 +27,6 @@ abstract class AbstractEndpointTest {
         }
 
         fun prepareTarget(target: String): WebTarget {
-            return client.target(target)
-        }
-
-        fun prepareTarget(target: URI): WebTarget {
             return client.target(target)
         }
 
