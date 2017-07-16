@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Run Jetty Servlet Container" type="MavenRunConfiguration" factoryName="Maven" singleton="true">
     <MavenSettings>
@@ -54,3 +55,4 @@
     <method />
   </configuration>
 </component>
+

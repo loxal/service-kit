@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="App Engine" type="GoogleAppEngineDevServer" factoryName="Local" APPLICATION_SERVER_NAME="AppEngine Dev 1.9.30" ALTERNATIVE_JRE_ENABLED="false">
+  <configuration default="false" name="App Engine (migrated)" type="gcp-app-engine-local-run" factoryName="Local" APPLICATION_SERVER_NAME="AppEngine Dev 1.9.30" ALTERNATIVE_JRE_ENABLED="false">
     <option name="OPEN_IN_BROWSER" value="false" />
     <server-settings>
       <option name="artifact" value="Service Kit:war exploded" />

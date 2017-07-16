@@ -136,6 +136,6 @@ class DilbertQuoteService : Endpoint() {
         const val RESOURCE_PATH_MANAGER = "manager"
         const val RESOURCE_PATH_ENTERPRISE = "enterprise"
         const val RESOURCE_PATH_EXPERT = "expert"
-        const val mediaType = MediaType.APPLICATION_JSON + ";charset=UTF-8"
+        const val mediaType = MediaType.APPLICATION_JSON + ";charset=utf-8"
     }
 }

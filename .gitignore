@@ -1,10 +1,14 @@
-# Maven-specific
+# Maven
 target/
 
-# IntelliJ-specific
+# Gradle
+build/
+.gradle/
+
+# IntelliJ
 \.idea/workspace\.xml
 out/
 
-# Eclipse-specific
+# Eclipse
 .project
 .classpath

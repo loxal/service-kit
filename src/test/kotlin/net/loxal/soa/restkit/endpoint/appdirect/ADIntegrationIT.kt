@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint.appdirect
@@ -48,7 +48,7 @@ class ADIntegrationIT {
                 .request()
                 .get()
 
-        assertEquals(Response.Status.OK.statusCode, event.status)
+        assertEquals(Response.Status.OK.statusCode, event.status, event.toString())
         assertEquals(MediaType.APPLICATION_XML_TYPE, event.mediaType)
 
         val result = event.readEntity(Result::class.java)

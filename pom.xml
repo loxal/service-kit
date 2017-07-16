@@ -20,29 +20,24 @@
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 
         <kotlin.version>1.1.2-4</kotlin.version>
-        <tomcat.version>9.0.0.M21</tomcat.version> <!--works-->
-        <jetty-maven-plugin.version>9.4.5.v20170502</jetty-maven-plugin.version>
+        <!--<kotlin.version>1.1.3-2</kotlin.version>-->
+        <!--<tomcat.version>9.0.0.M21</tomcat.version> &lt;!&ndash;works&ndash;&gt;-->
+        <!--<jetty-maven-plugin.version>9.4.5.v20170502</jetty-maven-plugin.version>-->
+        <jetty-maven-plugin.version>9.4.6.v20170531</jetty-maven-plugin.version>
         <jersey.version>2.26-b03</jersey.version>
+        <!--<jersey.version>2.26-b08</jersey.version>-->
 
         <cf.vpc>Cloud Foundry</cf.vpc>
-        <cf.memory>768</cf.memory>
+        <cf.memory>390</cf.memory>
         <cf.org>loxal</cf.org>
         <cf.space>production</cf.space>
         <cf.target>api.run.pivotal.io</cf.target>
-        <cf.domain.suffix>.yaas.io</cf.domain.suffix>
+        <cf.domain.suffix>cfapps.io</cf.domain.suffix>
         <build.number>0</build.number>
-
-        <!--YaaS is dead, remove related implementation-->
-        <tenant>muctool</tenant>
-        <appId>${tenant}.main</appId>
-        <repositoryServiceProxyUrl>https://api.yaas.io/hybris/document/v1</repositoryServiceProxyUrl>
-        <app.clientId>${yaas.app.sap.muctool.clientId}</app.clientId>
-        <app.clientSecret>${yaas.app.sap.muctool.clientSecret}</app.clientSecret>
-        <oAuth2ServiceUrl>https://api.yaas.io/hybris/oauth2/v1/token</oAuth2ServiceUrl>
 
         <deploymentTarget>http://${deployment.host.name}:${deployment.host.port}</deploymentTarget>
         <deployment.host.port>${local.jetty.port}</deployment.host.port>
-        <deployment.cargo.tomcat.ajp.port>8309</deployment.cargo.tomcat.ajp.port>
+        <!--<deployment.cargo.tomcat.ajp.port>8309</deployment.cargo.tomcat.ajp.port>-->
         <local.jetty.port>8300</local.jetty.port>
         <deployment.host.name>localhost</deployment.host.name>
         <maven-compiler-plugin.compilerArgument>-g:none</maven-compiler-plugin.compilerArgument>
@@ -277,85 +272,85 @@
                         <configuration>
                             <portNames>
                                 <portName>deployment.host.port</portName>
-                                <portName>deployment.cargo.tomcat.ajp.port</portName>
+                                <!--<portName>deployment.cargo.tomcat.ajp.port</portName>-->
                             </portNames>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>download-tomcat</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.apache.tomcat</groupId>
-                                    <artifactId>tomcat</artifactId>
-                                    <version>${tomcat.version}</version>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/cargo</outputDirectory>
-                                    <overWrite>true</overWrite>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.6.2</version>
-                <configuration>
-                    <container>
-                        <containerId>tomcat9x</containerId>
-                        <type>installed</type>
-                        <output>${project.build.directory}/cargo/container.log</output>
-                        <append>false</append>
-                        <log>${project.build.directory}/cargo/cargo.log</log>
-                        <home>${project.build.directory}/cargo/apache-tomcat-${tomcat.version}</home>
-                    </container>
-                    <deployables>
-                        <deployable>
-                            <pingURL>http://${deployment.host.name}:${deployment.host.port}/application.wadl</pingURL>
-                            <properties>
-                                <context>/</context>
-                            </properties>
-                        </deployable>
-                    </deployables>
-                    <configuration>
-                        <type>standalone</type>
-                        <home>${project.build.directory}/cargo/tomcat8x</home>
-                        <properties>
-                            <cargo.servlet.port>${deployment.host.port}</cargo.servlet.port>
-                            <cargo.tomcat.ajp.port>${deployment.cargo.tomcat.ajp.port}</cargo.tomcat.ajp.port>
-                        </properties>
-                    </configuration>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>start-container</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>start</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>stop-container</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-dependency-plugin</artifactId>-->
+            <!--<version>3.0.1</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>download-tomcat</id>-->
+            <!--<phase>package</phase>-->
+            <!--<goals>-->
+            <!--<goal>unpack</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<artifactItems>-->
+            <!--<artifactItem>-->
+            <!--<groupId>org.apache.tomcat</groupId>-->
+            <!--<artifactId>tomcat</artifactId>-->
+            <!--<version>${tomcat.version}</version>-->
+            <!--<type>zip</type>-->
+            <!--<outputDirectory>${project.build.directory}/cargo</outputDirectory>-->
+            <!--<overWrite>true</overWrite>-->
+            <!--</artifactItem>-->
+            <!--</artifactItems>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+            <!--<groupId>org.codehaus.cargo</groupId>-->
+            <!--<artifactId>cargo-maven2-plugin</artifactId>-->
+            <!--<version>1.6.2</version>-->
+            <!--<configuration>-->
+            <!--<container>-->
+            <!--<containerId>tomcat9x</containerId>-->
+            <!--<type>installed</type>-->
+            <!--<output>${project.build.directory}/cargo/container.log</output>-->
+            <!--<append>false</append>-->
+            <!--<log>${project.build.directory}/cargo/cargo.log</log>-->
+            <!--<home>${project.build.directory}/cargo/apache-tomcat-${tomcat.version}</home>-->
+            <!--</container>-->
+            <!--<deployables>-->
+            <!--<deployable>-->
+            <!--<pingURL>http://${deployment.host.name}:${deployment.host.port}/application.wadl</pingURL>-->
+            <!--<properties>-->
+            <!--<context>/</context>-->
+            <!--</properties>-->
+            <!--</deployable>-->
+            <!--</deployables>-->
+            <!--<configuration>-->
+            <!--<type>standalone</type>-->
+            <!--<home>${project.build.directory}/cargo/tomcat8x</home>-->
+            <!--<properties>-->
+            <!--<cargo.servlet.port>${deployment.host.port}</cargo.servlet.port>-->
+            <!--<cargo.tomcat.ajp.port>${deployment.cargo.tomcat.ajp.port}</cargo.tomcat.ajp.port>-->
+            <!--</properties>-->
+            <!--</configuration>-->
+            <!--</configuration>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>start-container</id>-->
+            <!--<phase>pre-integration-test</phase>-->
+            <!--<goals>-->
+            <!--<goal>start</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--<execution>-->
+            <!--<id>stop-container</id>-->
+            <!--<phase>post-integration-test</phase>-->
+            <!--<goals>-->
+            <!--<goal>stop</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -364,7 +359,7 @@
                     <systemPropertyVariables>
                     </systemPropertyVariables>
                     <environmentVariables>
-                        <tenant>${tenant}</tenant>
+                        <placeholder>placeholder</placeholder>
                     </environmentVariables>
                 </configuration>
             </plugin>
@@ -390,11 +385,11 @@
                     <org>${cf.org}</org>
                     <space>${cf.space}</space>
                     <path>${project.build.directory}/${project.build.finalName}.war</path>
-                    <instances>2</instances>
+                    <instances>1</instances>
                     <memory>${cf.memory}</memory>
                     <trustSelfSignedCerts>false</trustSelfSignedCerts>
                     <env>
-                        <tenant>${tenant}</tenant>
+                        <placeholder>placeholder</placeholder>
                     </env>
                 </configuration>
             </plugin>
@@ -416,10 +411,9 @@
     </build>
     <profiles>
         <profile>
-            <id>cf-pivotal</id>
+            <id>placeholder</id>
             <properties>
-                <cf.memory>390</cf.memory>
-                <cf.domain.suffix>cfapps.io</cf.domain.suffix>
+                <placeholder>placeholder</placeholder>
             </properties>
         </profile>
     </profiles>

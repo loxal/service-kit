@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Run all unit tests" type="JUnit" factoryName="JUnit" singleton="true">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -39,3 +40,4 @@
     <method />
   </configuration>
 </component>
+

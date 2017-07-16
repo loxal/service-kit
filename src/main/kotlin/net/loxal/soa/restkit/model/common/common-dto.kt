@@ -25,10 +25,4 @@ data class ErrorMessage(
     var moreInfo: String = "http://dilbert.com/assets/error-strip-dbb63fd118a5a7be2236f3474e7e65b8.jpg"
 }
 
-data class Authorization(@NotNull var access_token: String = "") {
-    var expires_in: Int = 0
-    var token_type: String = ""
-    var scope: String = ""
-}
-
 data class Creation(var id: String = "", var link: String = "")
