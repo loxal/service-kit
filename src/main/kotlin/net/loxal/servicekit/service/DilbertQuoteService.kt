@@ -115,7 +115,7 @@ class DilbertQuoteService : Endpoint() {
 
             val quotesType = Quotes()
 
-            val dilbertityReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream(dilbertitySource))
+            val dilbertityReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream(dilbertitySource), Charsets.UTF_8)
             val dilbertityData = dilbertityReader.readText()
             val dilbertity: List<Quote> = objectMapper.readValue(dilbertityData, quotesType)
             return dilbertity
@@ -125,7 +125,7 @@ class DilbertQuoteService : Endpoint() {
             class Dicts : TypeReference<List<Dict>>()
 
             val dictsType = Dicts()
-            val quotesExpertReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("dictionary-dilbert-expert.json"))
+            val quotesExpertReader = InputStreamReader(DilbertQuoteService::class.java.getResourceAsStream("dictionary-dilbert-expert.json"), Charsets.UTF_8)
             val quoteExpertData = quotesExpertReader.readText()
             val quotesExpert: List<Dict> = objectMapper.readValue(quoteExpertData, dictsType)
             return quotesExpert

@@ -23,9 +23,6 @@ class DilbertQuoteServiceIT : AbstractEndpointTest() {
     private val RESOURCE_PATH_MANAGER = "${DilbertQuoteService.RESOURCE_PATH}/${DilbertQuoteService.RESOURCE_PATH_MANAGER}"
 
     @Test fun getExpertDilberty(): Unit = retrieveSingleQuote(RESOURCE_PATH_EXPERT)
-    @Test fun getExpertDilbertyById(): Unit =
-            retrieveDictById(resource = RESOURCE_PATH_EXPERT, dilbertesque = initDilbertesqueExpert())
-
     @Test fun getEnterpriseQuote(): Unit = retrieveSingleQuote(RESOURCE_PATH_ENTERPRISE)
 
     @Test fun getEnterpriseQuoteViaId() =
@@ -35,6 +32,9 @@ class DilbertQuoteServiceIT : AbstractEndpointTest() {
 
     @Test fun getProgrammerQuoteViaId() =
             retrieveQuoteById(resource = RESOURCE_PATH_PROGRAMMER, dilbertesque = initDilbertesqueQuote("quotes-dilbert-programmer.json"))
+
+    @Test fun getExpertDilbertyById(): Unit =
+            retrieveDictById(resource = RESOURCE_PATH_EXPERT, dilbertesque = initDilbertesqueExpert())
 
     @Test fun getManagerQuote(): Unit = retrieveSingleQuote(RESOURCE_PATH_MANAGER)
 

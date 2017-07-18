@@ -15,6 +15,14 @@
 
 [Support this work with cryptocurrencies like BitCoin, Ethereum, Ardor, and Komodo!](http://me.loxal.net/coin-support.html)
 
+# Operate
+
+## Run
+    ./run.sh
+
+## Test
+    ./test.sh
+
 # Services & Endpoints
 
 ## Quotation Endpoint

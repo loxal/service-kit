@@ -4,7 +4,6 @@
 
 package net.loxal.servicekit.client
 
-import net.loxal.servicekit.App
 import net.loxal.servicekit.endpoint.appdirect.dto.ADError
 import net.loxal.servicekit.endpoint.appdirect.dto.Event
 import net.loxal.servicekit.endpoint.appdirect.dto.EventType
@@ -63,8 +62,8 @@ class ADClient {
 
 
     companion object {
-        private val consumerKey: String = App.PROPERTIES.getProperty("appdirect.oauth.consumer.key")
-        private val consumerSecret: String = App.PROPERTIES.getProperty("appdirect.oauth.consumer.secret")
+        private val consumerKey: String = System.getenv("appdirect_oAuth_consumer_key")
+        private val consumerSecret: String = System.getenv("appdirect_oAuth_consumer_secret")
 
         private val LOG = LoggerFactory.getLogger(ADClient::class.java)
         private val CLIENT = ClientBuilder.newClient()
