@@ -41,13 +41,9 @@
 
 1. **Add all corresponding required properties like `appdirect.oauth.consumer.secret` to your `~/.m2/settings.xml`.**
 
-1. Run WAR __./mvnw jetty:run__
-1. Call http://local.loxal.net:8200/application.wadl
-1. Try http://local.loxal.net:8200
-
-Alternatively _Tomcat_ Servlet Container can run the app
-
-1. ./mvnw package cargo:run
+1. ./run.sh
+1. Call http://local.loxal.net:8300/application.wadl
+1. Try http://local.loxal.net:8300
 
 ## Demo Showcase
 

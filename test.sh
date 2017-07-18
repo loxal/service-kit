@@ -1,3 +1,3 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-./mvnw clean integration-test
+./gradlew test
