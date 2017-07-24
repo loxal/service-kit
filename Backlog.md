@@ -1,6 +1,7 @@
 # Backlog
 
 ## next
+    integrate https://github.com/maxmind/geoip-api-java to lookup geoiplookup / geoipdata BINs
     convert to Gradle
 
 ## later
