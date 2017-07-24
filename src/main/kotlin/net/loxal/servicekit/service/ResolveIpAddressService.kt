@@ -6,7 +6,7 @@ package net.loxal.servicekit.service
 
 import net.loxal.servicekit.endpoint.Endpoint
 import net.loxal.servicekit.model.common.ErrorMessage
-import net.loxal.servicekit.model.whoami.Host
+import net.loxal.servicekit.model.whois.Host
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.net.InetAddress
@@ -35,7 +35,7 @@ class ResolveIpAddressService : Endpoint() {
         try {
             val localHost = InetAddress.getByName(hostName)
 
-            val host = Host(localHost.hostName, localHost.hostAddress)
+            val host = Host(name = localHost.hostName, address = localHost.hostAddress)
             asyncResponse.resume(Response.ok(host).build())
 
             LOG.info(requestContext.method)

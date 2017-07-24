@@ -34,7 +34,7 @@
 
 ## Who am I
 
-* /who-am-i:
+* /whois:
     * Retrieves the IP address of the requesting host
 
 ## Getting Started

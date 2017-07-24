@@ -5,7 +5,7 @@
 package net.loxal.servicekit.service
 
 import net.loxal.servicekit.endpoint.AbstractEndpointTest
-import net.loxal.servicekit.model.whoami.Host
+import net.loxal.servicekit.model.whois.Host
 import org.junit.Test
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response

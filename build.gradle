@@ -6,7 +6,8 @@ buildscript {
     ext {
         kotlinVersion = '1.1.3-2'
         jerseyVersion = '2.26-b08'
-        ktorVersion = '0.4.0-SNAPSHOT'
+        ktor_version = '0.4.0-alpha-10'
+        swaggerVersion = '2.7.0'
     }
     repositories {
         mavenCentral()
@@ -38,10 +39,25 @@ repositories {
     maven {
         url 'https://plugins.gradle.org/m2'
     }
+    maven { url "http://dl.bintray.com/kotlin/ktor" }
+    maven { url "https://dl.bintray.com/kotlin/kotlinx" }
 }
 
 war {
     archiveName = 'ROOT.war'
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 gretty {
@@ -50,6 +66,12 @@ gretty {
 }
 
 dependencies {
+    compile "io.springfox:springfox-swagger2:${swaggerVersion}"
+    compile "io.springfox:springfox-swagger-ui:${swaggerVersion}"
+    
+//    compile "org.jetbrains.ktor:ktor-core:$ktor_version"
+    compile "org.jetbrains.ktor:ktor-netty:$ktor_version"
+
     compile group: 'org.springframework.security', name: 'spring-security-openid', version: '4.1.4.RELEASE'
     compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth', version: '2.0.14.RELEASE'
     compile group: 'oauth.signpost', name: 'signpost-core', version: '1.2.1.2'
