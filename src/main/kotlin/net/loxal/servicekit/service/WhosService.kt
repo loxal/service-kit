@@ -30,7 +30,7 @@ class WhosService : Endpoint() {
         }
 
         val host = Whois(
-                headers,
+                headers = headers,
                 name = request.remoteHost,
                 address = request.remoteAddr
         )
