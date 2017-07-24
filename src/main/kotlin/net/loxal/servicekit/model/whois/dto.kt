@@ -5,6 +5,11 @@
 package net.loxal.servicekit.model.whois
 
 data class Host(
+        var name: String = "",
+        var address: String = ""
+)
+
+data class Whois(
         var headers: Map<String, String> = mapOf(),
         var name: String = "",
         var address: String = ""

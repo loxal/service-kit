@@ -35,7 +35,7 @@ class ResolveIpAddressService : Endpoint() {
         try {
             val localHost = InetAddress.getByName(hostName)
 
-            val host = Host(name = localHost.hostName, address = localHost.hostAddress)
+            val host = Host(localHost.hostName, localHost.hostAddress)
             asyncResponse.resume(Response.ok(host).build())
 
             LOG.info(requestContext.method)

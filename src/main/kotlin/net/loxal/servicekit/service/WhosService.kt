@@ -5,7 +5,7 @@
 package net.loxal.servicekit.service
 
 import net.loxal.servicekit.endpoint.Endpoint
-import net.loxal.servicekit.model.whois.Host
+import net.loxal.servicekit.model.whois.Whois
 import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit
 import javax.servlet.http.HttpServletRequest
@@ -29,7 +29,7 @@ class WhosService : Endpoint() {
             headers.put(headerName, request.getHeader(headerName))
         }
 
-        val host = Host(
+        val host = Whois(
                 headers,
                 name = request.remoteHost,
                 address = request.remoteAddr
