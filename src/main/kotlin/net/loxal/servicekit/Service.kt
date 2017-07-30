@@ -15,7 +15,6 @@ import org.jetbrains.ktor.logging.CallLogging
 import org.jetbrains.ktor.response.respondText
 import org.jetbrains.ktor.routing.Routing
 import org.jetbrains.ktor.routing.get
-import org.jetbrains.ktor.routing.routing
 import java.io.File
 
 fun Application.main() {
@@ -23,15 +22,18 @@ fun Application.main() {
     install(CallLogging)
     install(Routing) {
         get("/") {
-            call.respondText("Netty running", ContentType.Text.Plain)
+            call.respondText("Netty running...", ContentType.Text.Plain)
         }
 
-        routing {
-            static("/") {
-                staticRootFolder = File("src/main")
-                files("webapp")
-            }
+        static("/") {
+            staticRootFolder = File("src/main")
+            files("webapp")
         }
-
     }
+//    routing {
+//        static("/") {
+//            staticRootFolder = File("src/main")
+//            files("webapp")
+//        }
+//    }
 }
