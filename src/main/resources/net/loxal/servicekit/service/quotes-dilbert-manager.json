@@ -161,6 +161,14 @@
   },
   {
     "id": 41,
-    "quote": "We should not leverage microservice architecture, because our services need to scale."
+    "quote": "We should NOT leverage microservice architecture, because our services need to scale."
+  },
+  {
+    "id": 42,
+    "quote": "We do not want to re-invent the wheel."
+  },
+  {
+    "id": 43,
+    "quote": "Does your business idea consider a sudden quantum fluctuation during a leap second?"
   }
 ]
