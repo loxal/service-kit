@@ -9,9 +9,9 @@ import org.jetbrains.ktor.application.install
 import org.jetbrains.ktor.content.files
 import org.jetbrains.ktor.content.static
 import org.jetbrains.ktor.content.staticRootFolder
+import org.jetbrains.ktor.features.CallLogging
 import org.jetbrains.ktor.features.DefaultHeaders
 import org.jetbrains.ktor.http.ContentType
-import org.jetbrains.ktor.logging.CallLogging
 import org.jetbrains.ktor.response.respondText
 import org.jetbrains.ktor.routing.Routing
 import org.jetbrains.ktor.routing.get
@@ -30,10 +30,4 @@ fun Application.main() {
             files("webapp")
         }
     }
-//    routing {
-//        static("/") {
-//            staticRootFolder = File("src/main")
-//            files("webapp")
-//        }
-//    }
 }

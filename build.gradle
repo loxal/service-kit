@@ -5,7 +5,7 @@
 buildscript {
     ext {
         kotlinVersion = '1.1.4'
-        jerseyVersion = '2.26-b08'
+        jerseyVersion = '2.26-b09'
         ktor_version = '0.4.0'
         swaggerVersion = '2.7.0'
     }
