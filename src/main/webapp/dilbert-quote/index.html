@@ -3,26 +3,27 @@
   ~ Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
   -->
 
-<meta charset="UTF-8">
+<html lang="en">
+<meta charset="utf-8">
 <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 <title>Dilbert Quotes</title>
 
 <script>
     "use strict";
-    function main() {
-        var quoteResourcePath = "programmer";
-        var configure = function () {
-            var roleContainer = document.getElementById("role");
-            var jsonOutput = document.getElementById("jsonOutput");
+    const main = function () {
+        let quoteResourcePath = "programmer";
+        const configure = function () {
+            const roleContainer = document.getElementById("role");
+            const jsonOutput = document.getElementById("jsonOutput");
 
-            var config = JSON.parse(decodeURIComponent(window.location.search.substr(1)));
-            var role = config.role;
-            var quoteId = config.quoteId;
+            const config = JSON.parse(decodeURIComponent(window.location.search.substr(1)));
+            const role = config.role;
+            const quoteId = config.quoteId;
 
-            var expert = "expert";
-            var enterprise = "enterprise";
-            var manager = "manager";
-            var programmer = "programmer";
+            const expert = "expert";
+            const enterprise = "enterprise";
+            const manager = "manager";
+            const programmer = "programmer";
             quoteResourcePath = role;
             switch (role) {
                 case expert:
@@ -45,32 +46,32 @@
             jsonOutput.href = quoteResourcePath;
         };
 
-        var loadQuote = function () {
-            var xhr = new XMLHttpRequest();
+        const loadQuote = function () {
+            const xhr = new XMLHttpRequest();
 
-            function showDictionary(quotesFrame, quote) {
-                var dictionaryFrame = document.getElementById("dictionary");
+            const showDictionary = function (quotesFrame, quote) {
+                const dictionaryFrame = document.getElementById("dictionary");
                 dictionaryFrame.style.display = "inherit";
                 quotesFrame.style.display = "none";
 
-                var plainContainer = document.getElementById("plain");
-                var euphemisticContainer = document.getElementById("euphemistic");
+                const plainContainer = document.getElementById("plain");
+                const euphemisticContainer = document.getElementById("euphemistic");
                 plainContainer.textContent = quote.plain;
                 euphemisticContainer.textContent = quote.euphemistic;
-            }
+            };
 
-            function showQuote(quote) {
-                var quoteContainer = document.getElementById("quote");
+            const showQuote = function (quote) {
+                const quoteContainer = document.getElementById("quote");
                 quoteContainer.textContent = quote.quote;
-            }
+            };
 
-            function isQuote(quote) {
-                return quote.plain == null;
-            }
+            const isQuote = function (quote) {
+                return quote.plain === null;
+            };
             xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var quote = JSON.parse(xhr.response);
-                    var quotesFrame = document.getElementById("quotes");
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const quote = JSON.parse(xhr.response);
+                    const quotesFrame = document.getElementById("quotes");
                     if (isQuote(quote)) {
                         showQuote(quote);
                     } else {
@@ -78,7 +79,7 @@
                     }
                 }
             };
-            xhr.open("GET", quoteResourcePath, true);
+            xhr.open("GET", quoteResourcePath);
             xhr.send();
         };
 
@@ -89,7 +90,7 @@
     }
 </script>
 
-<style type="text/css">
+<style>
     @import url(https://fonts.googleapis.com/css?family=Courgette|Playball);
 
     #dilbertyFrame {
@@ -144,5 +145,4 @@
     <br/><br/>
     <span style="font-size: 20px; float: right;">— Dilbert<span id="role">, the Programmer</span></span>
 </div>
-</body>
 
